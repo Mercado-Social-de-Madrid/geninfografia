@@ -13,6 +13,16 @@ html {
   background-color: #999;
 }
 
+$color-main: #85b23d;
+$color-equidad: #9165a1;
+$color-sostenibilidad: #2a7840;
+$color-trabajo: #db9427;
+$color-cooperacion: #3ea4b7; 
+$color-cooperacion2: #85b23d; 
+$color-riqueza: #c42f43; 
+
+
+
 [tabindex='-1']:focus { outline: 0 !important; }
 body{ height:100%; background: #eaeaea; position: relative;}
 html,body{margin: 0; padding: 0;}
@@ -100,14 +110,79 @@ header{
 .columna1{ position:absolute; height:72%; top:21%; width: 53.5vw; border-right: 0.8vw solid #fff; }
 .columna2{ position:absolute; height:72%; top:21%; left:53.5vw; width:46.5vw;}
 
+ul.checklist{
+  font-family: Veneer Three;
+  list-style:none;
+  padding:0;
+  margin:0;
+  padding-right:3rem;
+  font-size:2.25vw;
+  position:absolute;
+
+  li{
+    margin-bottom: 0.4em;
+  }
+}
 
 section{
   padding:2vw 3.5vw ;
   border-bottom: 0.8vw solid #fff;
+  position:relative;
+  width:100%;
+
+  .titulo{
+    position:absolute;
+    top:6vw;
+    left:40%;
+    right:10%;
+    font-size: 4.2vw;
+  }
+
+  .checklist{
+    bottom:5%;
+  }
 }
 
-#equidad{ color:#9165a1; height: 34%; }
-#sostenibilidad{ color:#2a7840; height: 34%; }
-#trabajo{ color:#db9427; height: 32%;  }
-#cooperacion{ color:#3ea4b7; height:55%; }
-#riqueza{ color:#c42f43; height:45%; }
+#equidad{ 
+  color:$color-equidad;
+  height: 35%; 
+
+}
+
+#sostenibilidad{
+  color:$color-sostenibilidad;
+  height: 38%;
+
+  .titulo{ top:4.5vw; }  
+}
+
+#trabajo{
+  color:$color-trabajo;
+  height: 27%;
+
+  .titulo{ top:6vw; }
+}
+
+#cooperacion{
+  color:$color-cooperacion;
+  height:46%;
+
+  .titulo{
+    left:5.8%;     
+
+    &.secundario{
+      left:54%;
+      color:$color-cooperacion2;
+    } 
+  }
+
+  .checklist{
+    width:50%;
+  }
+}
+
+#riqueza{
+  color:$color-riqueza;
+  height:54%;
+}
+

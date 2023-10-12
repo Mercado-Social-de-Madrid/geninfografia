@@ -12,6 +12,6 @@ setup(
         'sass_path': 'static/sass',
         'css_path': 'static/css',
         'strip_extension': True,
-    	},
+      },
    }
 )

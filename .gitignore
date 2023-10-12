@@ -1,3 +1,6 @@
-
-static/css/styles.css
+.idea
+infografias/*
+static/css
+data/*
+!data/infografias_sample
 /email_sender_keys.py

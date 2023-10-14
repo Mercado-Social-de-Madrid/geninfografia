@@ -3,12 +3,13 @@ import base64
 from email_sender_keys import *
 
 
-def send_email(email_to, attached_file):
+def send_email(email_to, email_reply_to, attached_file):
     """
     Envío de email con archivo adjunto a través de Mailjet \n
     Recuerda configurar archivo email_sender_keys.py
     Arguments:
         email_to: email de destinatario
+        email_reply_to: email de respuesta
         attached_file: ruta relativa del archivo incluida la extensión. Solo acepta archivos con extensión .jpg
     """
     with open(attached_file, 'rb') as file:
@@ -28,6 +29,9 @@ def send_email(email_to, attached_file):
                         "Name": "You"
                     }
                 ],
+                "Headers": {
+                    "Reply-To": email_reply_to,
+                },
                 "Subject": "Pruebas adjuntos",
                 "TextPart": "Greetings from Mailjet!",
                 "HTMLPart": "<h3>Dear passenger 1, welcome to <a href=\"https://www.mailjet.com/\">Mailjet</a>!</h3><br />May the delivery force be with you!",

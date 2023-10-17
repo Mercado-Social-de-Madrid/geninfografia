@@ -8,8 +8,9 @@
 
     <!-- CSS -->
     <link href="https://fonts.cdnfonts.com/css/veneer-2?styles=93733" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/wingdings" rel="stylesheet">
     <link href="https://fonts.cdnfonts.com/css/source-sans-pro" rel="stylesheet">
-    <link href="../static/css/styles.css" rel="stylesheet" />
+    <link href="../../static/css/styles.css" rel="stylesheet" />
 
   </head>
 
@@ -18,7 +19,7 @@
 <header>
     <div class="corazon">
         <div class="titulo">
-            Grupo Cooperativo Tangente<br>
+            {{Nombre}}<br>
             <em>enseña el corazón</em>
         </div>
     </div>
@@ -28,32 +29,32 @@
     </div>
 
     <div class="personas-porcent">
-        <p><strong class="cifra cifra3">58,5%</strong> mujeres </p>
-        <p><strong class="cifra cifra3">38%</strong> hombres </p>
-        <p><strong class="cifra cifra3">8,5%</strong> identidades<br>no binarias </p>
+        <p><strong class="cifra cifra3">{% if ind3d != "nan" %}{{ind3d}}%{% else %}*{% endif%}</strong> mujeres </p>
+        <p><strong class="cifra cifra3">{% if ind3h != "nan" %}{{ind3h}}%{% else %}*{% endif%}</strong> hombres </p>
+        <p><strong class="cifra cifra3">{% if ind3a != "nan" %}{{ind3a}}%{% else %}*{% endif%}</strong> identidades<br>no binarias </p>
     </div>
 
     <div class="personas-numero">
-        <p><span class="label label1">Trabajadoras</span> <strong class="cifra cifra3">398</strong> </p>
-        <p><span class="label label1">Voluntarias</span> <strong class="cifra cifra3">385</strong> </p>
-        <p><span class="label label1">Asociadas</span><strong class="cifra cifra3">2.799</strong> </p>
+        <p><span class="label label1">Trabajadoras</span> <strong class="cifra cifra3">{{ind118}}</strong> </p>
+        <p><span class="label label1">Voluntarias</span> <strong class="cifra cifra3">{{q0107}}</strong> </p>
+        <p><span class="label label1">Asociadas</span><strong class="cifra cifra3">{{q0101}}</strong> </p>
     </div>
 
     <div class="personas text-center">
-        <span class="cifra cifra2">4.628</span>      
+        <span class="cifra cifra2">{{ind2}}</span>
         <span class="label label3">Personas de la <br>organización</span>
              
     </div>
 
     <div class="columnas">
-        <div>
+        <div class="columna">
             <span class="label label2">Ingresos</span>
-            <span class="cifra cifra4">12,5 M€</span>              
+            <span class="cifra cifra4">{{q1203}}€</span>
         </div>
 
-        <div>
+        <div class="columna">
             <span class="label label2">Gastos</span>
-            <span class="cifra cifra4">11,9 M€</span>              
+            <span class="cifra cifra4">{{q1201}}€</span>
         </div>
 
     </div>
@@ -62,45 +63,60 @@
 
 <div class="columna1">
     <section id="equidad">
+        <img class="icono" src="../../static/img/equidad.png">
         <h2 class="titulo">Equidad</h2>
 
         <div class="columnas">
             <div class="text-center">
-                <span class="cifra cifra1">57%</span>
+                <span class="cifra cifra1">{% if ind20d != "nan" %}{{ind20d}}%{% else %}*{% endif%}</span>
                 <span class="label label1">Mujeres en puestos <br>de responsabilidad</span>
                 <span class="description"></span>
             </div>
 
             <div class="text-center">
-                <span class="cifra cifra1">98%</span>
+                <span class="cifra cifra1">{% if ind97 != "nan" %}{{ind97}}%{% else %}*{% endif%}</span>
                 <span class="label label1">Brecha salarial entre hombres y mujeres</span>
                 <span class="description"></span>
             </div>
 
             <div class="text-center">
-                <span class="cifra cifra1">1,55</span>
+                <span class="cifra cifra1">{% if ind27 != "nan" %}{{ind27}}%{% else %}*{% endif%}</span>
                 <span class="label label1">Proporción salarial entre la plantilla</span>
                 <span class="description"></span>
             </div>
         </div>
 
         <ul class="checklist">
-            <li> Difusión de salarios a la plantilla <div class="check"></div></li>
+            <li> Difusión de salarios a la plantilla
+                <span class="check">{% if ind58 == True %}{% else %}{% endif %}</span>
+            </li>
         </ul>
     </section>       
 
     <section id="sostenibilidad">
+        <img class="icono" src="../../static/img/sostenibilidad_ecologica.png">
         <h2 class="titulo">Sostenibilidad ecológica</h2>
         <ul class="checklist">
-            <li> Sistema de gestión ambiental <div class="check"></div></li>
-            <li> Sensibilización ambiental a nivel interno <div class="check"></div></li>
-            <li> Divulgación ambiental a nivel externo <div class="check"></div></li>
-            <li> Medidas de reducción de impacto ambiental<br>y divulgación a nivel externo<div class="check"></div></li>
-            <li> Energía 100% renovable <div class="check"></div></li>
+            <li> Sistema de gestión ambiental
+                <span class="check">{% if q4104a == True %}{% else %}{% endif %}</span>
+            </li>
+            <li> Sensibilización ambiental a nivel interno
+                <span class="check">{% if q4104b == True %}{% else %}{% endif %}</span>
+            </li>
+            <li> Divulgación ambiental a nivel externo
+                <span class="check">{% if q4104c == True %}{% else %}{% endif %}</span>
+            </li>
+            <li> Medidas de reducción de impacto ambiental<br>y divulgación a nivel externo
+                <span class="check">{% if q4104d == True %}{% else %}{% endif %}</span>
+            </li>
+            <li> Energía 100% renovable
+                <span class="check">{% if ind62 == True %}{% else %}{% endif %}</span>
+            </li>
         </ul>
     </section>    
 
     <section id="trabajo">
+        <img class="icono" src="../../static/img/trabajo_digno.png">
         <h2 class="titulo">Trabajo digno</h2>
 
         <ul class="checklist">
@@ -117,27 +133,41 @@
         <h2 class="titulo">Cooperación y</h2>
         <h2 class="titulo secundario"> compromiso con el entorno</h2>
 
+        <img class="icono" src="../../static/img/cooperacion.png">
+        <img class="icono secundario" src="../../static/img/compromiso_entorno.png">
+
         <aside>
-            <span class="cifra cifra1">57%</span>
+            <span class="cifra cifra1">{{ind254}}%</span>
             <span class="label label1">Compras dentro de <br>la Economía Social</span>
         </aside>
 
 
         <ul class="checklist">
-            <li> Intercooperación <br>con mismo sector compartiendo: </li>
-            <li> Local <div class="check"></div></li>
-            <li> Conocimiento <div class="check"></div></li>
-            <li> Gestión <div class="check"></div></li>
-            <li> Proyectos <div class="check"></div></li>
+            <li> Intercooperación <br>con mismo sector<br> compartiendo: </li>
+            <li> Local
+                <span class="check">{% if q5305a == True %}{% else %}{% endif %}</span>
+            </li>
+            <li> Conocimiento
+                <span class="check">{% if q5305b == True %}{% else %}{% endif %}</span>
+            </li>
+            <li> Gestión
+                <span class="check">{% if q5305c == True %}{% else %}{% endif %}</span>
+            </li>
+            <li> Proyectos
+                <span class="check">{% if q5305d == True %}{% else %}{% endif %}</span>
+            </li>
         </ul>
 
          <ul class="checklist secundario">
-            <li> Opera con <br>finanzas éticas <div class="check"></div> </li>
+            <li> Opera con <br>finanzas éticas
+                <span class="check">{% if ind71 == True %}{% else %}{% endif %}</span>
+            </li>
          </ul>
 
     </section>    
 
     <section id="riqueza">
+        <img class="icono" src="../../static/img/reparto_justo_riqueza.png">
         <h2 class="titulo">Reparto justo de la riqueza</h2>
 
         <h3 class="titulo t1 text-center"> Fuentes de ingresos </h3>
@@ -147,19 +177,19 @@
 
          <div class="columnas">
             <div class="text-center">
-                <span class="cifra cifra2">50<small>MIL</small>€</span>
+                <span class="cifra cifra3">{% if q1405 != "nan" %}{{q1405}}€{% else %}*{% endif%}</span>
                 <span class="label label1">A empresas o personas socias</span>
                 <span class="description"></span>
             </div>
 
             <div class="text-center">
-                <span class="cifra cifra2">70<small>MIL</small>€</span>
+                <span class="cifra cifra3">{% if q1406 != "nan" %}{{q1406}}€{% else %}*{% endif%}</span>
                 <span class="label label1">A compensación <br>de pérdidas</span>
                 <span class="description"></span>
             </div>
 
             <div class="text-center">
-                <span class="cifra cifra2">11<small>MIL</small>€</span>
+                <span class="cifra cifra3">{% if q1413 != "nan" %}{{q1413}}€{% else %}*{% endif%}</span>
                 <span class="label label1">A reservas</span>
                 <span class="description"></span>
             </div>
@@ -172,7 +202,11 @@
 <footer>
     <div class="seccion promueve">
         PROMUEVE
-        <div class="logos"></div>
+        <div class="logos">
+            <img src="../../static/img/asturies_economia_solidaria.png">
+            <img src="../../static/img/mercado_social.svg">
+            <img src="../../static/img/reas.svg">
+        </div>
     </div>
     <div class="seccion enlaces">
         esasturies.org | info@esasturies.org<br>
@@ -180,7 +214,9 @@
     </div>
     <div class="seccion colabora">
         COLABORA
-        <div class="logos"></div>
+        <div class="logos">
+            <img src="../../static/img/ministerio_trabajo.png">
+        </div>
     </div>
 </footer>
 

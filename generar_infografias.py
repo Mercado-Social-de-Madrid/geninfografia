@@ -2,13 +2,14 @@ import asyncio
 import os
 import sys
 
-import pandas as pd
 import sass
 import jinja2
 from pathvalidate import sanitize_filename
 import pdfgen
 from fuzzywuzzy import fuzz
 from pyppeteer import launch
+
+from utils.parser import Parser
 
 total_tasks = 0
 export_percent = 0
@@ -20,27 +21,6 @@ def compile_sass():
         scss.read()
 
     sass.compile(dirname=('static/sass', 'static/css'))
-
-
-def parse_csv():
-    df = pd.read_csv('data/datos_infografias.csv', encoding="utf-8")
-    columns = df.columns.tolist()
-    data = df.values
-
-    props = [columns[1]] + df[columns[1]].to_list()
-
-    entities = []
-    for entity_index, territory_code in enumerate(columns[3:]):
-        entity_data = data[:, entity_index+3]  # Get all rows for a specific entity
-        entity = {props[0]: territory_code}
-
-        for index, value in enumerate(list(entity_data)):
-            prop = str(props[index+1])
-            entity[prop] = str(value)
-
-        entities.append(entity)
-
-    return entities
 
 
 def generar_infografias(entities_data, entity_name=None):
@@ -115,7 +95,7 @@ async def html2img(entity_name, format="jpg"):
     output_path = f"infografias/{format}"
 
     os.makedirs(output_path, exist_ok=True)
-    browser = await launch()
+    browser = await launch({"headless": True})
     page = await browser.newPage()
     await page.setViewport(viewport={"width": 2480, "height": 3508})
 
@@ -173,7 +153,7 @@ def get_entity_name_from_args():
 
 if __name__ == "__main__":
     compile_sass()
-    entities_data = parse_csv()
+    entities_data = Parser().parse_csv()
     entity_name = get_entity_name_from_args()
     generar_infografias(entities_data, entity_name)
     exportar_infografias(entity_name)

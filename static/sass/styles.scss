@@ -4,13 +4,13 @@
 
 html {
   box-sizing: border-box;
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Arial Black';
   line-height: 1.15;
   text-size-adjust: 100%;
   -ms-overflow-style: scrollbar;
   height: 141.4vw;
   font-size:1vw;
-  background-color: #999;
+  background-color: #FFFFFF;
 }
 
 $color-main: #85b23d;
@@ -24,7 +24,23 @@ $color-riqueza2: #d56473;
 
 
 [tabindex='-1']:focus { outline: 0 !important; }
-body{ height:100%; background: #eaeaea; position: relative;}
+body{
+  height:100%;
+  background: #FFFFFF;
+  position: relative;
+
+  &:before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background-image: url(../img/pattern.svg), none;
+    background-size: 15%;
+    opacity: 0.05;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
 html,body{margin: 0; padding: 0;}
 p,h1,h2,h3{margin:0;font-weight: normal;}
 
@@ -33,7 +49,7 @@ footer{
   position:absolute;
   bottom:0;
   width:100%;
-  height:7.5%;
+  height:6%;
 
   .seccion{
     padding-top:1rem;
@@ -47,7 +63,7 @@ footer{
     
     .logos{
       display:flex;
-      > * { flex: 1; }
+      > * { flex: 1; width: 33%; padding-right: 5%;}
     }
     
   }
@@ -64,6 +80,11 @@ footer{
     width:25%;
     padding-left:8%;
     padding-right:5%;
+
+    .logos{
+      display:flex;
+      > * { flex: 1; width: 10%;}
+    }
   }
 }
 
@@ -148,8 +169,8 @@ footer{
     .label{ margin-bottom:-0.4rem; display:block; }
 }
 
-.columna1{ position:absolute; height:72%; top:21%; width: 53.5vw; border-right: 0.8vw solid #fff; }
-.columna2{ position:absolute; height:72%; top:21%; left:53.5vw; width:46.5vw;}
+.columna1{ position:absolute; height:72%; top:21%; width: 53vw; padding-right: 0.3vw; }
+.columna2{ position:absolute; height:72%; top:21%; right:0; width:45vw;}
 
 .columnas{
   position:relative;
@@ -162,16 +183,16 @@ footer{
 ul.checklist{
   font-family: Veneer Three;
   list-style:none;
-  padding:0;
+  padding:0 3rem;
   margin:0;
-  padding-right:3rem;
   line-height:1.05;
-  font-size:2.25vw;
+  font-size:2.5vw;
   position:absolute;
   width:100%;
+  right: 0;
 
   li{
-    margin-bottom: 0.4em;
+    margin: 0.4em;
   }
 }
 
@@ -179,7 +200,18 @@ header{
     display: block;
     position: relative;
     height: 21%;
-    background-color: #f3f3f3;
+    background-color: #FFFFFF;
+
+    &:before {
+        content: "";
+        position: absolute;
+        width: 50%;
+        top: 8%;
+        bottom: 8%;
+        left: 20%;
+        background-image: url(../img/corazon.svg), none;
+        background-repeat: no-repeat;
+    }
 
     .corazon{
         position:absolute;
@@ -198,29 +230,54 @@ header{
 
     .columnas{
       position:absolute;
-      width:29%;
-      right:3vw;
-      bottom: 3vw;
+      width:35%;
+      height: 50%;
+      right: 0;
+      bottom: 0;
+      padding-bottom: 2%;
+      align-items: end;
+      text-align: center;
+      background-image: url(../img/colinas.png), none;
+      background-size: 100%;
+      background-repeat: no-repeat;
+      color: #FFF;
     }
 }
 
 
 section{
   padding:2vw 3.5vw ;
-  border-bottom: 0.8vw solid #fff;
+  margin-bottom: 0.8vw;
   position:relative;
   width:100%;
+
+  &:before {
+    content: "";
+    background-color: rgba(0, 200, 0, 0.1);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
 
   .titulo{
     position:absolute;
     top:6vw;
-    left:40%;
+    left:45%;
     right:10%;
     font-size: 4.2vw;
   }
 
   .checklist{
     bottom:5%;
+  }
+
+  .icono {
+    position:absolute;
+    width: 20%;
+    top: 4vw;
+    left: 20%;
   }
 }
 
@@ -261,6 +318,16 @@ section{
     top:20vw;
   }
 
+  .icono {
+    width: 15%;
+    top: 10vw;
+    left: 15%;
+
+    &.secundario {
+        left:32%;
+    }
+  }
+
   .titulo{
     left:5.8%;     
 
@@ -270,19 +337,25 @@ section{
   }
 
   .checklist{
-    width:50%;
+    width: 55%;
+    left: 0;
+    bottom: 5%;
   }
 
   .checklist.secundario{
     width:40%;
-    left:57%;
-    bottom:20%;
+    left:55%;
+    bottom:15%;
   }
 }
 
 #riqueza{
   color:$color-riqueza;
-  height:54%;
+  height:55%;
+
+  .titulo {
+    top: 3vw;
+  }
 
   h3{
     font-size: 2.25vw;
@@ -306,8 +379,16 @@ section{
   }
 
   .columnas{
-    width:105%;
+    width:100%;
     margin-left:-2.5%;
    }
+}
+
+.check {
+  font-family: Wingdings;
+  font-size:1.5em;
+  float: right;
+  line-height: 0.7;
+  width: 1em;
 }
 

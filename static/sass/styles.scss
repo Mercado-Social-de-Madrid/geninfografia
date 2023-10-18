@@ -4,7 +4,7 @@
 
 html {
   box-sizing: border-box;
-  font-family: 'Arial Black';
+  font-family: 'Source Sans Pro', sans-serif;
   line-height: 1.15;
   text-size-adjust: 100%;
   -ms-overflow-style: scrollbar;
@@ -49,12 +49,17 @@ footer{
   position:absolute;
   bottom:0;
   width:100%;
-  height:6%;
+  height:7%;
 
   .seccion{
     padding-top:1rem;
     float:left;
     font-size:1.2em;
+  
+    span{
+      margin-bottom:0.8em;
+      display:block;
+    }
   }
 
   .promueve{
@@ -121,7 +126,7 @@ footer{
 .cifra1{ font-size:5.5rem; font-weight: 800; }
 .cifra2{ font-size:4.2rem; font-weight: 800; }
 .cifra3{ font-size: 2.8rem; }
-.cifra4{ font-size: 3.3rem; font-weight:800; }
+.cifra4{ font-size: 3.5rem; font-weight:800; }
 
 .personas-porcent{
     position: absolute;
@@ -169,8 +174,9 @@ footer{
     .label{ margin-bottom:-0.4rem; display:block; }
 }
 
-.columna1{ position:absolute; height:72%; top:21%; width: 53vw; padding-right: 0.3vw; }
-.columna2{ position:absolute; height:72%; top:21%; right:0; width:45vw;}
+.columna1{ position:absolute; height:72%; top:21%; width: 53.5vw; border-right: 0.8vw solid #fff; }
+.columna2{ position:absolute; height:72%; top:21%; left:53.5vw; width:46.5vw;}
+
 
 .columnas{
   position:relative;
@@ -186,14 +192,29 @@ ul.checklist{
   padding:0 3rem;
   margin:0;
   line-height:1.05;
-  font-size:2.5vw;
+  font-size:2.25vw;
   position:absolute;
   width:100%;
   right: 0;
 
   li{
     margin: 0.4em;
+    position:relative;
   }
+
+  .check {
+    font-family: Wingdings;
+    font-size:1.5em;
+    line-height: 0.7;
+    width: 1em;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    margin-top: -0.5em;
+
+  }
+
+
 }
 
 header{
@@ -208,7 +229,7 @@ header{
         width: 50%;
         top: 8%;
         bottom: 8%;
-        left: 20%;
+        left: 24.5%;
         background-image: url(../img/corazon.svg), none;
         background-repeat: no-repeat;
     }
@@ -218,6 +239,21 @@ header{
         top:4vw;
         left:3.6vw;
         width:20vw;
+        display:flex;
+        flex-flow: column;
+        height:24vw;
+
+        .titulo{
+          flex: 0 1 auto;
+        }
+
+        .logo-entidad{
+          flex: 1 1 auto;
+          background-size:cover;
+          background-position:center left;
+          background-repeat:no-repeat;
+          background-color:#f00;
+        }
     }
 
     .mes{
@@ -230,16 +266,18 @@ header{
 
     .columnas{
       position:absolute;
-      width:35%;
-      height: 50%;
+      width:36%;
+      height: 55%;
       right: 0;
       bottom: 0;
-      padding-bottom: 2%;
+      padding-left: 4%;
+      line-height:1;
+      padding-bottom: 2.8%;
       align-items: end;
-      text-align: center;
       background-image: url(../img/colinas.png), none;
       background-size: 100%;
       background-repeat: no-repeat;
+      background-position: bottom;
       color: #FFF;
     }
 }
@@ -247,7 +285,8 @@ header{
 
 section{
   padding:2vw 3.5vw ;
-  margin-bottom: 0.8vw;
+  border-bottom: 0.8vw solid #fff;
+
   position:relative;
   width:100%;
 
@@ -264,7 +303,7 @@ section{
   .titulo{
     position:absolute;
     top:6vw;
-    left:45%;
+    left:40%;
     right:10%;
     font-size: 4.2vw;
   }
@@ -277,7 +316,7 @@ section{
     position:absolute;
     width: 20%;
     top: 4vw;
-    left: 20%;
+    left: 17%;
   }
 }
 
@@ -294,16 +333,17 @@ section{
 
 #sostenibilidad{
   color:$color-sostenibilidad;
-  height: 38%;
+  height: 37%;
 
   .titulo{ top:4.5vw; }  
 }
 
 #trabajo{
   color:$color-trabajo;
-  height: 27%;
+  height: 28%;
 
   .titulo{ top:6vw; }
+  .icono{ top:2.5vw; }
 }
 
 #cooperacion{
@@ -319,12 +359,12 @@ section{
   }
 
   .icono {
-    width: 15%;
+    width: 17%;
     top: 10vw;
     left: 15%;
 
     &.secundario {
-        left:32%;
+        left:34%;
     }
   }
 
@@ -337,25 +377,32 @@ section{
   }
 
   .checklist{
-    width: 55%;
+    width: 60%;
     left: 0;
     bottom: 5%;
   }
 
   .checklist.secundario{
-    width:40%;
-    left:55%;
-    bottom:15%;
+    width:55%;
+    left:49%;
+    bottom:20%;
+  
+    .check {
+      position: absolute;
+      top: auto;
+      bottom:0;
+      margin-top:0;
+
+    }
   }
 }
 
 #riqueza{
   color:$color-riqueza;
-  height:55%;
+  height:54%;
 
-  .titulo {
-    top: 3vw;
-  }
+  .icono{ width:18%; }
+  .titulo { top: 5.5vw; }
 
   h3{
     font-size: 2.25vw;
@@ -379,16 +426,7 @@ section{
   }
 
   .columnas{
-    width:100%;
+    width:105%;
     margin-left:-2.5%;
    }
 }
-
-.check {
-  font-family: Wingdings;
-  font-size:1.5em;
-  float: right;
-  line-height: 0.7;
-  width: 1em;
-}
-

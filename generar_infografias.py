@@ -95,7 +95,7 @@ async def html2img(entity_name, format="jpg"):
     output_path = f"infografias/{format}"
 
     os.makedirs(output_path, exist_ok=True)
-    browser = await launch({"headless": True})
+    browser = await launch({"headless": True}, args=['--disable-gpu'])
     page = await browser.newPage()
     await page.setViewport(viewport={"width": 2480, "height": 3508})
 

@@ -7,9 +7,6 @@
     <title>Infografía Balance social</title>
 
     <!-- CSS -->
-    <link href="https://fonts.cdnfonts.com/css/veneer-2?styles=93733" rel="stylesheet">
-    <link href="https://fonts.cdnfonts.com/css/wingdings" rel="stylesheet">
-    <link href="https://fonts.cdnfonts.com/css/source-sans-pro" rel="stylesheet">
     <link href="../../static/css/styles.css" rel="stylesheet" />
 
   </head>
@@ -48,12 +45,12 @@
     </div>
 
     <div class="columnas">
-        <div class="columna">
+        <div class="ingresos">
             <span class="label label2">Ingresos</span>
             <span class="cifra cifra4">{{q1203}}€</span>
         </div>
 
-        <div class="columna">
+        <div class="gastos">
             <span class="label label2">Gastos</span>
             <span class="cifra cifra4">{{q1201}}€</span>
         </div>
@@ -81,7 +78,7 @@
             </div>
 
             <div class="text-center">
-                <span class="cifra cifra1">{% if ind27 != "nan" %}{{ind27}}%{% else %}*{% endif%}</span>
+                <span class="cifra cifra1">{% if ind27 != "nan" %}{{ind27}}{% else %}*{% endif%}</span>
                 <span class="label label1">Proporción salarial entre la plantilla</span>
                 <span class="description"></span>
             </div>
@@ -89,7 +86,7 @@
 
         <ul class="checklist">
             <li> Difusión de salarios a la plantilla
-                <span class="check">{% if ind58 == True %}{% else %}{% endif %}</span>
+                <span class="check">{% if ind58 == "True" %}{% else %}{% endif %}</span>
             </li>
         </ul>
     </section>       
@@ -99,19 +96,19 @@
         <h2 class="titulo">Sostenibilidad ecológica</h2>
         <ul class="checklist">
             <li> Sistema de gestión ambiental
-                <span class="check">{% if q4104a == True %}{% else %}{% endif %}</span>
+                <span class="check">{% if q4104a == "True" %}{% else %}{% endif %}</span>
             </li>
             <li> Sensibilización ambiental a nivel interno
-                <span class="check">{% if q4104b == True %}{% else %}{% endif %}</span>
+                <span class="check">{% if q4104b == "True" %}{% else %}{% endif %}</span>
             </li>
             <li> Divulgación ambiental a nivel externo
-                <span class="check">{% if q4104c == True %}{% else %}{% endif %}</span>
+                <span class="check">{% if q4104c == "True" %}{% else %}{% endif %}</span>
             </li>
             <li> Medidas de reducción de impacto ambiental<br>y divulgación a nivel externo
-                <span class="check">{% if q4104d == True %}{% else %}{% endif %}</span>
+                <span class="check">{% if q4104d == "True" %}{% else %}{% endif %}</span>
             </li>
             <li> Energía 100% renovable
-                <span class="check">{% if ind62 == True %}{% else %}{% endif %}</span>
+                <span class="check">{% if ind62 == "True" %}{% else %}{% endif %}</span>
             </li>
         </ul>
     </section>    
@@ -121,9 +118,9 @@
         <h2 class="titulo">Trabajo digno</h2>
 
         <ul class="checklist">
-            <li> Espacios de atención emocional y cuidado <div class="check"></div></li>
-            <li> Reglamento interno de relaciones laborales <div class="check"></div></li>
-            <li> Medidas que mejoran la ley de conciliación <div class="check"></div></li>
+            <li> Espacios de atención emocional y cuidado <span class="check">{% if ind105 == "True" %}{% else %}{% endif %}</span></li>
+            <li> Reglamento interno de relaciones laborales <span class="check">{% if ind78 == "True" %}{% else %}{% endif %}</span></li>
+            <li> Medidas que mejoran la ley de conciliación <span class="check">{% if ind80 == "True" %}{% else %}{% endif %}</span></li>
         </ul>
 
     </section>    
@@ -146,22 +143,22 @@
         <ul class="checklist">
             <li> Intercooperación <br>con mismo sector<br> compartiendo: </li>
             <li> Local
-                <span class="check">{% if q5305a == True %}{% else %}{% endif %}</span>
+                <span class="check">{% if q5305a == "True" %}{% else %}{% endif %}</span>
             </li>
             <li> Conocimiento
-                <span class="check">{% if q5305b == True %}{% else %}{% endif %}</span>
+                <span class="check">{% if q5305b == "True" %}{% else %}{% endif %}</span>
             </li>
             <li> Gestión
-                <span class="check">{% if q5305c == True %}{% else %}{% endif %}</span>
+                <span class="check">{% if q5305c == "True" %}{% else %}{% endif %}</span>
             </li>
             <li> Proyectos
-                <span class="check">{% if q5305d == True %}{% else %}{% endif %}</span>
+                <span class="check">{% if q5305d == "True" %}{% else %}{% endif %}</span>
             </li>
         </ul>
 
          <ul class="checklist secundario">
             <li> Opera con <br>finanzas éticas
-                <span class="check">{% if ind71 == True %}{% else %}{% endif %}</span>
+                <span class="check">{% if ind71 == "True" %}{% else %}{% endif %}</span>
             </li>
          </ul>
 

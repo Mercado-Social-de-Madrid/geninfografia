@@ -1,3 +1,18 @@
+@font-face {
+  font-family: 'Veneer Three';
+  src: url('../fonts/Veneer Three.woff') format('truetype');
+}
+
+@font-face {
+  font-family: 'Wingding';
+  src: url('../fonts/wingding.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  src: url('../fonts/SourceSansPro-Regular.ttf') format('truetype');
+}
+
 *, *::after, *::before {
   box-sizing: inherit;
 }
@@ -67,8 +82,7 @@ footer{
     padding-left:5%;
     
     .logos{
-      display:flex;
-      > * { flex: 1; width: 33%; padding-right: 5%;}
+      > * { float:left; width: 33%; padding-right: 5%;}
     }
     
   }
@@ -87,8 +101,7 @@ footer{
     padding-right:5%;
 
     .logos{
-      display:flex;
-      > * { flex: 1; width: 10%;}
+      > * { float: left; width: 100%;}
     }
   }
 }
@@ -272,13 +285,29 @@ header{
       bottom: 0;
       padding-left: 4%;
       line-height:1;
-      padding-bottom: 2.8%;
-      align-items: end;
       background-image: url(../img/colinas.png), none;
       background-size: 100%;
       background-repeat: no-repeat;
       background-position: bottom;
       color: #FFF;
+
+      .ingresos {
+        position: absolute;
+        width: 50%;
+        bottom: 0;
+        left: 0;
+        text-align: center;
+        padding-bottom: 5%;
+      }
+
+      .gastos {
+        position: absolute;
+        width: 50%;
+        bottom: 0;
+        right: 0;
+        text-align: center;
+        padding-bottom: 5%;
+      }
     }
 }
 
@@ -354,7 +383,7 @@ section{
 
   aside{
     position:absolute;
-    left:57%;
+    left:53%;
     top:20vw;
   }
 
@@ -377,14 +406,14 @@ section{
   }
 
   .checklist{
-    width: 60%;
+    width: 55%;
     left: 0;
     bottom: 5%;
   }
 
   .checklist.secundario{
     width:55%;
-    left:49%;
+    left:45%;
     bottom:20%;
   
     .check {

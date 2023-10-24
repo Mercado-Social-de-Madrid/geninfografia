@@ -1,10 +1,17 @@
+import locale
+
 import pandas as pd
 
 
 class Parser:
 
-    numeric_properties = ["ind3d", "ind3h", "ind3a", "ind20d", "ind97", "ind27", "q1203", "q1201", "q1405", "q1406", "q1413"]
-    boolean_properties = ["ind58", "ind71", "ind105", "ind78", "ind80"]
+    numeric_properties = ["ind3d", "ind3h", "ind3a", "ind20d",
+                          "ind97", "ind27", "q1203", "q1201",
+                          "q1405", "q1406", "q1413", "ind254",
+                          "ind118", "q0107", "q0101"]
+    boolean_properties = ["ind58", "q4104a", "q4104b", "q4104c",
+                          "q4104d", "q5305a", "q5305b", "q5305c",
+                          "q5305d", "ind71", "ind105", "ind78", "ind80"]
 
     def parse_csv(self):
         df = pd.read_csv('data/datos_infografias.csv', encoding="utf-8")
@@ -41,7 +48,8 @@ class Parser:
         suffix_index = 0
 
         try:
-            value = float(str(value).replace('.', '').replace(',', '.'))
+            locale.setlocale(locale.LC_ALL, 'es_ES')
+            value = locale.atof(str(value))
         except ValueError:
             return value
 
@@ -49,7 +57,7 @@ class Parser:
             value /= 1000
             suffix_index += 1
 
-        formatted_value = f"{value:,.1f}".rstrip('0').rstrip('.')
+        formatted_value = f"{value:,.1f}".rstrip('0').rstrip('.').replace('.', ',')
 
         return f"{formatted_value}{suffixes[suffix_index]}"
 

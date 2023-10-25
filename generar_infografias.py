@@ -1,13 +1,16 @@
 import asyncio
+import base64
+import json
 import os
 import sys
+from pathlib import Path
 
 import sass
 import jinja2
 from pathvalidate import sanitize_filename
-import pdfgen
 from fuzzywuzzy import fuzz
-from pyppeteer import launch
+from selenium import webdriver
+from selenium.webdriver.common.print_page_options import PrintOptions
 
 from utils.parser import Parser
 
@@ -62,47 +65,78 @@ async def html2pdf(entity_name):
     output_path = "infografias/pdf"
     os.makedirs(output_path, exist_ok=True)
 
-    options = {
-        'scale': 1.0,
-        'format': 'A4',
-        'encoding': "UTF-8",
-        'custom-header': [
-            ('Accept-Encoding', 'gzip')
-        ],
+    # driver_path = ChromeDriverManager().install()
+    chrome_options = webdriver.ChromeOptions()
 
-        'pageRanges': '1',
+    settings = {
+        "recentDestinations": [{
+            "id": "Save as PDF",
+            "origin": "local",
+            "account": ""
+        }],
+        "selectedDestinationId": "Save as PDF",
+        "version": 2,
+        "isHeaderFooterEnabled": False,
+        "mediaSize": {
+            "name": "ISO_A4",
+            "custom_display_name": "A4"
+        },
+        "customMargins": {},
+        "marginsType": 2,
+        "scaling": 175,
+        "scalingType": 3,
+        "scalingTypePdf": 3,
+        "isCssBackgroundEnabled": True
     }
 
-    files_list = os.listdir(html_path)
-    total_tasks += len(files_list)
+    chrome_options.add_argument('--headless=new')
+    chrome_options.add_argument('--disable-gpu')
+    chrome_options.add_argument('--hide-scrollbars')
+    chrome_options.add_argument('--window-size=2480,3508')
 
-    if entity_name:
-        files_list = [filename for filename in files_list if sanitize_filename(entity_name) == filename.split('.')[0]]
+    prefs = {
+        "printing.print_preview_sticky_settings.appState": json.dumps(settings),
+    }
+    chrome_options.add_argument('--kiosk-printing')
+    chrome_options.add_experimental_option('prefs', prefs)
 
-    for index, filename in enumerate(files_list):
-        input_file = f"{html_path}/{filename}"
-        pdf_path = f"{output_path}/{filename.split('.')[0]}.pdf"
+    driver = webdriver.Chrome(options=chrome_options)
 
-        print(f"\033[K[{round(export_percent)}%] Exportando infografía en formato PDF [{pdf_path}]...", end='\r')
-        await pdfgen.from_file(input_file, pdf_path, options=options)
-        print(f"\033[K[{round(export_percent)}%] Infografía exportada a PDF [{pdf_path}]", end='\r')
-        export_percent += 100 / total_tasks
+    try:
+        files_list = os.listdir(html_path)
+        total_tasks += len(files_list)
+
+        if entity_name:
+            files_list = [filename for filename in files_list if sanitize_filename(entity_name) == filename.split('.')[0]]
+
+        for index, filename in enumerate(files_list):
+            input_file = f"{html_path}/{filename}"
+            pdf_path = f"{output_path}/{filename.split('.')[0]}.pdf"
+
+            print(f"\033[K[{round(export_percent)}%] Exportando infografía en formato PDF [{str(Path(pdf_path).absolute())}]...", end='\r')
+
+            driver.get(str(Path(input_file).absolute()))
+            print_options = PrintOptions()
+            print_options.page_height = 2480
+            print_options.page_width = 3508
+            pdf = driver.print_page()
+            decoded = base64.b64decode(pdf)
+            with open(pdf_path, 'wb') as output_file:
+                output_file.write(decoded)
+
+            print(f"\033[K[{round(export_percent)}%] Infografía exportada a PDF [{pdf_path}]", end='\r')
+            export_percent += 100 / total_tasks
+    finally:
+        driver.close()
+        driver.quit()
 
 
-async def html2img(entity_name, format="jpg"):
+async def html2img(entity_name, format="png"):
     global total_tasks, export_percent
     html_path = "infografias/html"
     output_path = f"infografias/{format}"
 
     os.makedirs(output_path, exist_ok=True)
-    browser = await launch({"headless": True}, args=['--disable-gpu'])
-    page = await browser.newPage()
-    await page.setViewport(viewport={"width": 2480, "height": 3508})
-
-    options = {
-        "fullPage": True,
-        "quality": 90
-    }
 
     files_list = os.listdir(html_path)
     total_tasks += len(files_list)
@@ -110,18 +144,29 @@ async def html2img(entity_name, format="jpg"):
     if entity_name:
         files_list = [filename for filename in files_list if sanitize_filename(entity_name) == filename.split('.')[0]]
 
-    for index, filename in enumerate(files_list):
-        input_file = f"{html_path}/{filename}"
-        img_path = f"{output_path}/{filename.split('.')[0]}.{format}"
-        options["path"] = img_path
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument('--headless=new')
+    chrome_options.add_argument('--disable-gpu')
+    chrome_options.add_argument('--hide-scrollbars')
+    chrome_options.add_argument('--window-size=2480,3508')
 
-        print(f"\033[K[{round(export_percent)}%] Exportando infografia en formato {format.upper()} [{img_path}]...", end='\r')
-        await page.goto(f"file://{os.path.abspath(input_file)}")
-        await page.screenshot(options)
-        print(f"\033[K[{round(export_percent)}%] Infografía exportada a {format.upper()} [{img_path}]", end='\r')
-        export_percent += 100 / total_tasks
+    driver = webdriver.Chrome(options=chrome_options)
 
-    await browser.close()
+    try:
+        for index, filename in enumerate(files_list):
+            input_file = f"{html_path}/{filename}"
+            img_path = f"{output_path}/{filename.split('.')[0]}.{format}"
+
+            print(f"\033[K[{round(export_percent)}%] Exportando infografia en formato {format.upper()} [{img_path}]...", end='\r')
+            driver.set_window_size(width=2480, height=3508)
+            driver.get(str(Path(input_file).absolute()))
+
+            driver.save_screenshot(filename=img_path)
+            print(f"\033[K[{round(export_percent)}%] Infografía exportada a {format.upper()} [{img_path}]", end='\r')
+            export_percent += 100 / total_tasks
+    finally:
+        driver.close()
+        driver.quit()
 
 
 def find_best_match(input_text, string_list):

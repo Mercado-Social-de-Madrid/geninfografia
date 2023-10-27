@@ -414,8 +414,9 @@ section{
   }
 
   .checklist.secundario{
-    width:55%;
-    left:45%;
+    padding-right:0;
+    width:50%;
+    left:49%;
     bottom:20%;
   
     .check {
@@ -460,4 +461,27 @@ section{
     width:105%;
     margin-left:-2.5%;
    }
+}
+
+#ingresos{
+  overflow: hidden;
+  position: absolute;
+  top: 33%;
+  width: 90%;
+  height: 45%;
+  margin-left:-1.5vw;
+}
+.ingresos-chart-label{ 
+  font-size: 1.8rem;
+}
+.chart-text{
+  font-family: 'Source Sans Pro', sans-serif;
+  line-height:0.9;
+  text-transform: uppercase;
+  position: relative;
+  top: -2rem;
+  padding-bottom:0.5rem;
+  border-bottom:0.3rem solid $color-riqueza;
+
+  .cifra3{ color: $color-riqueza; }
 }

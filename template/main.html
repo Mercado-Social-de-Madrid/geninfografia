@@ -9,6 +9,9 @@
     <!-- CSS -->
     <link href="../../static/css/styles.css" rel="stylesheet" />
 
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+
   </head>
 
   <body {% block bodyattrs %}{% endblock%}>
@@ -201,6 +204,8 @@
 
         <h3 class="titulo t1 text-center"> Fuentes de ingresos </h3>
 
+        <div id="ingresos"></div>
+
         <div class="reparto">
         <h3 class="titulo t2 text-center"> Reparto de beneficios </h3>
 
@@ -248,6 +253,71 @@
         </div>
     </div>
 </footer>
+
+<script type="text/javascript">
+    Highcharts.chart('ingresos', {
+    chart: {
+        backgroundColor: 'transparent',
+        type: 'pie'
+    },
+    title: {
+        text: ''
+    },
+     navigation: {
+        buttonOptions: {
+            enabled: false
+        }
+    },
+    plotOptions: {
+        series: {
+            animation: false,
+            borderRadius: 0,
+            dataLabels: {
+                className: 'ingresos-chart-label',
+                enabled: true,
+                format: '<div class="chart-text"><span class="cifra3">{point.y}%</span><br>{point.name}</div>'
+            }
+        },
+        pie: {
+            borderWidth:0.1,
+            startAngle:100,
+            dataLabels: {
+                padding:0,
+                connectorColor:'#c42f43',
+                connectorPadding:0,
+                connectorWidth:1.8,
+                verticalAlign: 'top',
+                className: 'ingresos-chart-label',
+                useHTML: true
+            }
+        }
+    },
+    series: [
+        {
+            name: 'Percentage',
+            colorByPoint: true,
+            data: [
+                {
+                    color:'#c42f43',
+                    name: 'Facturación',
+                    y: {{ingresos_facturacion}}
+                },
+                {
+                    color:'#d56473',
+                    name: 'Subvenciones',
+                    y: {{ingresos_subvenciones}}
+                },
+                {
+                    color:'#ff9fac',
+                    name: 'Otras',
+                    y: {{ingresos_otras}}
+                }
+            ]
+        }
+    ]
+});
+
+</script>
 
 </body>
 </html>

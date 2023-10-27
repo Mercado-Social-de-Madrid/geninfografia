@@ -65,7 +65,7 @@
     <div class="personas text-center">
         <span class="cifra cifra2">{{ind2}}</span>
         <span class="label label3">Personas de la <br>organización</span>
-             
+
     </div>
 
     <div class="columnas">
@@ -80,7 +80,7 @@
         </div>
 
     </div>
-    
+
 </header>
 
 <div class="columna1">
@@ -101,9 +101,9 @@
                 <span class="description">
                     {% if ind127 is defined and ind127 != "nan"  %}
                         {% if ind127|int >= 0  %}
-                            En esta entidad los hombres ganan un {{ind127}}% más que las mujeres
+                            * En esta entidad los hombres ganan un {{ind127}}% más que las mujeres
                         {% else %}
-                            En esta entidad las mujeres ganan un {{ind127|int|abs}}% mas que los hombres
+                            * En esta entidad las mujeres ganan un {{ind127|int|abs}}% mas que los hombres
                         {% endif %}
                     {% else %}
 
@@ -145,7 +145,7 @@
                 <span class="check">{% if ind62 == "True" %}{% else %}{% endif %}</span>
             </li>
         </ul>
-    </section>    
+    </section>
 
     <section id="trabajo">
         <img class="icono" src="../../static/img/trabajo_digno.png">
@@ -157,7 +157,7 @@
             <li> Medidas que mejoran la ley de conciliación <span class="check">{% if ind80 == "True" %}{% else %}{% endif %}</span></li>
         </ul>
 
-    </section>    
+    </section>
 </div>
 
 <div class="columna2">
@@ -196,7 +196,7 @@
             </li>
          </ul>
 
-    </section>    
+    </section>
 
     <section id="riqueza">
         <img class="icono" src="../../static/img/reparto_justo_riqueza.png">
@@ -230,7 +230,7 @@
         </div>
         </div>
 
-    </section> 
+    </section>
 </div>
 
 <footer>
@@ -275,7 +275,8 @@
             dataLabels: {
                 className: 'ingresos-chart-label',
                 enabled: true,
-                format: '<div class="chart-text"><span class="cifra3">{point.y}%</span><br>{point.name}</div>'
+                format: '<div class="chart-text"><span class="cifra3">{point.y}%</span><br>{point.name}</div>',
+                distance: 70
             }
         },
         pie: {
@@ -285,7 +286,7 @@
                 padding:0,
                 connectorColor:'#c42f43',
                 connectorPadding:0,
-                connectorWidth:1.8,
+                connectorWidth:7,
                 verticalAlign: 'top',
                 className: 'ingresos-chart-label',
                 useHTML: true
@@ -317,6 +318,21 @@
     ]
 });
 
+    function redrawChart(){
+        var chart = Highcharts.charts[0];
+
+        console.log('redraw');
+        var ingresos = document.getElementById('ingresos');
+        var container = document.getElementById('riqueza');
+        var w = container.offsetWidth;
+        console.log(w);
+        if (chart) {
+          chart.setSize(w, w * (2/5), false);
+        }
+    }
+
+    window.addEventListener('resize', redrawChart);
+    redrawChart();
 </script>
 
 </body>

@@ -418,7 +418,7 @@ section{
     width:50%;
     left:49%;
     bottom:20%;
-  
+
     .check {
       position: absolute;
       top: auto;
@@ -466,12 +466,13 @@ section{
 #ingresos{
   overflow: hidden;
   position: absolute;
-  top: 33%;
+  top: 40%;
   width: 90%;
   height: 45%;
   margin-left:-1.5vw;
 }
-.ingresos-chart-label{ 
+
+.ingresos-chart-label{
   font-size: 1.8rem;
 }
 .chart-text{
@@ -484,4 +485,8 @@ section{
   border-bottom:0.3rem solid $color-riqueza;
 
   .cifra3{ color: $color-riqueza; }
+}
+
+.highcharts-credits {
+    display: none;
 }

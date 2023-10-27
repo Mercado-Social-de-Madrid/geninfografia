@@ -19,7 +19,7 @@
             {{Nombre}}<br>
             <em>enseña el corazón</em>
         </div>
-        <div class="logo-entidad" style="background-image:'{{blablabla}}'"></div>
+        <div class="logo-entidad" style="background-image: url({{logo}})"></div>
     </div>
 
     <div class="mes titulo">
@@ -27,15 +27,36 @@
     </div>
 
     <div class="personas-porcent">
-        <p><strong class="cifra cifra3">{% if ind3d != "nan" %}{{ind3d}}%{% else %}*{% endif%}</strong> mujeres </p>
-        <p><strong class="cifra cifra3">{% if ind3h != "nan" %}{{ind3h}}%{% else %}*{% endif%}</strong> hombres </p>
-        <p><strong class="cifra cifra3">{% if ind3a != "nan" %}{{ind3a}}%{% else %}*{% endif%}</strong> identidades<br>no binarias </p>
+        <p><strong class="cifra cifra3">{% if ind1d != "nan" %}{{ind1d}}%{% else %}*{% endif%}</strong> mujeres </p>
+        <p><strong class="cifra cifra3">{% if ind1h != "nan" %}{{ind1h}}%{% else %}*{% endif%}</strong> hombres </p>
+        <p><strong class="cifra cifra3">{% if ind1a != "nan" %}{{ind1a}}%{% else %}*{% endif%}</strong> identidades<br>no binarias </p>
     </div>
 
     <div class="personas-numero">
-        <p><span class="label label1">Trabajadoras</span> <strong class="cifra cifra3">{{ind118}}</strong> </p>
-        <p><span class="label label1">Voluntarias</span> <strong class="cifra cifra3">{{q0107}}</strong> </p>
-        <p><span class="label label1">Asociadas</span><strong class="cifra cifra3">{{q0101}}</strong> </p>
+        <div>
+            <p class="label label1">Trabajadoras</p>
+            {% if ind118 is defined and ind118|int != 0 %}
+                <strong class="cifra cifra3">{{ind118}}</strong>
+            {% else %}
+                <span class="description">* La entidad no cuenta con<br>personas trabajadoras</span>
+            {% endif %}
+        </div>
+        <div>
+            <p class="label label1">Voluntarias</p>
+            {% if q0107 is defined and q0107|int != 0 %}
+                <strong class="cifra cifra3">{{q0107}}</strong>
+            {% else %}
+                <span class="description">* Por su estructura la entidad<br>no cuenta con personas<br>voluntarias</span>
+            {% endif %}
+        </div>
+        <div>
+            <p class="label label1">Asociadas</p>
+            {% if q0101 is defined and q0101|int != 0 %}
+                <strong class="cifra cifra3">{{q0101}}</strong>
+            {% else %}
+                <span class="description">* Por su estructura la entidad<br>no cuenta con personas<br>asociadas</span>
+            {% endif %}
+        </div>
     </div>
 
     <div class="personas text-center">
@@ -72,13 +93,23 @@
             </div>
 
             <div class="text-center">
-                <span class="cifra cifra1">{% if ind97 != "nan" %}{{ind97}}%{% else %}*{% endif%}</span>
-                <span class="label label1">Brecha salarial entre hombres y mujeres</span>
-                <span class="description"></span>
+                <span class="cifra cifra1">{% if ind127 != "nan" and ind27|int %}{{ind127|int|abs}}%{% else %}*{% endif%}</span>
+                <span class="label label1">Brecha salarial entre hombres y mujeres</span><br>
+                <span class="description">
+                    {% if ind127 is defined and ind127 != "nan"  %}
+                        {% if ind127|int >= 0  %}
+                            En esta entidad los hombres ganan un {{ind127}}% más que las mujeres
+                        {% else %}
+                            En esta entidad las mujeres ganan un {{ind127|int|abs}}% mas que los hombres
+                        {% endif %}
+                    {% else %}
+
+                    {% endif %}
+                </span>
             </div>
 
             <div class="text-center">
-                <span class="cifra cifra1">{% if ind27 != "nan" %}{{ind27}}{% else %}*{% endif%}</span>
+                <span class="cifra cifra1">{% if ind27 != "nan" and ind27|int %}{{ind27}}{% else %}*{% endif%}</span>
                 <span class="label label1">Proporción salarial entre la plantilla</span>
                 <span class="description"></span>
             </div>

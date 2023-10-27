@@ -1,9 +1,7 @@
 import base64
 import json
-import multiprocessing
 import os
 import sys
-from multiprocessing import Process
 from pathlib import Path
 
 import sass
@@ -64,12 +62,8 @@ def exportar_infografias(entity_name):
     total_tasks = len(files_list)
 
     for filename in files_list:
-        p1 = Process(target=html2img, args=(filename, total_tasks))
-        p2 = Process(target=html2pdf, args=(filename, total_tasks))
-        p1.start()
-        p2.start()
-        p1.join()
-        p2.join()
+        html2img(filename, total_tasks)
+        # html2pdf(filename, total_tasks)
 
 
 def html2pdf(filename, total_tasks):
@@ -117,8 +111,8 @@ def html2pdf(filename, total_tasks):
         with open(pdf_path, 'wb') as output_file:
             output_file.write(decoded)
 
-        print(f"[{round(export_percent)}%] Infografía exportada a PDF [{pdf_path}]")
         export_percent += 100 / total_tasks
+        print(f"[{round(export_percent)}%] Infografía exportada a PDF [{pdf_path}]")
     finally:
         driver.quit()
 
@@ -134,26 +128,11 @@ def html2img(filename, total_tasks, extension="png"):
     img_path = f"{output_path}/{filename.split('.')[0]}.{extension}"
 
     chrome_options = webdriver.ChromeOptions()
-    chrome_options.add_argument('--headless=new')
+    chrome_options.add_argument('--headless')
     chrome_options.add_argument('--hide-scrollbars')
     chrome_options.add_argument('--window-size=2480,3508')
-    settings = {
-        "recentDestinations": [{
-            "id": "Save as PDF",
-            "origin": "local",
-            "account": ""
-        }],
-        "selectedDestinationId": "Save as PDF",
-        "version": 2,
-        "isHeaderFooterEnabled": False,
-        "isCssBackgroundEnabled": True
-    }
 
-    prefs = {
-        "printing.print_preview_sticky_settings.appState": json.dumps(settings),
-    }
     chrome_options.add_argument('--kiosk-printing')
-    chrome_options.add_experimental_option('prefs', prefs)
     # driver_path = ChromeDriverManager().install()
     driver = webdriver.Chrome(options=chrome_options)
 
@@ -163,8 +142,8 @@ def html2img(filename, total_tasks, extension="png"):
         driver.get(str(Path(input_file).absolute()))
 
         driver.save_screenshot(filename=img_path)
-        print(f"[{round(export_percent)}%] Infografía exportada a {extension.upper()} [{img_path}]")
         export_percent += 100 / total_tasks
+        print(f"[{round(export_percent)}%] Infografía exportada a {extension.upper()} [{img_path}]")
     finally:
         driver.quit()
 

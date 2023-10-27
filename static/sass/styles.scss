@@ -1,17 +1,18 @@
-@font-face {
-  font-family: 'Veneer Three';
-  src: url('../fonts/Veneer Three.woff') format('truetype');
-}
-
-@font-face {
-  font-family: 'Wingding';
-  src: url('../fonts/wingding.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Source Sans Pro';
-  src: url('../fonts/SourceSansPro-Regular.ttf') format('truetype');
-}
+@import 'font-face';
+@include font-face("Veneer Three", "../fonts/Veneer Three.woff");
+@include font-face("Wingding", "../fonts/wingding.ttf");
+@include font-face("Source Sans Pro", "../fonts/SourceSansPro-Regular.ttf", 400);
+@include font-face("Source Sans Pro", "../fonts/SourceSansPro-Italic.ttf", 400, italic);
+@include font-face("Source Sans Pro", "../fonts/SourceSansPro-ExtraLight.ttf", 200);
+@include font-face("Source Sans Pro", "../fonts/SourceSansPro-ExtraLightItalic.ttf", 200, italic);
+@include font-face("Source Sans Pro", "../fonts/SourceSansPro-Light.ttf", 300);
+@include font-face("Source Sans Pro", "../fonts/SourceSansPro-LightItalic.ttf", 300, italic);
+@include font-face("Source Sans Pro", "../fonts/SourceSansPro-Semibold.ttf", 600);
+@include font-face("Source Sans Pro", "../fonts/SourceSansPro-SemiboldItalic.ttf", 600, italic);
+@include font-face("Source Sans Pro", "../fonts/SourceSansPro-Bold.ttf", 700);
+@include font-face("Source Sans Pro", "../fonts/SourceSansPro-BoldItalic.ttf", 700, italic);
+@include font-face("Source Sans Pro", "../fonts/SourceSansPro-Black.ttf", 900);
+@include font-face("Source Sans Pro", "../fonts/SourceSansPro-BlackItalic.ttf", 900, italic);
 
 *, *::after, *::before {
   box-sizing: inherit;
@@ -143,7 +144,8 @@ footer{
 
 .personas-porcent{
     position: absolute;
-    right:50%;
+    top: 35%;
+    right: 50%;
     bottom: 2.3vw;
     text-align: right;
     padding-right:0.4vw;
@@ -174,6 +176,7 @@ footer{
 
 .personas-numero{
     position: absolute;
+    top: 35%;
     left:51%;
     bottom: 2.3vw;
     padding-left:0.6vw;
@@ -184,7 +187,6 @@ footer{
     p{
       margin-top:1.05rem;
     }
-    .label{ margin-bottom:-0.4rem; display:block; }
 }
 
 .columna1{ position:absolute; height:72%; top:21%; width: 53.5vw; border-right: 0.8vw solid #fff; }
@@ -249,6 +251,7 @@ header{
 
     .corazon{
         position:absolute;
+        container-type: inline-size;
         top:4vw;
         left:3.6vw;
         width:20vw;
@@ -257,15 +260,14 @@ header{
         height:24vw;
 
         .titulo{
-          flex: 0 1 auto;
+            font-size: 18cqw;
         }
 
         .logo-entidad{
-          flex: 1 1 auto;
-          background-size:cover;
-          background-position:center left;
-          background-repeat:no-repeat;
-          background-color:#f00;
+            flex: 1 1 auto;
+            background-size: contain;
+            background-position:center left;
+            background-repeat:no-repeat;
         }
     }
 
@@ -279,7 +281,7 @@ header{
 
     .columnas{
       position:absolute;
-      width:36%;
+      width:34%;
       height: 55%;
       right: 0;
       bottom: 0;

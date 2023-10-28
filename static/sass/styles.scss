@@ -195,7 +195,6 @@ footer{
 
 .columnas{
   position:relative;
-  width:100%;
   display:flex;
 
   > * { flex: 1; }
@@ -315,7 +314,6 @@ header{
 
 
 section{
-  padding:2vw 3.5vw ;
   border-bottom: 0.8vw solid #fff;
 
   position:relative;
@@ -353,7 +351,8 @@ section{
 
 #equidad{ 
   color:$color-equidad;
-  height: 35%; 
+  height: 35%;
+  padding: 3.5vw;
 
   .columnas{
     top:10vw;
@@ -453,12 +452,13 @@ section{
 
   .reparto{
     position:absolute;
+    width:100%;
+    padding-left: 3vw;
+    padding-right: 3vw;
     bottom:3vw;
-
   }
 
   .columnas{
-    width:105%;
     margin-left:-2.5%;
    }
 }
@@ -467,26 +467,39 @@ section{
   overflow: hidden;
   position: absolute;
   top: 40%;
-  width: 90%;
-  height: 45%;
-  margin-left:-1.5vw;
+  width: 100%;
+  height: 50%;
 }
 
-.ingresos-chart-label{
-  font-size: 1.8rem;
-}
+
 .chart-text{
   font-family: 'Source Sans Pro', sans-serif;
+  font-size: 1.4rem;
   line-height:0.9;
-  text-transform: uppercase;
+//   text-transform: uppercase;
   position: relative;
-  top: -2rem;
+  top: -1.9rem;
+  margin-left: 0.4rem;
+  padding-right: 0.8rem;
   padding-bottom:0.5rem;
   border-bottom:0.3rem solid $color-riqueza;
 
-  .cifra3{ color: $color-riqueza; }
+  .cifra3{
+    font-size: 2.3rem;
+    color: $color-riqueza;
+  }
 }
 
 .highcharts-credits {
     display: none;
+}
+
+.highcharts-container {
+    width: 100%;
+    height: 100%;
+}
+
+.highcharts-pie-series .highcharts-data-label-connector {
+    stroke: #c42f43;
+    stroke-width: 0.3rem;
 }

@@ -273,22 +273,18 @@
             animation: false,
             borderRadius: 0,
             dataLabels: {
-                className: 'ingresos-chart-label',
                 enabled: true,
                 format: '<div class="chart-text"><span class="cifra3">{point.y}%</span><br>{point.name}</div>',
-                distance: 70
             }
         },
         pie: {
             borderWidth:0.1,
             startAngle:100,
             dataLabels: {
-                padding:0,
-                connectorColor:'#c42f43',
-                connectorPadding:0,
-                connectorWidth:7,
+                connectorShape: 'straight',
+                padding:-15,
+                distance: '50%',
                 verticalAlign: 'top',
-                className: 'ingresos-chart-label',
                 useHTML: true
             }
         }
@@ -321,11 +317,9 @@
     function redrawChart(){
         var chart = Highcharts.charts[0];
 
-        console.log('redraw');
         var ingresos = document.getElementById('ingresos');
         var container = document.getElementById('riqueza');
         var w = container.offsetWidth;
-        console.log(w);
         if (chart) {
           chart.setSize(w, w * (2/5), false);
         }

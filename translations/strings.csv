@@ -24,8 +24,8 @@ E2,No se puede calcular porque la entidad no cuenta con trabajadoras,No es pot c
 E5,En esta entidad las trabajadoras y los trabajadores tienen la misma remuneración,En aquesta entitat les treballadores i treballadors tenen la mateixa remuneració,"Erakunde horretan, langileek ordainsari bera dute.","Nesta entidade, as traballadoras e os traballadores teñen a mesma remuneración"
 E3,No se puede calcular porque la entidad sólo tiene una trabajadora,No es pot calcular perquè l'entitat compta només amb una treballadora,Ezin da kalkulatu erakundeak langile bakarra duelako,Non se pode calcular porque a entidade só ten unha traballadora
 E4,No se puede calcular porque la entidad es no mixta,No es pot calcular perquè l'entitat no és mixta,Ezin da kalkulatu erakundea ez delako mistoa,Non se pode calcular porque a entidade é non-mixta
-TXT025,Los hombres ganan un X % más que las mujeres,Els homes guanyen un X % més que les dones,Gizonek emakumeek baino % X gehiago irabazten dute,Os homes gañan un X % máis ca as mulleres
-TXT026,Las mujeres ganan un X % mas que los hombres”,Les dones guanyen un X % més que els homes,Emakumeek gizonek baino % X gehiago irabazten dute,As mulleres gañan un X % máis ca os homes
+TXT025,Los hombres ganan un ind127% más que las mujeres,Els homes guanyen un ind127% més que les dones,Gizonek emakumeek baino % ind127 gehiago irabazten dute,Os homes gañan un ind127% máis ca as mulleres
+TXT026,Las mujeres ganan un ind127% mas que los hombres,Les dones guanyen un ind127% més que els homes,Emakumeek gizonek baino % ind127 gehiago irabazten dute,As mulleres gañan un ind127% máis ca os homes
 TXT027,Difusión de salarios a la plantilla,Difusió dels salaris a la plantilla,Langileen artean soldatak zabaltzea,Difusión de salarios ao persoal
 E9,No corresponde porque solo hay una persona trabajadora,No correspon perquè només hi ha una persona treballadora,"Ez dagokio, langile bakarra dagoelako",Non corresponde porque só hai unha persoa traballadora
 E8,No corresponde porque no hay personal contratado,No correspon perquè no hi ha personal contractat,"Ez dagokio, langilerik ez dagoelako",Non corresponde porque non hai persoal contratado

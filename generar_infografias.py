@@ -36,18 +36,33 @@ def generar_infografias(entities_data, entity_name=None):
     total_entities = len(entities_data)
     for index, entity in enumerate(entities_data):
         print(f"[{index+1}/{total_entities}] Generando infografia para la entidad {entity['Nombre']}...")
-        template_loader = jinja2.FileSystemLoader(searchpath="template")
-        template_env = jinja2.Environment(loader=template_loader)
-        template_file = "main.html"
-        template = template_env.get_template(template_file)
-        output_text = template.render(**entity)
+        langs = entity['Idioma'].split(';')
+        for lang in langs:
+            translations = get_translations_from_lang(lang)
 
-        filename = sanitize_filename(entity["Nombre"])
-        html_path = f'{output_path}/{filename}.html'
-        html_file = open(html_path, 'w', encoding="utf-8")
-        html_file.write(output_text)
-        html_file.close()
-        print(f"[{index+1}/{total_entities}] Infografía para la entidad [{entity['Nombre']}] generada.")
+            template_loader = jinja2.FileSystemLoader(searchpath="template")
+            template_env = jinja2.Environment(loader=template_loader)
+            template_file = "main.html"
+            template = template_env.get_template(template_file)
+            output_text = template.render(**{**entity, **translations})
+
+            filename = sanitize_filename(entity["NIF"])
+            html_path = f'{output_path}/{filename}_{lang}.html'
+            html_file = open(html_path, 'w', encoding="utf-8")
+            html_file.write(output_text)
+            html_file.close()
+            print(f"[{index+1}/{total_entities}] Infografía para la entidad [{entity['Nombre']}] generada.")
+
+
+def get_translations_from_lang(lang):
+    translations = {}
+    try:
+        with open(f"translations/{lang}.json", "r", encoding="utf-8") as translations_file:
+            translations = json.loads(translations_file.read())
+    except FileNotFoundError:
+        pass
+
+    return translations
 
 
 def exportar_infografias(entity_name):

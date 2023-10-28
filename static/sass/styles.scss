@@ -144,6 +144,7 @@ footer{
 
 .personas-porcent{
     position: absolute;
+    width: 9%;
     top: 35%;
     right: 50%;
     bottom: 2.3vw;
@@ -158,16 +159,20 @@ footer{
       line-height: 1;
     }
 
-    strong{
-      margin-bottom: -0.1rem;
-    }
 }
 
 .personas{
   position:absolute;
+  display: flex;
+  flex-direction: column;
   top:2.5vw;
   width:100%;
   padding-left:1vw;
+
+    .label {
+        width: 15%;
+        align-self: center;
+    }
 
     .cifra2{
         margin-bottom:-0.1em;
@@ -176,6 +181,7 @@ footer{
 
 .personas-numero{
     position: absolute;
+    width: 14%;
     top: 35%;
     left:51%;
     bottom: 2.3vw;
@@ -226,6 +232,14 @@ ul.checklist{
     top: 50%;
     margin-top: -0.5em;
 
+  }
+
+  .description {
+    font-family: Source Sans Pro;
+    position: absolute;
+    font-size:0.5em;
+    padding-left: 5em;
+    margin-top: -0.5em;
   }
 
 
@@ -358,6 +372,7 @@ section{
     top:10vw;
     width:110%;
     margin-left:-5%;
+    padding: 0 1rem;
   }
 }
 

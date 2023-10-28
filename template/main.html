@@ -20,7 +20,7 @@
     <div class="corazon">
         <div class="titulo">
             {{Nombre}}<br>
-            <em>enseña el corazón</em>
+            <em>{{TXT003}}</em> <!-- Enseña el corazón -->
         </div>
         <div class="logo-entidad" style="background-image: url({{logo}})"></div>
     </div>
@@ -30,52 +30,52 @@
     </div>
 
     <div class="personas-porcent">
-        <p><strong class="cifra cifra3">{% if ind1d != "nan" %}{{ind1d}}%{% else %}*{% endif%}</strong> mujeres </p>
-        <p><strong class="cifra cifra3">{% if ind1h != "nan" %}{{ind1h}}%{% else %}*{% endif%}</strong> hombres </p>
-        <p><strong class="cifra cifra3">{% if ind1a != "nan" %}{{ind1a}}%{% else %}*{% endif%}</strong> identidades<br>no binarias </p>
+        <p><strong class="cifra cifra3">{% if ind1d != "nan" %}{{ind1d}}%{% else %}*{% endif%}</strong> {{TXT005}} </p> <!-- Mujeres -->
+        <p><strong class="cifra cifra3">{% if ind1h != "nan" %}{{ind1h}}%{% else %}*{% endif%}</strong> {{TXT006}} </p> <!-- Hombres -->
+        <p><strong class="cifra cifra3">{% if ind1a != "nan" %}{{ind1a}}%{% else %}*{% endif%}</strong> {{TXT007}} </p> <!-- Identidades no binarias -->
     </div>
 
     <div class="personas-numero">
         <div>
-            <p class="label label1">Trabajadoras</p>
+            <p class="label label1">{{TXT008}}</p> <!-- Trabajadoras -->
             {% if ind118 is defined and ind118|int != 0 %}
                 <strong class="cifra cifra3">{{ind118}}</strong>
             {% else %}
-                <span class="description">* La entidad no cuenta con<br>personas trabajadoras</span>
+                <span class="description">* {{TXT009}}</span> <!-- La entidad no cuenta con<br>personas trabajadoras -->
             {% endif %}
         </div>
         <div>
-            <p class="label label1">Voluntarias</p>
+            <p class="label label1">{{TXT010}}</p> <!-- Voluntarias -->
             {% if q0107 is defined and q0107|int != 0 %}
                 <strong class="cifra cifra3">{{q0107}}</strong>
             {% else %}
-                <span class="description">* Por su estructura la entidad<br>no cuenta con personas<br>voluntarias</span>
+                <span class="description">* {{TXT011}}</span> <!-- Por su estructura la entidad no cuenta con personas voluntarias -->
             {% endif %}
         </div>
         <div>
-            <p class="label label1">Asociadas</p>
+            <p class="label label1">{{TXT012}}</p> <!-- Asociadas -->
             {% if q0101 is defined and q0101|int != 0 %}
                 <strong class="cifra cifra3">{{q0101}}</strong>
             {% else %}
-                <span class="description">* Por su estructura la entidad<br>no cuenta con personas<br>asociadas</span>
+                <span class="description">* {{TXT013}}</span> <!-- Por su estructura la entidad no cuenta con personas asociadas -->
             {% endif %}
         </div>
     </div>
 
     <div class="personas text-center">
         <span class="cifra cifra2">{{ind2}}</span>
-        <span class="label label3">Personas de la <br>organización</span>
+        <span class="label label3">{{TXT004}}</span> <!-- Personas de la organización-->
 
     </div>
 
     <div class="columnas">
         <div class="ingresos">
-            <span class="label label2">Ingresos</span>
+            <span class="label label2">{{TXT014}}</span> <!-- Ingresos -->
             <span class="cifra cifra4">{{q1203}}€</span>
         </div>
 
         <div class="gastos">
-            <span class="label label2">Gastos</span>
+            <span class="label label2">{{TXT015}}</span> <!-- Gastos -->
             <span class="cifra cifra4">{{q1201}}€</span>
         </div>
 
@@ -86,41 +86,58 @@
 <div class="columna1">
     <section id="equidad">
         <img class="icono" src="../../static/img/equidad.png">
-        <h2 class="titulo">Equidad</h2>
+        <h2 class="titulo">{{TXT016}}</h2> <!-- Equidad -->
 
         <div class="columnas">
             <div class="text-center">
-                <span class="cifra cifra1">{% if ind20d != "nan" %}{{ind20d}}%{% else %}*{% endif%}</span>
-                <span class="label label1">Mujeres en puestos <br>de responsabilidad</span>
-                <span class="description"></span>
+                <span class="cifra cifra1">{% if ind20d != "nan" and ind20d|int %}{{ind20d}}%{% else %}*{% endif%}</span>
+                <span class="label label1">{{TXT017}}</span><br> <!-- Mujeres en puestos de responsabilidad -->
+                <span class="description">{% if ind20d != "nan" and not ind20d|int %}* {{E1}}{% endif%}</span> <!-- Esta entidad cuenta con representación horizontal -->
             </div>
 
             <div class="text-center">
-                <span class="cifra cifra1">{% if ind127 != "nan" and ind27|int %}{{ind127|int|abs}}%{% else %}*{% endif%}</span>
-                <span class="label label1">Brecha salarial entre hombres y mujeres</span><br>
+                <span class="cifra cifra1">{% if ind127 != "nan" and ind127|int %}{{ind127|int|abs}}%{% else %}*{% endif%}</span>
+                <span class="label label1">{{TXT020}}</span><br> <!-- Brecha salarial entre hombres y mujeres -->
                 <span class="description">
-                    {% if ind127 is defined and ind127 != "nan"  %}
+                    {% if ind127 is defined and ind127|int  %}
                         {% if ind127|int >= 0  %}
-                            * En esta entidad los hombres ganan un {{ind127}}% más que las mujeres
+                            * {{TXT025 | replace("ind127", ind127|int|abs) }} <!-- Los hombres ganan un X % más que las mujeres -->
                         {% else %}
-                            * En esta entidad las mujeres ganan un {{ind127|int|abs}}% mas que los hombres
+                            * {{TXT026 | replace("ind127", ind127|int|abs) }} <!-- Las mujeres ganan un X % mas que los hombres” -->
                         {% endif %}
                     {% else %}
+                        {% set values = { "E2": E2, "E3": E3, "E4": E4, "E5": E5 } %}
 
+                        {% if ind127 in values %}
+                            * {{ values[ind127] }}
+                        {% endif %}
                     {% endif %}
                 </span>
             </div>
 
             <div class="text-center">
                 <span class="cifra cifra1">{% if ind27 != "nan" and ind27|int %}{{ind27}}{% else %}*{% endif%}</span>
-                <span class="label label1">Proporción salarial entre la plantilla</span>
+                <span class="label label1">{{TXT018}}</span> <!-- Proporción salarial entre la plantilla -->
                 <span class="description"></span>
             </div>
         </div>
 
         <ul class="checklist">
-            <li> Difusión de salarios a la plantilla
-                <span class="check">{% if ind58 == "True" %}{% else %}{% endif %}</span>
+            <li> {{TXT027}} <!-- Difusión de salarios a la plantilla -->
+                <span class="check">
+                    {% if ind58 == "True" %}
+                        
+                    {% elif ind58 == "False" %}
+                        
+                    {% endif %}
+                </span>
+                <span class="description">
+                    {% set values = { "E8": E8, "E9": E9 } %}
+
+                    {% if ind58 in values %}
+                        * {{ values[ind58] }}
+                    {% endif %}
+                </span>
             </li>
         </ul>
     </section>       

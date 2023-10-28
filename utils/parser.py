@@ -62,4 +62,9 @@ class Parser:
         return f"{formatted_value}{suffixes[suffix_index]}"
 
     def parse_boolean(self, value):
-        return str(value).lower() == "si"
+        if str(value).lower() == "si":
+            return True
+        elif str(value).lower() == "no":
+            return False
+        else:
+            return value

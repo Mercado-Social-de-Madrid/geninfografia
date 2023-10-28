@@ -144,34 +144,56 @@
 
     <section id="sostenibilidad">
         <img class="icono" src="../../static/img/sostenibilidad_ecologica.png">
-        <h2 class="titulo">Sostenibilidad ecológica</h2>
+        <h2 class="titulo">{{TXT038}}</h2> <!-- Sostenibilidad ecológica -->
         <ul class="checklist">
-            <li> Sistema de gestión ambiental
+            <li>{{TXT039}} <!-- Sistema de gestión ambiental -->
                 <span class="check">{% if q4104a == "True" %}{% else %}{% endif %}</span>
             </li>
-            <li> Sensibilización ambiental a nivel interno
+            <li>{{TXT040}} <!-- Sensibilización ambiental a nivel interno -->
                 <span class="check">{% if q4104b == "True" %}{% else %}{% endif %}</span>
             </li>
-            <li> Divulgación ambiental a nivel externo
+            <li>{{TXT041}} <!-- Divulgación ambiental a nivel externo -->
                 <span class="check">{% if q4104c == "True" %}{% else %}{% endif %}</span>
             </li>
-            <li> Medidas de reducción de impacto ambiental<br>y divulgación a nivel externo
+            <li>{{TXT042}} <!-- Medidas de reducción de impacto ambiental<br>y divulgación a nivel externo -->
                 <span class="check">{% if q4104d == "True" %}{% else %}{% endif %}</span>
             </li>
-            <li> Energía 100% renovable
-                <span class="check">{% if ind62 == "True" %}{% else %}{% endif %}</span>
+            <li>{{TXT043}} <!-- Energía 100% renovable -->
+                <span class="check">
+                    {% if ind62 == "True" %}
+                        
+                    {% elif ind62 == "False" %}
+                        
+                    {% endif %}
+                </span>
+                <span class="description">
+                    {% set values = { "S1": S1 } %}
+
+                    {% if ind62 in values %}
+                        * {{ values[ind62] }}
+                    {% endif %}
+                </span>
             </li>
         </ul>
     </section>
 
     <section id="trabajo">
         <img class="icono" src="../../static/img/trabajo_digno.png">
-        <h2 class="titulo">Trabajo digno</h2>
+        <h2 class="titulo">{{TXT045}}</h2> <!-- Trabajo digno -->
 
         <ul class="checklist">
-            <li> Espacios de atención emocional y cuidado <span class="check">{% if ind105 == "True" %}{% else %}{% endif %}</span></li>
-            <li> Reglamento interno de relaciones laborales <span class="check">{% if ind78 == "True" %}{% else %}{% endif %}</span></li>
-            <li> Medidas que mejoran la ley de conciliación <span class="check">{% if ind80 == "True" %}{% else %}{% endif %}</span></li>
+            <li>{{TXT046}}<span class="check">{% if ind105 == "True" %}{% elif ind105 == "False" %}{% endif %}</span></li> <!-- Espacios de atención emocional y cuidado -->
+            <li>{{TXT047}} <!-- Reglamento interno de relaciones laborales -->
+                <span class="check">{% if ind78 == "True" %}{% elif ind78 == "False" %}{% endif %}</span>
+                <span class="description">
+                    {% set values = { "T1": T1 } %}
+
+                    {% if ind78 in values %}
+                        * {{ values[ind78] }}
+                    {% endif %}
+                </span>
+            </li>
+            <li>{{TXT048}}<span class="check">{% if ind80 == "True" %}{% elif ind80 == "False" %}{% endif %}</span></li> <!-- Medidas que mejoran la ley de conciliación -->
         </ul>
 
     </section>
@@ -179,36 +201,36 @@
 
 <div class="columna2">
     <section id="cooperacion">
-        <h2 class="titulo">Cooperación y</h2>
-        <h2 class="titulo secundario"> compromiso con el entorno</h2>
+        <h2 class="titulo">{{TXT030A}}</h2> <!-- Cooperación y -->
+        <h2 class="titulo secundario"> {{TXT030B}}</h2> <!-- compromiso con el entorno -->
 
         <img class="icono" src="../../static/img/cooperacion.png">
         <img class="icono secundario" src="../../static/img/compromiso_entorno.png">
 
         <aside>
             <span class="cifra cifra1">{{ind254}}%</span>
-            <span class="label label1">Compras dentro de <br>la Economía Social</span>
+            <span class="label label1">{{TXT031}}</span> <!-- Compras dentro de la Economía Social -->
         </aside>
 
 
         <ul class="checklist">
-            <li> Intercooperación <br>con mismo sector<br> compartiendo: </li>
-            <li> Local
+            <li>{{TXT032}}</li> <!--  Intercooperación con mismo sector compartiendo: -->
+            <li>{{TXT033}} <!-- Local -->
                 <span class="check">{% if q5305a == "True" %}{% else %}{% endif %}</span>
             </li>
-            <li> Conocimiento
+            <li>{{TXT034}} <!-- Conocimiento -->
                 <span class="check">{% if q5305b == "True" %}{% else %}{% endif %}</span>
             </li>
-            <li> Gestión
+            <li>{{TXT035}} <!-- Gestión -->
                 <span class="check">{% if q5305c == "True" %}{% else %}{% endif %}</span>
             </li>
-            <li> Proyectos
+            <li>{{TXT036}} <!-- Proyectos -->
                 <span class="check">{% if q5305d == "True" %}{% else %}{% endif %}</span>
             </li>
         </ul>
 
          <ul class="checklist secundario">
-            <li> Opera con <br>finanzas éticas
+            <li>{{TXT037}} <!-- Opera con <br>finanzas éticas -->
                 <span class="check">{% if ind71 == "True" %}{% else %}{% endif %}</span>
             </li>
          </ul>
@@ -217,33 +239,40 @@
 
     <section id="riqueza">
         <img class="icono" src="../../static/img/reparto_justo_riqueza.png">
-        <h2 class="titulo">Reparto justo de la riqueza</h2>
+        <h2 class="titulo">{{TXT050}}</h2> <!-- Reparto justo de la riqueza -->
 
-        <h3 class="titulo t1 text-center"> Fuentes de ingresos </h3>
+        <h3 class="titulo t1 text-center"> {{TXT051}} </h3> <!-- Fuentes de ingresos -->
 
         <div id="ingresos"></div>
 
         <div class="reparto">
-        <h3 class="titulo t2 text-center"> Reparto de beneficios </h3>
+        <h3 class="titulo t2 text-center"> {{TXT055}} </h3> <!-- Reparto de beneficios -->
 
          <div class="columnas">
-            <div class="text-center">
-                <span class="cifra cifra3">{% if q1405 != "nan" %}{{q1405}}€{% else %}*{% endif%}</span>
-                <span class="label label1">A empresas o personas socias</span>
-                <span class="description"></span>
-            </div>
+            {% if q1405 != "R1" %}
+                <div class="text-center">
+                    <span class="cifra cifra3">{% if q1405 != "nan" %}{{q1405}}€{% else %}*{% endif%}</span>
+                    <span class="label label1">{{TXT056}}</span> <!-- A empresas o personas socias -->
+                    <span class="description"></span>
+                </div>
 
-            <div class="text-center">
-                <span class="cifra cifra3">{% if q1406 != "nan" %}{{q1406}}€{% else %}*{% endif%}</span>
-                <span class="label label1">A compensación <br>de pérdidas</span>
-                <span class="description"></span>
-            </div>
+                <div class="text-center">
+                    <span class="cifra cifra3">{% if q1406 != "nan" %}{{q1406}}€{% else %}*{% endif%}</span>
+                    <span class="label label1">{{TXT057}}</span> <!-- A compensación de pérdidas -->
+                    <span class="description"></span>
+                </div>
 
-            <div class="text-center">
-                <span class="cifra cifra3">{% if q1413 != "nan" %}{{q1413}}€{% else %}*{% endif%}</span>
-                <span class="label label1">A reservas</span>
-                <span class="description"></span>
-            </div>
+                <div class="text-center">
+                    <span class="cifra cifra3">{% if q1413 != "nan" %}{{q1413}}€{% else %}*{% endif%}</span>
+                    <span class="label label1">{{TXT058}}</span> <!-- A reservas -->
+                    <span class="description"></span>
+                </div>
+            {% else %}
+                <div class="text-center">
+                    <span class="cifra cifra3">*</span>
+                    <span class="description">* {{R1}}</span> <!-- No corresponde porque no se han tenido beneficios este año -->
+                </div>
+            {% endif %}
         </div>
         </div>
 
@@ -313,17 +342,17 @@
             data: [
                 {
                     color:'#c42f43',
-                    name: 'Facturación',
+                    name: '{{TXT052}}', // Facturación
                     y: {{ingresos_facturacion}}
                 },
                 {
                     color:'#d56473',
-                    name: 'Subvenciones',
+                    name: '{{TXT053}}', // Subvenciones
                     y: {{ingresos_subvenciones}}
                 },
                 {
                     color:'#ff9fac',
-                    name: 'Otras',
+                    name: '{{TXT054}}', // Otras
                     y: {{ingresos_otras}}
                 }
             ]

@@ -9,7 +9,7 @@ class Parser:
                           "ind97", "ind27", "q1203", "q1201",
                           "q1405", "q1406", "q1413", "ind254",
                           "ind118", "q0107", "q0101"]
-    boolean_properties = ["ind58", "q4104a", "q4104b", "q4104c",
+    boolean_properties = ["ind58", "ind62", "q4104a", "q4104b", "q4104c",
                           "q4104d", "q5305a", "q5305b", "q5305c",
                           "q5305d", "ind71", "ind105", "ind78", "ind80"]
 

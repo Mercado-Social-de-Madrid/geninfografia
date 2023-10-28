@@ -16,22 +16,23 @@ TXT014,Ingresos,Ingressos,Diru-sarrerak,Ingresos
 TXT015,Gastos,Despeses,Gastuak,Gastos
 TXT016,EQUIDAD,EQUITAT,EKITATEA,EQUIDADE
 TXT017,Mujeres en puestos de responsabilidad ,Dones en càrrecs directius,Emakumeak erantzukizun postuetan,Mulleres en postos de responsabilidade
+E1,Esta entidad cuenta con representación horizontal,Aquesta entitat compta amb representació horitzonal,Erakunde honek ordezkaritza horizontala du,Esta entidade conta con representación horizontal
 TXT018,Proporción salarial entre la plantilla,Proporció salarial entre la plantilla,Plantillaren soldata-proportzioa,Proporción salarial entre o persoal
-TXT019,No se puede calcular porque no hay personal contratado,No es pot calcular perquè no hi ha personal contractat,Ezin da kalkulatu langilerik ez dagoelako,Non se pode calcular porque non hai persoal contratado
+E6,No se puede calcular porque no hay personal contratado,No es pot calcular perquè no hi ha personal contractat,Ezin da kalkulatu langilerik ez dagoelako,Non se pode calcular porque non hai persoal contratado
 TXT020,Brecha salarial entre hombres y mujeres,Bretxa salarial entres homes i dones,Gizonen eta emakumeen arteko soldata-arrakala,Fenda salarial entre homes e mulleres
-TXT021,No se puede calcular porque la entidad no cuenta con trabajadoras,No es pot calcular perquè l'entitat no compta amb treballadores,Ezin da kalkulatu erakundeak ez duelako langilerik,Non se pode calcular porque a entidade non conta con traballadoras
-TXT022,En esta entidad las trabajadoras y los trabajadores tienen la misma remuneración,En aquesta entitat les treballadores i treballadors tenen la mateixa remuneració,"Erakunde horretan, langileek ordainsari bera dute.","Nesta entidade, as traballadoras e os traballadores teñen a mesma remuneración"
-TXT023,No se puede calcular porque la entidad sólo tiene una trabajadora,No es pot calcular perquè l'entitat compta només amb una treballadora,Ezin da kalkulatu erakundeak langile bakarra duelako,Non se pode calcular porque a entidade só ten unha traballadora
-TXT024,No se puede calcular porque la entidad es no mixta,No es pot calcular perquè l'entitat no és mixta,Ezin da kalkulatu erakundea ez delako mistoa,Non se pode calcular porque a entidade é non-mixta
+E2,No se puede calcular porque la entidad no cuenta con trabajadoras,No es pot calcular perquè l'entitat no compta amb treballadores,Ezin da kalkulatu erakundeak ez duelako langilerik,Non se pode calcular porque a entidade non conta con traballadoras
+E5,En esta entidad las trabajadoras y los trabajadores tienen la misma remuneración,En aquesta entitat les treballadores i treballadors tenen la mateixa remuneració,"Erakunde horretan, langileek ordainsari bera dute.","Nesta entidade, as traballadoras e os traballadores teñen a mesma remuneración"
+E3,No se puede calcular porque la entidad sólo tiene una trabajadora,No es pot calcular perquè l'entitat compta només amb una treballadora,Ezin da kalkulatu erakundeak langile bakarra duelako,Non se pode calcular porque a entidade só ten unha traballadora
+E4,No se puede calcular porque la entidad es no mixta,No es pot calcular perquè l'entitat no és mixta,Ezin da kalkulatu erakundea ez delako mistoa,Non se pode calcular porque a entidade é non-mixta
 TXT025,Los hombres ganan un X % más que las mujeres,Els homes guanyen un X % més que les dones,Gizonek emakumeek baino % X gehiago irabazten dute,Os homes gañan un X % máis ca as mulleres
 TXT026,Las mujeres ganan un X % mas que los hombres”,Les dones guanyen un X % més que els homes,Emakumeek gizonek baino % X gehiago irabazten dute,As mulleres gañan un X % máis ca os homes
 TXT027,Difusión de salarios a la plantilla,Difusió dels salaris a la plantilla,Langileen artean soldatak zabaltzea,Difusión de salarios ao persoal
-TXT028,No corresponde porque solo hay una persona trabajadora,No correspon perquè només hi ha una persona treballadora,"Ez dagokio, langile bakarra dagoelako",Non corresponde porque só hai unha persoa traballadora
-TXT029,No corresponde porque no hay personal contratado,No correspon perquè no hi ha personal contractat,"Ez dagokio, langilerik ez dagoelako",Non corresponde porque non hai persoal contratado
+E9,No corresponde porque solo hay una persona trabajadora,No correspon perquè només hi ha una persona treballadora,"Ez dagokio, langile bakarra dagoelako",Non corresponde porque só hai unha persoa traballadora
+E8,No corresponde porque no hay personal contratado,No correspon perquè no hi ha personal contractat,"Ez dagokio, langilerik ez dagoelako",Non corresponde porque non hai persoal contratado
 TXT030,COOPERACIÓN  Y  COMPROMISO CON EL ENTORNO ,COOPERACIÓ I COMPROMÍS AMB L'ENTORN,LANKIDETZA ETA INGURUNEAREKIKO KONPROMISOA,COOPERACIÓN E COMPROMISO COA CONTORNA
-TXT031,Compras dentro de la economía social ,Compres dins l'economia social,Erosketak gizarte-ekonomiaren barruan,Compras dentro da economía social
+TXT031,Compras dentro de la economía social ,Compres dins l'economia social,Erosketak gizarte-ekonomiaren barruan,Compras dentro da economía social 
 TXT032,Intercooperación con mismo sector compartiendo,"Intercooperació amb el mateix sector, compartint","Sektore berarekin lankidetza, hurrengoa partekatuz",Intercooperación co mesmo sector compartindo
-TXT033,Local ,Local,Lokala,Local
+TXT033,Local ,Local,Lokala,Local 
 TXT034,Conocimiento,Coneixement,Ezagutza,Coñecemento
 TXT035,Gestión,Gestió,Kudeaketa,Xestión
 TXT036,Proyectos,Projectes,Proiektuak,Proxectos
@@ -42,12 +43,12 @@ TXT040,Sensibilización ambiental a nivel interno,Sensibilització ambiental a n
 TXT041,Divulgación ambiental a nivel externo,Divulgació ambiental a nivell extern,Ingurumen-zabalkundea kanpoan,Divulgación ambiental a nivel externo
 TXT042,Medidas de reducción de impacto ambiental y divulgación a nivel externo,Mesures de reducció d'impacte ambiental i divulgació a nivell extern,Ingurumen-inpaktua murrizteko  neurriak eta zabalkundea kanpoan,Medidas de redución do impacto ambiental e divulgación a nivel externo
 TXT043,Energía 100% renovable,Energía 100% renovable,Energia % 100 berriztagarria,Enerxía 100 % renovable
-TXT044,Esta entidad no cuenta con centro de trabajo,Aquesta entitat no compta amb un centre de treball,Erakunde honek ez du lantokirik,Esta entidade non conta con centro de traballo
+S1,Esta entidad no cuenta con centro de trabajo,Aquesta entitat no compta amb un centre de treball,Erakunde honek ez du lantokirik,Esta entidade non conta con centro de traballo
 TXT045,TRABAJO DIGNO,TREBALL DIGNE,LAN DUINA,TRABALLO DIGNO
 TXT046,Espacios de atención emocional y cuidado,Espais d'atenció emocional i de cures,Arreta emozionalerako eta zaintzarako espazioak,Espazos de atención emocional e coidado
 TXT047,Reglamento interno de relaciones laborales,Reglament intern de relacions laborals,Lan-harremanen barne-araudia,Regulamento interno de relacións laborais
 TXT048,Medidas que mejoran la ley de conciliación,Mesures que milloren la llei de conciliació,Kontziliazio-legea hobetzen duten neurriak,Medidas que melloran a lei de conciliación
-TXT049,No corresponde medir estos indicadores porque no hay personal contratado,No correspon mesurar aquests indicadors perquè no hi ha personal contractat,"Ez dagokio adierazle horiek neurtzea, ez baitago kontratatutako langilerik",Non corresponde medir estes indicadores porque non hai persoal contratado
+T1,No corresponde medir estos indicadores porque no hay personal contratado,No correspon mesurar aquests indicadors perquè no hi ha personal contractat,"Ez dagokio adierazle horiek neurtzea, ez baitago kontratatutako langilerik",Non corresponde medir estes indicadores porque non hai persoal contratado
 TXT050,REPARTO JUSTO DE LA RIQUEZA,REPARTIMENT JUST DE LA RIQUESA,ABERASTASUNAREN BIDEZKO BANAKETA,REPARTICIÓN XUSTA DA RIQUEZA
 TXT051,Fuentes de ingresos,Fonts d'ingressos,Diru-iturriak,Fontes de ingresos
 TXT052,Facturación,Facturació,Fakturazioa,Facturación
@@ -57,16 +58,4 @@ TXT055,Reparto beneficios,Repartiment de beneficis,Mozkinen banaketa,Repartició
 TXT056,A empresas o personas socias,A empreses o persones sòcies,Enpresei edo bazkideei,A empresas ou persoas socias
 TXT057,A compensación de pérdidas,A compensació de pèrdues ,Galerak konpentsatzera,A compensación de perdas
 TXT058,A reservas,A reserves,Erreserbetara,A reservas
-TXT059,No corresponde porque no se han tenido beneficios este año,No correspon perquè no hi ha hagut beneficis enguany,"Ez dagokio, aurten ez delako etekinik izan",Non corresponde porque non houbo beneficios este ano
-E1,Esta entidad cuenta con representación horizontal,Aquesta entitat compta amb representació horitzonal,Erakunde honek ordezkaritza horizontala du,Esta entidade conta con representación horizontal
-E2,La brecha salarial no se puede calcular porque la entidad no cuenta con trabajadoras,,,
-E3,No se puede calcular porque la entidad sólo tiene una trabajadora,,,
-E4,No se puede calcular porque la entidad es no mixta,,,
-E5,En esta entidad las trabajadoras y los trabajadores tienen la misma remuneración,,,
-E6,El ínidce de banda salarial no se puede calcular porque la entidad no cuenta con trabajadoras,,,
-E7,No se puede calcular porque la entidad sólo tiene una trabajadora,,,
-E8,No corresponde porque no hay personal contratado,,,
-E9,No corresponde porque solo hay una persona trabajadora,,,
-S1,Esta entidad no cuenta con centro de trabajo,,,
-T1,No corresponde medir estos indicadores porque no hay personal contratado,,,
-R1,No corresponde porque no se han tenido beneficios este año,,,
+R1,No corresponde porque no se han tenido beneficios este año,No correspon perquè no hi ha hagut beneficis enguany,"Ez dagokio, aurten ez delako etekinik izan",Non corresponde porque non houbo beneficios este ano

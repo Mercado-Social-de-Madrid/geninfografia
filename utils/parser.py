@@ -27,6 +27,7 @@ class Parser:
 
             for index, value in enumerate(list(entity_data)):
                 prop_name = str(props[index + 1])
+                prop_name = self.replace_unallowed_symbols(prop_name)
                 value = self.parse_value(prop_name, value)
                 entity[prop_name] = str(value)
 
@@ -68,3 +69,6 @@ class Parser:
             return False
         else:
             return value
+
+    def replace_unallowed_symbols(self, prop_name):
+        return str(prop_name).replace("/", "_")

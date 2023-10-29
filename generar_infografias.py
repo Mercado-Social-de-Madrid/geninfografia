@@ -3,6 +3,7 @@ import json
 import os
 import sys
 from pathlib import Path
+from datetime import datetime
 
 import sass
 import jinja2
@@ -11,6 +12,7 @@ from fuzzywuzzy import fuzz
 from selenium import webdriver
 from selenium.webdriver.common.print_page_options import PrintOptions
 
+from utils.translations import Translations
 from utils.parser import Parser
 
 export_percent = 0
@@ -25,10 +27,17 @@ def compile_sass():
     sass.compile(dirname=('static/sass', 'static/css'))
 
 
+def get_custom_props():
+    return {
+        "year": datetime.now().year
+    }
+
+
 def generar_infografias(entities_data, entity_name=None):
     print("\n======== Generando ficheros HTML de las infografías =============")
     output_path = "infografias/html"
     os.makedirs(output_path, exist_ok=True)
+    custom_props = get_custom_props()
 
     if entity_name:
         entities_data = [entity for entity in entities_data if entity_name == entity["Nombre"]]
@@ -44,10 +53,10 @@ def generar_infografias(entities_data, entity_name=None):
             template_env = jinja2.Environment(loader=template_loader)
             template_file = "main.html"
             template = template_env.get_template(template_file)
-            output_text = template.render(**{**entity, **translations})
+            output_text = template.render(**{**entity, **translations, **custom_props})
 
             filename = sanitize_filename(entity["NIF"])
-            html_path = f'{output_path}/{filename}_{lang}.html'
+            html_path = f'{output_path}/{filename}_{lang.lower()}.html'
             html_file = open(html_path, 'w', encoding="utf-8")
             html_file.write(output_text)
             html_file.close()
@@ -78,7 +87,7 @@ def exportar_infografias(entity_name):
 
     for filename in files_list:
         html2img(filename, total_tasks)
-        # html2pdf(filename, total_tasks)
+        html2pdf(filename, total_tasks)
 
 
 def html2pdf(filename, total_tasks):
@@ -193,6 +202,7 @@ def get_entity_name_from_args():
 if __name__ == "__main__":
     compile_sass()
     entities_data = Parser().parse_csv()
+    Translations().generate_translations()
     entity_name = get_entity_name_from_args()
     generar_infografias(entities_data, entity_name)
     exportar_infografias(entity_name)

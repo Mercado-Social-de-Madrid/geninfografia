@@ -25,8 +25,16 @@
         <div class="logo-entidad" style="background-image: url({{logo}})"></div>
     </div>
 
-    <div class="mes titulo">
-        Balance social <em> de la Economía Social y Solidaria</em> 2023
+    <div class="mes titulo"> <!-- Balance/Auditoría social de la Economía Social y Solidaria [AÑO] -->
+        {% if Auditoria_balance.lower() == "bal" %}
+            {% if TXT001 is string %}
+                {{ ' '.join(TXT001.split(' ')[0:2]) }} <em>{{ ' '.join(TXT001.split(' ')[2:]) }}</em> {{ year }}
+            {% endif %}
+        {% else %}
+            {% if TXT002 is string %}
+                {{ ' '.join(TXT002.split(' ')[0:2]) }} <em>{{ ' '.join(TXT002.split(' ')[2:]) }}</em> {{ year }}
+            {% endif %}
+        {% endif %}
     </div>
 
     <div class="personas-porcent">
@@ -268,10 +276,12 @@
                     <span class="description"></span>
                 </div>
             {% else %}
+                <div class="text-center"></div>
                 <div class="text-center">
                     <span class="cifra cifra3">*</span>
                     <span class="description">* {{R1}}</span> <!-- No corresponde porque no se han tenido beneficios este año -->
                 </div>
+                <div class="text-center"></div>
             {% endif %}
         </div>
         </div>

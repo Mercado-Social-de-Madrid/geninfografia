@@ -11,6 +11,8 @@
 
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.1/html2canvas.min.js"></script>
+
 
   </head>
 
@@ -312,66 +314,67 @@
 
 <script type="text/javascript">
     Highcharts.chart('ingresos', {
-    accessibility: {
-        enabled: false
-    },
-    chart: {
-        backgroundColor: 'transparent',
-        type: 'pie'
-    },
-    title: {
-        text: ''
-    },
-     navigation: {
-        buttonOptions: {
+        accessibility: {
             enabled: false
-        }
-    },
-    plotOptions: {
-        series: {
-            animation: false,
-            borderRadius: 0,
-            dataLabels: {
-                enabled: true,
-                format: '<div class="chart-text"><span class="cifra3">{point.y}%</span><br>{point.name}</div>',
+        },
+        chart: {
+            backgroundColor: 'transparent',
+            type: 'pie'
+        },
+        title: {
+            text: ''
+        },
+         navigation: {
+            buttonOptions: {
+                enabled: false
             }
         },
-        pie: {
-            borderWidth:0.1,
-            startAngle:100,
-            dataLabels: {
-                connectorShape: 'straight',
-                padding:-15,
-                distance: '50%',
-                verticalAlign: 'top',
-                useHTML: true
-            }
-        }
-    },
-    series: [
-        {
-            name: 'Percentage',
-            colorByPoint: true,
-            data: [
-                {
-                    color:'#c42f43',
-                    name: '{{TXT052}}', // Facturación
-                    y: {{ingresos_facturacion}}
-                },
-                {
-                    color:'#d56473',
-                    name: '{{TXT053}}', // Subvenciones
-                    y: {{ingresos_subvenciones}}
-                },
-                {
-                    color:'#ff9fac',
-                    name: '{{TXT054}}', // Otras
-                    y: {{ingresos_otras}}
+        plotOptions: {
+            series: {
+                enableMouseTracking: false,
+                animation: false,
+                borderRadius: 0,
+                dataLabels: {
+                    enabled: true,
+                    format: '<div class="chart-text"><span class="cifra3">{point.y}%</span><br>{point.name}</div>',
                 }
-            ]
-        }
-    ]
-});
+            },
+            pie: {
+                borderWidth:0.1,
+                startAngle:100,
+                dataLabels: {
+                    connectorShape: 'straight',
+                    padding:-15,
+                    distance: '50%',
+                    verticalAlign: 'top',
+                    useHTML: true
+                }
+            }
+        },
+        series: [
+            {
+                name: 'Percentage',
+                colorByPoint: true,
+                data: [
+                    {
+                        color:'#c42f43',
+                        name: '{{TXT052}}', // Facturación
+                        y: {{ingresos_facturacion}}
+                    },
+                    {
+                        color:'#d56473',
+                        name: '{{TXT053}}', // Subvenciones
+                        y: {{ingresos_subvenciones}}
+                    },
+                    {
+                        color:'#ff9fac',
+                        name: '{{TXT054}}', // Otras
+                        y: {{ingresos_otras}}
+                    }
+                ]
+            }
+        ]
+    });
 
     function redrawChart(){
         var chart = Highcharts.charts[0];
@@ -386,6 +389,23 @@
 
     window.addEventListener('resize', redrawChart);
     redrawChart();
+
+    var ingresosDiv = document.getElementById('ingresos');
+
+    // Use html2canvas to rasterize the div
+    html2canvas(ingresosDiv, {backgroundColor:null}).then(function (canvas) {
+        // Convert the canvas to a data URL
+        var imgData = canvas.toDataURL('image/png');
+
+        // Create an image element and set the data URL as its source
+        var img = document.createElement('img');
+        img.src = imgData;
+        img.style.width = '100%';
+
+        // Replace the contents of the div with the image data
+        ingresosDiv.innerHTML = '';
+        ingresosDiv.appendChild(img);
+    });
 </script>
 
 </body>

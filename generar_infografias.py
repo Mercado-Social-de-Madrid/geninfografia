@@ -107,7 +107,16 @@ def html2pdf(driver, filename):
     pdf_path = f"{output_path}/{filename.split('.')[0]}.pdf"
 
     print(f"[{round(export_percent)}%] Exportando infografía en formato PDF [{str(Path(pdf_path).absolute())}]...")
-    params = {'behavior': 'allow', 'downloadPath': pdf_path}
+    params = {
+        "paperWidth": 8.268,
+        "paperHeight": 11.693,
+        "marginTop": 0,
+        "marginLeft": 0,
+        "marginBottom": 0,
+        "marginRight": 0,
+        "pageRanges": "1",
+        "printBackground": True
+    }
     pdf = driver.execute_cdp_cmd('Page.printToPDF', params)
     decoded = base64.b64decode(pdf["data"])
     with open(pdf_path, 'wb') as output_file:
@@ -130,35 +139,10 @@ def html2img(driver, filename, extension="png"):
 
 
 def get_driver():
-    settings = {
-        "recentDestinations": [{
-            "id": "Save as PDF",
-            "origin": "local",
-            "account": ""
-        }],
-        "selectedDestinationId": "Save as PDF",
-        "version": 2,
-        "isHeaderFooterEnabled": False,
-        "isCssBackgroundEnabled": True
-    }
-    prefs = {
-        "printing.print_preview_sticky_settings.appState": json.dumps(settings),
-        "download.prompt_for_download": False,  # To auto download the file
-        "download.directory_upgrade": True,
-        "profile.default_content_setting_values.automatic_downloads": 1,
-        "safebrowsing.enabled": True
-    }
-
     chrome_options = webdriver.ChromeOptions()
-    chrome_options.add_argument("--remote-allow-origins=*")
     chrome_options.add_argument('--headless')
-    chrome_options.add_argument('--disable-gpu')
-    chrome_options.add_argument('--enable-print-browser')
-    chrome_options.add_argument('--run-all-compositor-stages-before-draw')
     chrome_options.add_argument('--hide-scrollbars')
     chrome_options.add_argument('--window-size=2480,3508')
-    chrome_options.add_experimental_option('prefs', prefs)
-    chrome_options.add_argument('--kiosk-printing')
 
     driver = webdriver.Chrome(options=chrome_options)
     return driver
@@ -196,7 +180,5 @@ if __name__ == "__main__":
     entities_data = Parser().parse_csv()
     Translations().generate_translations()
     entity_name = get_entity_name_from_args()
-    # generar_infografias(entities_data, entity_name)
+    generar_infografias(entities_data, entity_name)
     exportar_infografias(entity_name)
-
-

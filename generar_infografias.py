@@ -10,7 +10,6 @@ import jinja2
 from pathvalidate import sanitize_filename
 from fuzzywuzzy import fuzz
 from selenium import webdriver
-from selenium.webdriver.common.print_page_options import PrintOptions
 
 from utils.translations import Translations
 from utils.parser import Parser
@@ -75,7 +74,7 @@ def get_translations_from_lang(lang):
 
 
 def exportar_infografias(entity_name):
-    global total_tasks
+    global export_percent
     print("\n\n======== Exportando infografías =============")
     html_path = "infografias/html"
     files_list = os.listdir(html_path)
@@ -85,26 +84,52 @@ def exportar_infografias(entity_name):
 
     total_tasks = len(files_list)
 
-    for filename in files_list:
-        html2img(filename, total_tasks)
-        html2pdf(filename, total_tasks)
+    driver = get_driver()
+
+    try:
+        for filename in files_list:
+            html_path = "infografias/html"
+            input_file = f"{html_path}/{filename}"
+            driver.get(str(Path(input_file).absolute()))
+            export_percent += 100 / total_tasks
+            html2img(driver, filename)
+            html2pdf(driver, filename)
+
+    finally:
+        driver.quit()
 
 
-def html2pdf(filename, total_tasks):
+def html2pdf(driver, filename):
     global export_percent
-    html_path = "infografias/html"
+
     output_path = "infografias/pdf"
     os.makedirs(output_path, exist_ok=True)
-
-    input_file = f"{html_path}/{filename}"
     pdf_path = f"{output_path}/{filename.split('.')[0]}.pdf"
 
     print(f"[{round(export_percent)}%] Exportando infografía en formato PDF [{str(Path(pdf_path).absolute())}]...")
+    params = {'behavior': 'allow', 'downloadPath': pdf_path}
+    pdf = driver.execute_cdp_cmd('Page.printToPDF', params)
+    decoded = base64.b64decode(pdf["data"])
+    with open(pdf_path, 'wb') as output_file:
+        output_file.write(decoded)
 
-    chrome_options = webdriver.ChromeOptions()
-    chrome_options.add_argument('--headless=new')
-    chrome_options.add_argument('--hide-scrollbars')
-    chrome_options.add_argument('--window-size=2480,3508')
+    print(f"[{round(export_percent)}%] Infografía exportada a PDF [{pdf_path}]")
+
+
+def html2img(driver, filename, extension="png"):
+    global export_percent
+
+    output_path = f"infografias/{extension}"
+    os.makedirs(output_path, exist_ok=True)
+    img_path = f"{output_path}/{filename.split('.')[0]}.{extension}"
+
+    print(f"[{round(export_percent)}%] Exportando infografia en formato {extension.upper()} [{img_path}]...")
+    driver.set_window_size(width=2480, height=3508)
+    driver.save_screenshot(filename=img_path)
+    print(f"[{round(export_percent)}%] Infografía exportada a {extension.upper()} [{img_path}]")
+
+
+def get_driver():
     settings = {
         "recentDestinations": [{
             "id": "Save as PDF",
@@ -116,60 +141,27 @@ def html2pdf(filename, total_tasks):
         "isHeaderFooterEnabled": False,
         "isCssBackgroundEnabled": True
     }
-
     prefs = {
         "printing.print_preview_sticky_settings.appState": json.dumps(settings),
+        "download.prompt_for_download": False,  # To auto download the file
+        "download.directory_upgrade": True,
+        "profile.default_content_setting_values.automatic_downloads": 1,
+        "safebrowsing.enabled": True
     }
-    chrome_options.add_argument('--kiosk-printing')
-    chrome_options.add_experimental_option('prefs', prefs)
-    # driver_path = ChromeDriverManager().install()
-    driver = webdriver.Chrome(options=chrome_options)
-
-    try:
-        driver.get(str(Path(input_file).absolute()))
-        print_options = PrintOptions()
-        print_options.page_height = 2480
-        print_options.page_width = 3508
-        pdf = driver.print_page()
-        decoded = base64.b64decode(pdf)
-        with open(pdf_path, 'wb') as output_file:
-            output_file.write(decoded)
-
-        export_percent += 100 / total_tasks
-        print(f"[{round(export_percent)}%] Infografía exportada a PDF [{pdf_path}]")
-    finally:
-        driver.quit()
-
-
-def html2img(filename, total_tasks, extension="png"):
-    global export_percent
-    html_path = "infografias/html"
-    output_path = f"infografias/{extension}"
-
-    os.makedirs(output_path, exist_ok=True)
-
-    input_file = f"{html_path}/{filename}"
-    img_path = f"{output_path}/{filename.split('.')[0]}.{extension}"
 
     chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument("--remote-allow-origins=*")
     chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--disable-gpu')
+    chrome_options.add_argument('--enable-print-browser')
+    chrome_options.add_argument('--run-all-compositor-stages-before-draw')
     chrome_options.add_argument('--hide-scrollbars')
     chrome_options.add_argument('--window-size=2480,3508')
-
+    chrome_options.add_experimental_option('prefs', prefs)
     chrome_options.add_argument('--kiosk-printing')
-    # driver_path = ChromeDriverManager().install()
+
     driver = webdriver.Chrome(options=chrome_options)
-
-    try:
-        print(f"[{round(export_percent)}%] Exportando infografia en formato {extension.upper()} [{img_path}]...")
-        driver.set_window_size(width=2480, height=3508)
-        driver.get(str(Path(input_file).absolute()))
-
-        driver.save_screenshot(filename=img_path)
-        export_percent += 100 / total_tasks
-        print(f"[{round(export_percent)}%] Infografía exportada a {extension.upper()} [{img_path}]")
-    finally:
-        driver.quit()
+    return driver
 
 
 def find_best_match(input_text, string_list):
@@ -204,7 +196,7 @@ if __name__ == "__main__":
     entities_data = Parser().parse_csv()
     Translations().generate_translations()
     entity_name = get_entity_name_from_args()
-    generar_infografias(entities_data, entity_name)
+    # generar_infografias(entities_data, entity_name)
     exportar_infografias(entity_name)
 
 

@@ -46,12 +46,13 @@ class Parser:
 
     def parse_territories(self):
         df = pd.read_csv('data/datos_territorios.csv', encoding="utf-8")
+        df = df.fillna('')
 
         territories = {}
         for index, row in df.iterrows():
             territories[row["Código"]] = {}
-            territories[row["Código"]]["logo_reas"] = row["Logo reas"]
-            territories[row["Código"]]["logo_mercado"] = row["Logo mercado"]
+            territories[row["Código"]]["logo_reas"] = row["Logo 1 reas"]
+            territories[row["Código"]]["logo_mercado"] = row["Logo 2 mercado"]
             territories[row["Código"]]["web"] = row["web territorio"]
             territories[row["Código"]]["email"] = row["email"]
 

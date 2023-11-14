@@ -295,13 +295,14 @@
     <div class="seccion promueve">
         <span>PROMUEVE</span>
         <div class="logos">
-            {% if logo_mercado is not none%}<img src="{{logo_mercado}}">{% endif %}
-            <img src="../../../static/img/mercado_social.svg">
-            {% if logo_reas is not none %}<img src="{{logo_reas}}">{% endif %}
+            {% if logo_reas %}<img src="{{logo_reas}}">{% endif %}
+            {% if logo_mercado %}<img src="{{logo_mercado}}">{% endif %}
+            <img src="../../../static/img/reas.svg">
         </div>
     </div>
     <div class="seccion enlaces">
-        {{web}} | {{email}}<br>
+        {{web}}<br>
+        {{email}}<br>
         reas.red | www.mercadosocial.net
     </div>
     <div class="seccion colabora">

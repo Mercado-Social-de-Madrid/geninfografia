@@ -490,7 +490,7 @@ section{
 }
 
 #ingresos{
-  overflow: hidden;
+  overflow: visible !important;
   position: absolute;
   top: 40%;
   width: 100%;
@@ -508,7 +508,6 @@ section{
   margin-left: 0.4rem;
   padding-right: 0.8rem;
   padding-bottom:0.5rem;
-  border-bottom:0.3rem solid $color-riqueza;
 
   .cifra3{
     font-size: 2.3rem;
@@ -521,6 +520,7 @@ section{
 }
 
 .highcharts-container {
+    overflow: visible !important;
     width: 100%;
     height: 100%;
 }

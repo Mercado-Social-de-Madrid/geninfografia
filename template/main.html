@@ -336,6 +336,8 @@
                 borderRadius: 0,
                 dataLabels: {
                     enabled: true,
+                    crop: false,
+                    overflow: 'none',
                     formatter: function(){ // your condition/check
                       if(this.y !== 0){
                         return '<div class="chart-text"><span class="cifra3">' + this.y + '%</span><br>' + this.point.name + '</div>';
@@ -344,13 +346,32 @@
                 }
             },
             pie: {
+                size: '100%',
                 borderWidth:0.1,
                 startAngle:100,
                 dataLabels: {
-                    connectorShape: 'straight',
-                    padding:-15,
-                    distance: '50%',
-                    verticalAlign: 'top',
+                    connectorShape: function(labelPosition, connectorPosition, options) {
+                        // Let the built-in crookedLine function do the heavy lifting
+                        const path = Highcharts.seriesTypes
+                            .pie
+                            .prototype
+                            .pointClass
+                            .prototype
+                            .connectorShapes
+                            .crookedLine
+                            .call(this, labelPosition, connectorPosition, options);
+
+                        const labelWidth = this.dataLabel.getBBox().width;
+                        if (labelPosition.alignment === 'right') {
+                            path[0][1] -= labelWidth;
+                        } else {
+                            path[0][1] += labelWidth;
+                        }
+
+                        return path;
+                    },
+                    crop: false,
+                    overflow: 'none',
                     useHTML: true
                 }
             }

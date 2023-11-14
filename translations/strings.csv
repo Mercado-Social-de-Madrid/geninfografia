@@ -7,11 +7,11 @@ TXT005,    Mujeres,Dones,Emakumeak,    Mulleres
 TXT006,    Hombres,Homes,Gizonak,    Homes
 TXT007,    Identidades No binarias,Identitats no-binàries,Nortasun ez-bitarrak,    Identidades non-binarias
 TXT008,TRABAJADORAS,Treballadores,LANGILEAK,TRABALLADORAS
-TXT009,La entidad no cuenta con personas trabajadoras,L'entitat no compta amb persones treballadores,Erakundeak ez du langilerik,A entidade non conta con persoas traballadoras
+G1,La entidad no cuenta con personas trabajadoras,L'entitat no compta amb persones treballadores,Erakundeak ez du langilerik,A entidade non conta con persoas traballadoras
 TXT010,VOLUNTARIAS,Voluntàries,BOLUNTARIOAK,VOLUNTARIAS
-TXT011,Por su estructura la entidad no cuenta con personas voluntarias,"Per la seva estructura, l'entitat no compta amb persones vuluntàries","Bere egituragatik, erakundeak ez du boluntariorik","Pola súa estrutura, a entidade non conta con persoas voluntarias"
+G2,Por su estructura la entidad no cuenta con personas voluntarias,"Per la seva estructura, l'entitat no compta amb persones vuluntàries","Bere egituragatik, erakundeak ez du boluntariorik","Pola súa estrutura, a entidade non conta con persoas voluntarias"
 TXT012,ASOCIADAS,Sòcies,BAZKIDEAK,ASOCIADAS
-TXT013,Por su estructura la entidad no cuenta con personas asociadas,"Per la seva estructura, l'entitat no compta amb persones sòcies","Bere egituragatik, erakundeak ez du bazkiderik","Pola súa estrutura, a entidade non conta con persoas asociadas"
+G3,Por su estructura la entidad no cuenta con personas asociadas,"Per la seva estructura, l'entitat no compta amb persones sòcies","Bere egituragatik, erakundeak ez du bazkiderik","Pola súa estrutura, a entidade non conta con persoas asociadas"
 TXT014,Ingresos,Ingressos,Diru-sarrerak,Ingresos
 TXT015,Gastos,Despeses,Gastuak,Gastos
 TXT016,EQUIDAD,EQUITAT,EKITATEA,EQUIDADE
@@ -31,7 +31,7 @@ E9,No corresponde porque solo hay una persona trabajadora,No correspon perquè n
 E8,No corresponde porque no hay personal contratado,No correspon perquè no hi ha personal contractat,"Ez dagokio, langilerik ez dagoelako",Non corresponde porque non hai persoal contratado
 TXT030A,COOPERACIÓN  Y ,COOPERACIÓ I ,LANKIDETZA ETA ,COOPERACIÓN E 
 TXT030B,COMPROMISO CON EL ENTORNO,COMPROMÍS AMB L'ENTORN,INGURUNEAREKIKO KONPROMISOA,COMPROMISO COA CONTORNA
-TXT031,Compras dentro de la economía social ,Compres dins l'economia social,Erosketak gizarte-ekonomiaren barruan,Compras dentro da economía social 
+TXT031,Compras dentro de la economía social y solidaria,Compres dins l'economia social i solidária,Erosketak Ekonomia Sozial eta Solidarioaren barruan,Compras dentro da economía social e solidaria
 TXT032,Intercooperación con mismo sector compartiendo,"Intercooperació amb el mateix sector, compartint","Sektore berarekin lankidetza, hurrengoa partekatuz",Intercooperación co mesmo sector compartindo
 TXT033,Local ,Local,Lokala,Local 
 TXT034,Conocimiento,Coneixement,Ezagutza,Coñecemento
@@ -50,12 +50,13 @@ TXT046,Espacios de atención emocional y cuidado,Espais d'atenció emocional i d
 TXT047,Reglamento interno de relaciones laborales,Reglament intern de relacions laborals,Lan-harremanen barne-araudia,Regulamento interno de relacións laborais
 TXT048,Medidas que mejoran la ley de conciliación,Mesures que milloren la llei de conciliació,Kontziliazio-legea hobetzen duten neurriak,Medidas que melloran a lei de conciliación
 T1,No corresponde medir estos indicadores porque no hay personal contratado,No correspon mesurar aquests indicadors perquè no hi ha personal contractat,"Ez dagokio adierazle horiek neurtzea, ez baitago kontratatutako langilerik",Non corresponde medir estes indicadores porque non hai persoal contratado
+T2,No corresponde porque solo hay una persona trabajadora,No correspon perquè només hi ha una persona treballadora,"Ez dagokio, langile bakarra dagoelako",Non corresponde porque só hai unha persoa traballadora
 TXT050,REPARTO JUSTO DE LA RIQUEZA,REPARTIMENT JUST DE LA RIQUESA,ABERASTASUNAREN BIDEZKO BANAKETA,REPARTICIÓN XUSTA DA RIQUEZA
 TXT051,Fuentes de ingresos,Fonts d'ingressos,Diru-iturriak,Fontes de ingresos
 TXT052,Facturación,Facturació,Fakturazioa,Facturación
 TXT053,Subvenciones,Subvencions,Dirulaguntzak,Subvencións
 TXT054,Otras,Altres,Bestelakoak,Outras
-TXT055,Reparto beneficios,Repartiment de beneficis,Mozkinen banaketa,Repartición de beneficios
+TXT055,Reparto de beneficios,Repartiment de beneficis,Mozkinen banaketa,Repartición de beneficios
 TXT056,A empresas o personas socias,A empreses o persones sòcies,Enpresei edo bazkideei,A empresas ou persoas socias
 TXT057,A compensación de pérdidas,A compensació de pèrdues ,Galerak konpentsatzera,A compensación de perdas
 TXT058,A reservas,A reserves,Erreserbetara,A reservas

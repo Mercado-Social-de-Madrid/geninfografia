@@ -7,9 +7,11 @@ from datetime import datetime
 
 import sass
 import jinja2
+import pngquant
 from pathvalidate import sanitize_filename
 from fuzzywuzzy import fuzz
 from selenium import webdriver
+from wakepy import keep
 
 from utils.translations import Translations
 from utils.parser import Parser
@@ -32,7 +34,24 @@ def get_custom_props():
     }
 
 
-def generar_infografias(entities_data, entity_name=None):
+def float_with_comma(value):
+    try:
+        cleaned_value = str(value).replace(',', '.')
+        return float(cleaned_value)
+    except ValueError:
+        return value
+
+
+def is_float(value):
+    try:
+        cleaned_value = str(value).replace(',', '.')
+        float(cleaned_value)
+        return True
+    except ValueError:
+        return False
+
+
+def generar_infografias(entities_data, entity_name=None, regenerate=False):
     print("\n======== Generando ficheros HTML de las infografías =============")
     output_path = "infografias/html"
     os.makedirs(output_path, exist_ok=True)
@@ -44,22 +63,28 @@ def generar_infografias(entities_data, entity_name=None):
     total_entities = len(entities_data)
     for index, entity in enumerate(entities_data):
         print(f"[{index+1}/{total_entities}] Generando infografia para la entidad {entity['Nombre']}...")
+        filename = sanitize_filename(entity["NIF"])
         langs = entity['Idioma'].split(';')
         for lang in langs:
             translations = get_translations_from_lang(lang)
+            territory_path = f"{output_path}/{entity['Codigo Territorio'].upper()}"
+            os.makedirs(territory_path, exist_ok=True)
+            html_path = f"{territory_path}/{filename}_{lang.lower()}.html"
+            if regenerate or not os.path.isfile(html_path):
+                template_loader = jinja2.FileSystemLoader(searchpath="template")
+                template_env = jinja2.Environment(loader=template_loader)
+                template_env.filters['float'] = float_with_comma
+                template_env.filters['is_float'] = is_float
+                template_file = "main.html"
+                template = template_env.get_template(template_file)
+                output_text = template.render(**{**entity, **translations, **custom_props})
 
-            template_loader = jinja2.FileSystemLoader(searchpath="template")
-            template_env = jinja2.Environment(loader=template_loader)
-            template_file = "main.html"
-            template = template_env.get_template(template_file)
-            output_text = template.render(**{**entity, **translations, **custom_props})
-
-            filename = sanitize_filename(entity["NIF"])
-            html_path = f'{output_path}/{filename}_{lang.lower()}.html'
-            html_file = open(html_path, 'w', encoding="utf-8")
-            html_file.write(output_text)
-            html_file.close()
-            print(f"[{index+1}/{total_entities}] Infografía para la entidad [{entity['Nombre']}] generada.")
+                html_file = open(html_path, 'w', encoding="utf-8")
+                html_file.write(output_text)
+                html_file.close()
+                print(f"[{index+1}/{total_entities}] Infografía para la entidad [{entity['Nombre']}] generada.")
+            else:
+                print(f"[{index + 1}/{total_entities}] Infografía para la entidad [{entity['Nombre']}] ya existe.")
 
 
 def get_translations_from_lang(lang):
@@ -73,69 +98,84 @@ def get_translations_from_lang(lang):
     return translations
 
 
-def exportar_infografias(entity_name):
+def exportar_infografias(nif, regenerate=False):
     global export_percent
     print("\n\n======== Exportando infografías =============")
-    html_path = "infografias/html"
-    files_list = os.listdir(html_path)
-
-    if entity_name:
-        files_list = [filename for filename in files_list if sanitize_filename(entity_name) == filename.split('.')[0]]
-
-    total_tasks = len(files_list)
 
     driver = get_driver()
+    driver.set_script_timeout(999999999)
 
     try:
-        for filename in files_list:
-            html_path = "infografias/html"
-            input_file = f"{html_path}/{filename}"
-            driver.get(str(Path(input_file).absolute()))
-            export_percent += 100 / total_tasks
-            html2img(driver, filename)
-            html2pdf(driver, filename)
+        html_path = "infografias/html"
+        territories_dirs = os.listdir(html_path)
+        for territory in territories_dirs:
+            files_list = os.listdir(f"{html_path}/{territory}")
+
+            if nif:
+                files_list = [filename for filename in files_list if nif == filename.split('_')[0]]
+
+            total_tasks = len(files_list)
+
+            for filename in files_list:
+                html_path = "infografias/html"
+                input_file = f"{html_path}/{territory}/{filename}"
+                driver.get(str(Path(input_file).absolute()))
+                export_percent += 100 / total_tasks
+                html2img(driver, filename, extension="png", output_path=f"infografias/png/{territory}", regenerate=regenerate)
+                html2pdf(driver, filename, output_path=f"infografias/pdf/{territory}", regenerate=regenerate)
 
     finally:
         driver.quit()
 
 
-def html2pdf(driver, filename):
+def html2pdf(driver, filename, output_path="infografias/pdf", regenerate=False):
     global export_percent
 
-    output_path = "infografias/pdf"
     os.makedirs(output_path, exist_ok=True)
     pdf_path = f"{output_path}/{filename.split('.')[0]}.pdf"
 
-    print(f"[{round(export_percent)}%] Exportando infografía en formato PDF [{str(Path(pdf_path).absolute())}]...")
-    params = {
-        "paperWidth": 8.268,
-        "paperHeight": 11.693,
-        "marginTop": 0,
-        "marginLeft": 0,
-        "marginBottom": 0,
-        "marginRight": 0,
-        "pageRanges": "1",
-        "printBackground": True
-    }
-    pdf = driver.execute_cdp_cmd('Page.printToPDF', params)
-    decoded = base64.b64decode(pdf["data"])
-    with open(pdf_path, 'wb') as output_file:
-        output_file.write(decoded)
+    if regenerate or not os.path.isfile(pdf_path):
+        print(f"[{round(export_percent)}%] Exportando infografía en formato PDF [{str(Path(pdf_path).absolute())}]...")
+        params = {
+            "paperWidth": 8.268,
+            "paperHeight": 11.693,
+            "marginTop": 0,
+            "marginLeft": 0,
+            "marginBottom": 0,
+            "marginRight": 0,
+            "pageRanges": "1",
+            "printBackground": True
+        }
+        pdf = driver.execute_cdp_cmd('Page.printToPDF', params)
+        decoded = base64.b64decode(pdf["data"])
+        with open(pdf_path, 'wb') as output_file:
+            output_file.write(decoded)
 
-    print(f"[{round(export_percent)}%] Infografía exportada a PDF [{pdf_path}]")
+        print(f"[{round(export_percent)}%] Infografía exportada a PDF [{pdf_path}]")
+    else:
+        print(f"[{round(export_percent)}%] Infografía [{pdf_path}] ya existe")
 
 
-def html2img(driver, filename, extension="png"):
+def html2img(driver, filename, extension, output_path="infografias/png", regenerate=False):
     global export_percent
 
-    output_path = f"infografias/{extension}"
     os.makedirs(output_path, exist_ok=True)
     img_path = f"{output_path}/{filename.split('.')[0]}.{extension}"
 
-    print(f"[{round(export_percent)}%] Exportando infografia en formato {extension.upper()} [{img_path}]...")
-    driver.set_window_size(width=2480, height=3508)
-    driver.save_screenshot(filename=img_path)
-    print(f"[{round(export_percent)}%] Infografía exportada a {extension.upper()} [{img_path}]")
+    if regenerate or not os.path.isfile(img_path):
+        print(f"[{round(export_percent)}%] Exportando infografia en formato {extension.upper()} [{img_path}]...")
+        driver.set_window_size(width=2480, height=3508)
+        driver.save_screenshot(filename=img_path)
+        try:
+            pngquant.config(os.environ["PNGQUANT_PATH"], min_quality=85, max_quality=85)
+            pngquant.quant_image(img_path)
+        except KeyError:
+            print("No es posible optimizar la imagen")
+            print("- Añade la variable de entorno PNGQUANT_PATH con la ubicación del ejecutable de pngquant.")
+            print("Puedes descargarlo en https://pngquant.org/")
+        print(f"[{round(export_percent)}%] Infografía exportada a {extension.upper()} [{img_path}]")
+    else:
+        print(f"[{round(export_percent)}%] Infografía [{img_path}] ya existe")
 
 
 def get_driver():
@@ -143,6 +183,8 @@ def get_driver():
     chrome_options.add_argument('--headless')
     chrome_options.add_argument('--hide-scrollbars')
     chrome_options.add_argument('--window-size=2480,3508')
+    chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
+    chrome_options.add_argument('--log-level=3')
 
     driver = webdriver.Chrome(options=chrome_options)
     return driver
@@ -167,18 +209,31 @@ def find_best_match(input_text, string_list):
             exit(-1)
 
 
-def get_entity_name_from_args():
+def get_args():
     entity_name = None
-    if len(sys.argv) == 2 and sys.argv[1].startswith("nombre="):
-        _, entity_name = sys.argv[1].split("=")
+    regenerate = False
+    if len(sys.argv) > 1:
+        for arg in sys.argv:
+            if arg.startswith("nombre="):
+                _, entity_name = arg.split("=")
+            if arg.startswith("--regenerate") or arg.startswith("-r"):
+                regenerate = True
+
+    return entity_name, regenerate
+
+
+def main():
+    compile_sass()
+    entities_data = Parser().parse_infografias()
+    Translations().generate_translations()
+    entity_name, regenerate = get_args()
+    if entity_name is not None:
         entity_name = find_best_match(entity_name, [entity["Nombre"] for entity in entities_data])
-    return entity_name
+    generar_infografias(entities_data, entity_name, regenerate)
+    with keep.presenting() as k:
+        nif = next((entity["NIF"] for entity in entities_data if entity["Nombre"] == entity_name))
+        exportar_infografias(nif, regenerate)
 
 
 if __name__ == "__main__":
-    compile_sass()
-    entities_data = Parser().parse_csv()
-    Translations().generate_translations()
-    entity_name = get_entity_name_from_args()
-    generar_infografias(entities_data, entity_name)
-    exportar_infografias(entity_name)
+    main()

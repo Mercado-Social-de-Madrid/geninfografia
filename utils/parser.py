@@ -11,7 +11,7 @@ class Parser:
                           "ind118", "q0107", "q0101", "ind6", "ind7",
                           "ind67agru", "ind1d", "ind1h", "ind1a"]
 
-    float_properties = ["ind27"]
+    float_properties = []
 
     boolean_properties = ["ind58", "ind62", "q4104a", "q4104b", "q4104c",
                           "q4104d", "q5305a", "q5305b", "q5305c",

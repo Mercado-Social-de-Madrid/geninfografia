@@ -67,9 +67,9 @@ def generar_infografias(entities_data, entity_name=None, regenerate=False):
         langs = entity['Idioma'].split(';')
         for lang in langs:
             translations = get_translations_from_lang(lang)
-            territory_path = f"{output_path}/{entity['Codigo Territorio'].upper()}"
-            os.makedirs(territory_path, exist_ok=True)
-            html_path = f"{territory_path}/{filename}_{lang.lower()}.html"
+            html_root = f"{output_path}/{entity['Codigo Territorio'].upper()}/{lang.upper()}"
+            os.makedirs(html_root, exist_ok=True)
+            html_path = f"{html_root}/{filename}.html"
             if regenerate or not os.path.isfile(html_path):
                 template_loader = jinja2.FileSystemLoader(searchpath="template")
                 template_env = jinja2.Environment(loader=template_loader)
@@ -98,7 +98,7 @@ def get_translations_from_lang(lang):
     return translations
 
 
-def exportar_infografias(nif, regenerate=False):
+def exportar_infografias(nif=None, regenerate=False):
     global export_percent
     print("\n\n======== Exportando infografías =============")
 
@@ -107,25 +107,38 @@ def exportar_infografias(nif, regenerate=False):
 
     try:
         html_path = "infografias/html"
+        total_tasks = get_file_count(html_path)
         territories_dirs = os.listdir(html_path)
         for territory in territories_dirs:
-            files_list = os.listdir(f"{html_path}/{territory}")
+            lang_dirs = os.listdir(f"{html_path}/{territory}")
+            for lang in lang_dirs:
+                files_list = os.listdir(f"{html_path}/{territory}/{lang}")
 
-            if nif:
-                files_list = [filename for filename in files_list if nif == filename.split('_')[0]]
+                if nif:
+                    files_list = [filename for filename in files_list if nif == filename.split(".")[0]]
 
-            total_tasks = len(files_list)
-
-            for filename in files_list:
-                html_path = "infografias/html"
-                input_file = f"{html_path}/{territory}/{filename}"
-                driver.get(str(Path(input_file).absolute()))
-                export_percent += 100 / total_tasks
-                html2img(driver, filename, extension="png", output_path=f"infografias/png/{territory}", regenerate=regenerate)
-                html2pdf(driver, filename, output_path=f"infografias/pdf/{territory}", regenerate=regenerate)
+                for filename in files_list:
+                    html_path = "infografias/html"
+                    input_file = f"{html_path}/{territory}/{lang}/{filename}"
+                    driver.get(str(Path(input_file).absolute()))
+                    export_percent += 100 / total_tasks
+                    # html2img(driver, filename, extension="png", output_path=f"infografias/png/{territory}/{lang}", regenerate=regenerate)
+                    # html2img(driver, filename, extension="jpg", output_path=f"infografias/jpg/{territory}/{lang}", regenerate=regenerate)
+                    html2pdf(driver, filename, output_path=f"infografias/pdf/{territory}/{lang}", regenerate=regenerate)
 
     finally:
         driver.quit()
+
+
+def get_file_count(path):
+    file_list = []
+
+    for root, dirs, files in os.walk(path):
+        for file in files:
+            file_path = os.path.join(root, file)
+            file_list.append(file_path)
+
+    return len(file_list)
 
 
 def html2pdf(driver, filename, output_path="infografias/pdf", regenerate=False):
@@ -167,7 +180,7 @@ def html2img(driver, filename, extension, output_path="infografias/png", regener
         driver.set_window_size(width=2480, height=3508)
         driver.save_screenshot(filename=img_path)
         try:
-            pngquant.config(os.environ["PNGQUANT_PATH"], min_quality=85, max_quality=85)
+            pngquant.config(os.environ["PNGQUANT_PATH"], min_quality=80, max_quality=80)
             pngquant.quant_image(img_path)
         except KeyError:
             print("No es posible optimizar la imagen")
@@ -227,12 +240,15 @@ def main():
     entities_data = Parser().parse_infografias()
     Translations().generate_translations()
     entity_name, regenerate = get_args()
+    nif_to_export = None
     if entity_name is not None:
         entity_name = find_best_match(entity_name, [entity["Nombre"] for entity in entities_data])
+        nif_to_export = next((entity["NIF"] for entity in entities_data if entity["Nombre"] == entity_name))
+
     generar_infografias(entities_data, entity_name, regenerate)
+
     with keep.presenting() as k:
-        nif = next((entity["NIF"] for entity in entities_data if entity["Nombre"] == entity_name))
-        exportar_infografias(nif, regenerate)
+        exportar_infografias(nif_to_export, regenerate)
 
 
 if __name__ == "__main__":

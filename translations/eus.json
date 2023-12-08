@@ -1,8 +1,8 @@
 {
     "TXT001": NaN,
     "TXT002": "EKONOMIA SOZIAL ETA SOLIDARIOAREN AUDITORIA SOZIALA",
-    "TXT003": "BIHOTZA ERAKUTSI",
-    "TXT004": "Erakundeko pertsonak",
+    "TXT003": "bihotza erakusten du",
+    "TXT004": "pertsona erakundean",
     "TXT005": "Emakumeak",
     "TXT006": "Gizonak",
     "TXT007": "Nortasun ez-bitarrak",
@@ -60,5 +60,9 @@
     "TXT056": "Enpresei edo bazkideei",
     "TXT057": "Galerak konpentsatzera",
     "TXT058": "Erreserbetara",
-    "R1": "Ez dagokio, aurten ez delako etekinik izan"
+    "R1": "Ez dagokio, aurten ez delako etekinik izan",
+    "T4": "Ez dagokio, tamaina dela eta",
+    "TXT059": "mila",
+    "TXT060": "Sustatzaileak",
+    "TXT061": "Laguntzailea"
 }

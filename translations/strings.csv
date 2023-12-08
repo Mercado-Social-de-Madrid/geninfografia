@@ -1,15 +1,15 @@
 Código,Castellano,Català,Euskera,Galego
 TXT001,BALANCE SOCIAL DE LA ECONOMÍA SOCIAL Y SOLIDARIA,BALANÇ SOCIAL DE L'ECONOMIA SOCIAL I SOLIDÀRIA,,
 TXT002,AUDITORÍA SOCIAL DE LA ECONOMÍA SOCIAL Y SOLIDARIA,,EKONOMIA SOZIAL ETA SOLIDARIOAREN AUDITORIA SOZIALA,AUDITORÍA SOCIAL DA ECONOMÍA SOCIAL E SOLIDARIA
-TXT003,ENSEÑA EL CORAZÓN,ENSENYA EL COR,BIHOTZA ERAKUTSI ,ENSINA O CORAZÓN
-TXT004,Personas de la organización,Persones de l'organització,Erakundeko pertsonak,Persoas da organización
+TXT003,ENSEÑA EL CORAZÓN,ENSENYA EL COR,bihotza erakusten du,ENSINA O CORAZÓN
+TXT004,Personas de la organización,Persones de l'organització,pertsona erakundean,Persoas da organización
 TXT005,    Mujeres,Dones,Emakumeak,    Mulleres
 TXT006,    Hombres,Homes,Gizonak,    Homes
 TXT007,    Identidades No binarias,Identitats no-binàries,Nortasun ez-bitarrak,    Identidades non-binarias
 TXT008,TRABAJADORAS,Treballadores,LANGILEAK,TRABALLADORAS
 G1,La entidad no cuenta con personas trabajadoras,L'entitat no compta amb persones treballadores,Erakundeak ez du langilerik,A entidade non conta con persoas traballadoras
 TXT010,VOLUNTARIAS,Voluntàries,BOLUNTARIOAK,VOLUNTARIAS
-G2,Por su estructura la entidad no cuenta con personas voluntarias,"Per la seva estructura, l'entitat no compta amb persones vuluntàries","Bere egituragatik, erakundeak ez du boluntariorik","Pola súa estrutura, a entidade non conta con persoas voluntarias"
+G2,Por su estructura la entidad no cuenta con personas voluntarias,"Per la seva estructura, l'entitat no compta amb persones voluntàries","Bere egituragatik, erakundeak ez du boluntariorik","Pola súa estrutura, a entidade non conta con persoas voluntarias"
 TXT012,ASOCIADAS,Sòcies,BAZKIDEAK,ASOCIADAS
 G3,Por su estructura la entidad no cuenta con personas asociadas,"Per la seva estructura, l'entitat no compta amb persones sòcies","Bere egituragatik, erakundeak ez du bazkiderik","Pola súa estrutura, a entidade non conta con persoas asociadas"
 TXT014,Ingresos,Ingressos,Diru-sarrerak,Ingresos
@@ -31,19 +31,19 @@ E9,No corresponde porque solo hay una persona trabajadora,No correspon perquè n
 E8,No corresponde porque no hay personal contratado,No correspon perquè no hi ha personal contractat,"Ez dagokio, langilerik ez dagoelako",Non corresponde porque non hai persoal contratado
 TXT030A,COOPERACIÓN  Y ,COOPERACIÓ I ,LANKIDETZA ETA ,COOPERACIÓN E 
 TXT030B,COMPROMISO CON EL ENTORNO,COMPROMÍS AMB L'ENTORN,INGURUNEAREKIKO KONPROMISOA,COMPROMISO COA CONTORNA
-TXT031,Compras dentro de la economía social y solidaria,Compres dins l'economia social i solidária,Erosketak Ekonomia Sozial eta Solidarioaren barruan,Compras dentro da economía social e solidaria
+TXT031,Compras dentro de la economía social y solidaria,Compres dins l'economia social i solidària,Erosketak Ekonomia Sozial eta Solidarioaren barruan,Compras dentro da economía social e solidaria
 TXT032,Intercooperación con mismo sector compartiendo,"Intercooperació amb el mateix sector, compartint","Sektore berarekin lankidetza, hurrengoa partekatuz",Intercooperación co mesmo sector compartindo
 TXT033,Local ,Local,Lokala,Local 
 TXT034,Conocimiento,Coneixement,Ezagutza,Coñecemento
 TXT035,Gestión,Gestió,Kudeaketa,Xestión
 TXT036,Proyectos,Projectes,Proiektuak,Proxectos
 TXT037,Opera con finanzas éticas,Opera amb finances ètiques,Finantza etikoekin jarduten du,Opera con finanzas éticas
-TXT038,SOSTENIBILIDAD ECOLÓGICA,SOSTENABILITAT ECOLÒGICA,IRAUNKORTASUN EKOLOGIKOA,SUSTENTABILIDADE ECOLÓXICA
+TXT038,SOSTENIBILIDAD ECOLÓGICA,SOSTENIBILITAT ECOLÒGICA,IRAUNKORTASUN EKOLOGIKOA,SUSTENTABILIDADE ECOLÓXICA
 TXT039,Sistema de gestión ambiental,Sistema de gestió ambiental,Ingurumena kudeatzeko sistema,Sistema de xestión ambiental
 TXT040,Sensibilización ambiental a nivel interno,Sensibilització ambiental a nivell intern,Ingurumen-sentsibilizazioa barne-mailan,Sensibilización ambiental a nivel interno
 TXT041,Divulgación ambiental a nivel externo,Divulgació ambiental a nivell extern,Ingurumen-zabalkundea kanpoan,Divulgación ambiental a nivel externo
 TXT042,Medidas de reducción de impacto ambiental y divulgación a nivel externo,Mesures de reducció d'impacte ambiental i divulgació a nivell extern,Ingurumen-inpaktua murrizteko  neurriak eta zabalkundea kanpoan,Medidas de redución do impacto ambiental e divulgación a nivel externo
-TXT043,Energía 100% renovable,Energía 100% renovable,Energia % 100 berriztagarria,Enerxía 100 % renovable
+TXT043,Energía 100% renovable,Energia 100% renovable,Energia % 100 berriztagarria,Enerxía 100 % renovable
 S1,Esta entidad no cuenta con centro de trabajo,Aquesta entitat no compta amb un centre de treball,Erakunde honek ez du lantokirik,Esta entidade non conta con centro de traballo
 TXT045,TRABAJO DIGNO,TREBALL DIGNE,LAN DUINA,TRABALLO DIGNO
 TXT046,Espacios de atención emocional y cuidado,Espais d'atenció emocional i de cures,Arreta emozionalerako eta zaintzarako espazioak,Espazos de atención emocional e coidado
@@ -61,3 +61,7 @@ TXT056,A empresas o personas socias,A empreses o persones sòcies,Enpresei edo b
 TXT057,A compensación de pérdidas,A compensació de pèrdues ,Galerak konpentsatzera,A compensación de perdas
 TXT058,A reservas,A reserves,Erreserbetara,A reservas
 R1,No corresponde porque no se han tenido beneficios este año,No correspon perquè no hi ha hagut beneficis enguany,"Ez dagokio, aurten ez delako etekinik izan",Non corresponde porque non houbo beneficios este ano
+T4,No corresponde por tamaño,No correspon per mida,"Ez dagokio, tamaina dela eta",
+TXT059,Mil,Mil,mila,
+TXT060,Promueve,Promou,Sustatzaileak,
+TXT061,Colabora,Col·labora,Laguntzailea,

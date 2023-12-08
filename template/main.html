@@ -51,7 +51,7 @@
             {% if ind118 is defined and ind118|int != 0 %}
                 <strong class="cifra cifra3">{{ind118}}</strong>
             {% else %}
-                <span class="description">* {{G1}}</span> <!-- La entidad no cuenta con<br>personas trabajadoras -->
+                <span class="description">* {{G1}}</span> <!-- La entidad no cuenta con personas trabajadoras -->
             {% endif %}
         </div>
         <div>
@@ -100,9 +100,15 @@
 
         <div class="columnas">
             <div class="text-center">
-                <span class="cifra cifra1">{% if ind20d != "nan" and ind20d|int %}{{ind20d}}%{% else %}*{% endif%}</span>
+                <span class="cifra cifra1">{% if ind20d != "nan" and ind20d | is_float %}{{ind20d}}%{% else %}*{% endif%}</span>
                 <span class="label label1">{{TXT017}}</span><br> <!-- Mujeres en puestos de responsabilidad -->
-                <span class="description">{% if ind20d != "nan" and not ind20d|int %}* {{E1}}{% endif%}</span> <!-- Esta entidad cuenta con representación horizontal -->
+                <span class="description">
+                    {% set values = { "E1": E1, "E3": E3, "E4": E4, "E7": E7, "E8": E8, "T2": T2 } %}
+
+                    {% if ind20d in values %}
+                        * {{ values[ind20d] }}
+                    {% endif %}
+                </span> <!-- Esta entidad cuenta con representación horizontal -->
             </div>
 
             <div class="text-center">
@@ -129,7 +135,7 @@
                 <span class="cifra cifra1">{% if ind27 != "nan" and ind27 | is_float %}{{ind27}}{% else %}*{% endif%}</span>
                 <span class="label label1">{{TXT018}}</span><br> <!-- Proporción salarial entre la plantilla -->
                 <span class="description">
-                    {% set values = { "E6": E6, "E7": E7 } %}
+                    {% set values = { "E5": E5, "E6": E6, "E7": E7 } %}
 
                     {% if ind27 in values %}
                         * {{ values[ind27] }}
@@ -202,7 +208,7 @@
             <li>{{TXT047}} <!-- Reglamento interno de relaciones laborales -->
                 <span class="check">{% if ind78 == "True" %}{% elif ind78 == "False" %}{% endif %}</span>
                 <span class="description">
-                    {% set values = { "T1": T1, "T2": T2, } %}
+                    {% set values = { "T1": T1, "T2": T2, "T3": T3, "T4": T4 } %}
 
                     {% if ind78 in values %}
                         * {{ values[ind78] }}
@@ -299,7 +305,7 @@
 
 <footer>
     <div class="seccion promueve">
-        <span>PROMUEVE</span>
+        <span>{{TXT060|upper}}</span> <!-- PROMUEVE -->
         <div class="logos">
             {% if logo_reas %}<img src="{{logo_reas}}">{% endif %}
             {% if logo_mercado %}<img src="{{logo_mercado}}">{% endif %}
@@ -312,7 +318,7 @@
         reas.red | www.mercadosocial.net
     </div>
     <div class="seccion colabora">
-        <span>COLABORA</span>
+        <span>{{TXT061|upper}}</span> <!-- COLABORA -->
         <div class="logos">
             <img src="../../../../static/img/ministerio_trabajo.jpg">
         </div>
@@ -354,9 +360,10 @@
             },
             pie: {
                 size: '100%',
-                borderWidth:0.1,
-                startAngle:100,
+                borderWidth:0,
+                startAngle:{{ rotacion if rotacion != "nan" else 100 }},
                 dataLabels: {
+
                     connectorShape: function(labelPosition, connectorPosition, options) {
                         // Let the built-in crookedLine function do the heavy lifting
                         const path = Highcharts.seriesTypes
@@ -391,17 +398,17 @@
                     {
                         color:'#c42f43',
                         name: '{{TXT052}}', // Facturación
-                        y: {{ind6}}
+                        y: {{ ind6 if ind6 != "nan" else 0 }}
                     },
                     {
                         color:'#d56473',
                         name: '{{TXT053}}', // Subvenciones
-                        y: {{ind7}}
+                        y: {{ ind7 if ind7 != "nan" else 0 }}
                     },
                     {
                         color:'#ff9fac',
                         name: '{{TXT054}}', // Otras
-                        y: {{ind67agru}}
+                        y: {{ ind67agru if ind67agru != "nan" else 0 }}
                     }
                 ]
             }

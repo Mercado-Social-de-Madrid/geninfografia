@@ -110,21 +110,22 @@ def exportar_infografias(nif=None, regenerate=False):
         total_tasks = get_file_count(html_path)
         territories_dirs = os.listdir(html_path)
         for territory in territories_dirs:
-            lang_dirs = os.listdir(f"{html_path}/{territory}")
-            for lang in lang_dirs:
-                files_list = os.listdir(f"{html_path}/{territory}/{lang}")
+            if territory in ["CAT"]:
+                lang_dirs = os.listdir(f"{html_path}/{territory}")
+                for lang in lang_dirs:
+                    files_list = os.listdir(f"{html_path}/{territory}/{lang}")
 
-                if nif:
-                    files_list = [filename for filename in files_list if nif == filename.split(".")[0]]
+                    if nif:
+                        files_list = [filename for filename in files_list if nif == filename.split(".")[0]]
 
-                for filename in files_list:
-                    html_path = "infografias/html"
-                    input_file = f"{html_path}/{territory}/{lang}/{filename}"
-                    driver.get(str(Path(input_file).absolute()))
-                    export_percent += 100 / total_tasks
-                    # html2img(driver, filename, extension="png", output_path=f"infografias/png/{territory}/{lang}", regenerate=regenerate)
-                    # html2img(driver, filename, extension="jpg", output_path=f"infografias/jpg/{territory}/{lang}", regenerate=regenerate)
-                    html2pdf(driver, filename, output_path=f"infografias/pdf/{territory}/{lang}", regenerate=regenerate)
+                    for filename in files_list:
+                        html_path = "infografias/html"
+                        input_file = f"{html_path}/{territory}/{lang}/{filename}"
+                        driver.get(str(Path(input_file).absolute()))
+                        export_percent += 100 / total_tasks
+                        html2img(driver, filename, extension="png", output_path=f"infografias/png/{territory}/{lang}", regenerate=regenerate)
+                        # html2img(driver, filename, extension="jpg", output_path=f"infografias/jpg/{territory}/{lang}", regenerate=regenerate)
+                        # html2pdf(driver, filename, output_path=f"infografias/pdf/{territory}/{lang}", regenerate=regenerate)
 
     finally:
         driver.quit()
@@ -180,7 +181,7 @@ def html2img(driver, filename, extension, output_path="infografias/png", regener
         driver.set_window_size(width=2480, height=3508)
         driver.save_screenshot(filename=img_path)
         try:
-            pngquant.config(os.environ["PNGQUANT_PATH"], min_quality=80, max_quality=80)
+            pngquant.config(os.environ["PNGQUANT_PATH"], min_quality=85, max_quality=85)
             pngquant.quant_image(img_path)
         except KeyError:
             print("No es posible optimizar la imagen")

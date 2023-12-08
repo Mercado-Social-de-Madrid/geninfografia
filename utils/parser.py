@@ -6,10 +6,9 @@ import pandas as pd
 class Parser:
 
     int_properties = ["ind3d", "ind3h", "ind3a", "ind20d",
-                          "ind97", "q1203", "q1201",
-                          "q1405", "q1406", "q1413", "ind254",
-                          "ind118", "q0107", "q0101", "ind6", "ind7",
-                          "ind67agru", "ind1d", "ind1h", "ind1a"]
+                      "ind97", "q1203", "q1201", "q1405",
+                      "q1406", "q1413", "ind254", "ind6",
+                      "ind7", "ind67agru", "ind1d", "ind1h", "ind1a"]
 
     float_properties = []
 

@@ -61,7 +61,7 @@ TXT056,A empresas o personas socias,A empreses o persones sòcies,Enpresei edo b
 TXT057,A compensación de pérdidas,A compensació de pèrdues ,Galerak konpentsatzera,A compensación de perdas
 TXT058,A reservas,A reserves,Erreserbetara,A reservas
 R1,No corresponde porque no se han tenido beneficios este año,No correspon perquè no hi ha hagut beneficis enguany,"Ez dagokio, aurten ez delako etekinik izan",Non corresponde porque non houbo beneficios este ano
-T4,No corresponde por tamaño,No correspon per mida,"Ez dagokio, tamaina dela eta",
-TXT059,Mil,Mil,mila,
-TXT060,Promueve,Promou,Sustatzaileak,
-TXT061,Colabora,Col·labora,Laguntzailea,
+T3,No corresponde por tamaño,No correspon per mida,"Ez dagokio, tamaina dela eta",Non corresponde por tamaño
+TXT059,Mil,Mil,mila,Mil
+TXT060,Promueve,Promou,Sustatzaileak,Promove
+TXT061,Colabora,Col·labora,Laguntzailea,Colabora

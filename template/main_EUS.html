@@ -7,7 +7,7 @@
     <title>Infografía Balance social</title>
 
     <!-- CSS -->
-    <link href="../../../../static/css/styles.css" rel="stylesheet" />
+    <link href="../../../../static/css/styles_EUS.css" rel="stylesheet" />
 
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
@@ -40,9 +40,9 @@
     </div>
 
     <div class="personas-porcent">
-        <p><strong class="cifra cifra3">{% if ind1d != "nan" %}{{ind1d}}%{% else %}*{% endif%}</strong> {{TXT005}} </p> <!-- Mujeres -->
-        <p><strong class="cifra cifra3">{% if ind1h != "nan" %}{{ind1h}}%{% else %}*{% endif%}</strong> {{TXT006}} </p> <!-- Hombres -->
-        <p><strong class="cifra cifra3">{% if ind1a != "nan" %}{{ind1a}}%{% else %}*{% endif%}</strong> {{TXT007}} </p> <!-- Identidades no binarias -->
+        <p><strong class="cifra cifra3">{% if ind1d != "nan" %}%{{ind1d}}{% else %}*{% endif%}</strong> {{TXT005}} </p> <!-- Mujeres -->
+        <p><strong class="cifra cifra3">{% if ind1h != "nan" %}%{{ind1h}}{% else %}*{% endif%}</strong> {{TXT006}} </p> <!-- Hombres -->
+        <p><strong class="cifra cifra3">{% if ind1a != "nan" %}%{{ind1a}}{% else %}*{% endif%}</strong> {{TXT007}} </p> <!-- Identidades no binarias -->
     </div>
 
     <div class="personas-numero">
@@ -100,7 +100,7 @@
 
         <div class="columnas">
             <div class="text-center">
-                <span class="cifra cifra1">{% if ind20d != "nan" and ind20d | is_float %}{{ind20d}}%{% else %}*{% endif%}</span>
+                <span class="cifra cifra1">{% if ind20d != "nan" and ind20d | is_float %}%{{ind20d}}{% else %}*{% endif%}</span>
                 <span class="label label1">{{TXT017}}</span><br> <!-- Mujeres en puestos de responsabilidad -->
                 <span class="description">
                     {% set values = { "E1": E1, "E3": E3, "E4": E4, "E7": E7, "E8": E8, "T2": T2 } %}
@@ -112,7 +112,7 @@
             </div>
 
             <div class="text-center">
-                <span class="cifra cifra1">{% if ind127 != "nan" and ind127 | is_float %}{{ind127|float|abs|replace(".", ",")}}%{% else %}*{% endif%}</span>
+                <span class="cifra cifra1">{% if ind127 != "nan" and ind127 | is_float %}%{{ind127|float|abs|replace(".", ",")}}{% else %}*{% endif%}</span>
                 <span class="label label1">{{TXT020}}</span><br> <!-- Brecha salarial entre hombres y mujeres -->
                 <span class="description">
                     {% if ind127 is defined and ind127 | is_float  %}
@@ -204,16 +204,7 @@
         <h2 class="titulo">{{TXT045}}</h2> <!-- Trabajo digno -->
 
         <ul class="checklist">
-            <li>{{TXT046}} <!-- Espacios de atención emocional y cuidado -->
-                <span class="check">{% if ind105 == "True" %}{% elif ind105 == "False" %}{% endif %}</span>
-                <span class="description">
-                    {% set values = { "T1": T1, "T2": T2, "T3": T3, "T4": T4 } %}
-
-                    {% if ind105 in values and ind78 not in values %}
-                        * {{ values[ind105] }}
-                    {% endif %}
-                </span>
-            </li>
+            <li>{{TXT046}}<span class="check">{% if ind105 == "True" %}{% elif ind105 == "False" %}{% endif %}</span></li> <!-- Espacios de atención emocional y cuidado -->
             <li>{{TXT047}} <!-- Reglamento interno de relaciones laborales -->
                 <span class="check">{% if ind78 == "True" %}{% elif ind78 == "False" %}{% endif %}</span>
                 <span class="description">
@@ -224,16 +215,7 @@
                     {% endif %}
                 </span>
             </li>
-            <li>{{TXT048}} <!-- Medidas que mejoran la ley de conciliación -->
-                <span class="check">{% if ind80 == "True" %}{% elif ind80 == "False" %}{% endif %}</span>
-                <span class="description">
-                    {% set values = { "T1": T1, "T2": T2, "T3": T3, "T4": T4 } %}
-
-                    {% if ind80 in values %}
-                        * {{ values[ind80] }}
-                    {% endif %}
-                </span>
-            </li>
+            <li>{{TXT048}}<span class="check">{% if ind80 == "True" %}{% elif ind80 == "False" %}{% endif %}</span></li> <!-- Medidas que mejoran la ley de conciliación -->
         </ul>
 
     </section>
@@ -248,7 +230,7 @@
         <img class="icono secundario" src="../../../../static/img/compromiso_entorno.png">
 
         <aside>
-            <span class="cifra cifra1">{{ind254}}%</span>
+            <span class="cifra cifra1">%{{ind254}}</span>
             <span class="label label1">{{TXT031}}</span> <!-- Compras dentro de la Economía Social -->
         </aside>
 
@@ -371,7 +353,7 @@
                     overflow: 'none',
                     formatter: function(){ // your condition/check
                       if(this.y !== 0){
-                        return '<div class="chart-text"><span class="cifra3">' + this.y + '%</span><br>' + this.point.name + '</div>';
+                        return '<div class="chart-text"><span class="cifra3">%' + this.y + '</span><br>' + this.point.name + '</div>';
                       }
                     }
                 }
@@ -381,7 +363,7 @@
                 borderWidth:0,
                 startAngle:{{ rotacion if rotacion != "nan" else 100 }},
                 dataLabels: {
-
+                    alignTo: 'connectors',
                     connectorShape: function(labelPosition, connectorPosition, options) {
                         // Let the built-in crookedLine function do the heavy lifting
                         const path = Highcharts.seriesTypes
@@ -397,8 +379,7 @@
                         if (labelPosition.alignment === 'right') {
                             path[0][1] -= labelWidth;
                         } else {
-                            path.push(['M', path[0][1], path[0][2]]);
-                            path.push(['L', path[0][1] + labelWidth, path[0][2]]);
+                            path[0][1] += labelWidth;
                         }
 
                         return path;

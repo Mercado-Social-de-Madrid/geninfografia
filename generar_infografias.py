@@ -2,6 +2,7 @@ import base64
 import json
 import os
 import sys
+import time
 from pathlib import Path
 from datetime import datetime
 
@@ -18,11 +19,14 @@ from utils.parser import Parser
 
 export_percent = 0
 
+TEMPLATE_FILENAME = "main.html"
+SCSS_FILENAME = "styles.scss"
+
 
 def compile_sass():
     os.makedirs('static/css', exist_ok=True)
 
-    with open('static/sass/styles.scss', 'r') as scss:
+    with open(f'static/sass/{SCSS_FILENAME}', 'r') as scss:
         scss.read()
 
     sass.compile(dirname=('static/sass', 'static/css'))
@@ -75,7 +79,7 @@ def generar_infografias(entities_data, entity_name=None, regenerate=False):
                 template_env = jinja2.Environment(loader=template_loader)
                 template_env.filters['float'] = float_with_comma
                 template_env.filters['is_float'] = is_float
-                template_file = "main.html"
+                template_file = TEMPLATE_FILENAME
                 template = template_env.get_template(template_file)
                 output_text = template.render(**{**entity, **translations, **custom_props})
 
@@ -110,22 +114,29 @@ def exportar_infografias(nif=None, regenerate=False):
         total_tasks = get_file_count(html_path)
         territories_dirs = os.listdir(html_path)
         for territory in territories_dirs:
-            if territory in ["CAT"]:
+            if territory in ["MAD"]:
                 lang_dirs = os.listdir(f"{html_path}/{territory}")
                 for lang in lang_dirs:
-                    files_list = os.listdir(f"{html_path}/{territory}/{lang}")
+                    if lang in ["CAS"]:
+                        files_list = os.listdir(f"{html_path}/{territory}/{lang}")
 
-                    if nif:
-                        files_list = [filename for filename in files_list if nif == filename.split(".")[0]]
+                        if nif:
+                            files_list = [filename for filename in files_list if nif == filename.split(".")[0]]
 
-                    for filename in files_list:
-                        html_path = "infografias/html"
-                        input_file = f"{html_path}/{territory}/{lang}/{filename}"
-                        driver.get(str(Path(input_file).absolute()))
-                        export_percent += 100 / total_tasks
-                        html2img(driver, filename, extension="png", output_path=f"infografias/png/{territory}/{lang}", regenerate=regenerate)
-                        # html2img(driver, filename, extension="jpg", output_path=f"infografias/jpg/{territory}/{lang}", regenerate=regenerate)
-                        # html2pdf(driver, filename, output_path=f"infografias/pdf/{territory}/{lang}", regenerate=regenerate)
+                        for filename in files_list:
+                            html_path = "infografias/html"
+                            input_file = f"{html_path}/{territory}/{lang}/{filename}"
+                            driver.delete_all_cookies()
+                            driver.execute_cdp_cmd('Storage.clearDataForOrigin', {
+                                "origin": '*',
+                                "storageTypes": 'all',
+                            })
+                            driver.get(str(Path(input_file).absolute()))
+                            # time.sleep(2) # Only for PDF export
+                            export_percent += 100 / total_tasks
+                            html2img(driver, filename, extension="png", output_path=f"infografias/png/{territory}/{lang}", regenerate=regenerate)
+                            # html2img(driver, filename, extension="jpg", output_path=f"infografias/jpg/{territory}/{lang}", regenerate=regenerate)
+                            # html2pdf(driver, filename, output_path=f"infografias/pdf/{territory}/{lang}", regenerate=regenerate)
 
     finally:
         driver.quit()

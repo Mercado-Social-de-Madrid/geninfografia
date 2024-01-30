@@ -363,7 +363,6 @@
                 borderWidth:0,
                 startAngle:{{ rotacion if rotacion != "nan" else 100 }},
                 dataLabels: {
-                    alignTo: 'connectors',
                     connectorShape: function(labelPosition, connectorPosition, options) {
                         // Let the built-in crookedLine function do the heavy lifting
                         const path = Highcharts.seriesTypes

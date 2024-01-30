@@ -1,6 +1,6 @@
 Código,Castellano,Català,Euskera,Galego
 TXT001,BALANCE SOCIAL DE LA ECONOMÍA SOCIAL Y SOLIDARIA,BALANÇ SOCIAL DE L'ECONOMIA SOCIAL I SOLIDÀRIA,,
-TXT002,AUDITORÍA SOCIAL DE LA ECONOMÍA SOCIAL Y SOLIDARIA,,EKONOMIA SOZIAL ETA SOLIDARIOAREN AUDITORIA SOZIALA,AUDITORÍA SOCIAL DA ECONOMÍA SOCIAL E SOLIDARIA
+TXT002,AUDITORÍA SOCIAL DE LA ECONOMÍA SOCIAL Y SOLIDARIA,AUDITORIA SOCIAL DE L'ECONOMIA SOCIAL I SOLIDÀRIA,EKONOMIA SOZIAL ETA SOLIDARIOAREN AUDITORIA SOZIALA,AUDITORÍA SOCIAL DA ECONOMÍA SOCIAL E SOLIDARIA
 TXT003,ENSEÑA EL CORAZÓN,ENSENYA EL COR,bihotza erakusten du,ENSINA O CORAZÓN
 TXT004,Personas de la organización,Persones de l'organització,pertsona erakundean,Persoas da organización
 TXT005,    Mujeres,Dones,Emakumeak,    Mulleres
@@ -65,3 +65,4 @@ T3,No corresponde por tamaño,No correspon per mida,"Ez dagokio, tamaina dela et
 TXT059,Mil,Mil,mila,Mil
 TXT060,Promueve,Promou,Sustatzaileak,Promove
 TXT061,Colabora,Col·labora,Laguntzailea,Colabora
+E7,No se puede calcular porque la entidad sólo tiene una trabajadora,No es pot calcular perquè l'entitat compta només amb una treballadora,Ezin da kalkulatu erakundeak langile bakarra duelako,Non se pode calcular porque a entidade só ten unha traballadora

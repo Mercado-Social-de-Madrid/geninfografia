@@ -1,6 +1,6 @@
 {
     "TXT001": "BALANÇ SOCIAL DE L'ECONOMIA SOCIAL I SOLIDÀRIA",
-    "TXT002": NaN,
+    "TXT002": "AUDITORIA SOCIAL DE L'ECONOMIA SOCIAL I SOLIDÀRIA",
     "TXT003": "ENSENYA EL COR",
     "TXT004": "Persones de l'organització",
     "TXT005": "Dones",
@@ -64,5 +64,6 @@
     "T3": "No correspon per mida",
     "TXT059": "Mil",
     "TXT060": "Promou",
-    "TXT061": "Col·labora"
+    "TXT061": "Col·labora",
+    "E7": "No es pot calcular perquè l'entitat compta només amb una treballadora"
 }

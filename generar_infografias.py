@@ -2,6 +2,7 @@ import base64
 import json
 import os
 import sys
+import yaml
 import time
 from pathlib import Path
 from datetime import datetime
@@ -9,6 +10,7 @@ from datetime import datetime
 import sass
 import jinja2
 import pngquant
+from jinja2 import TemplateNotFound
 from pathvalidate import sanitize_filename
 from fuzzywuzzy import fuzz
 from selenium import webdriver
@@ -17,25 +19,28 @@ from wakepy import keep
 from utils.translations import Translations
 from utils.parser import Parser
 
-export_percent = 0
 
-TEMPLATE_FILENAME = "main.html"
-SCSS_FILENAME = "styles.scss"
+def get_custom_props():
+    config_file = "config.yaml"
+    with open(config_file, 'r', encoding='utf-8') as file:
+        config = yaml.safe_load(file)
+    return config
+
+
+custom_props = get_custom_props()
+export_percent = 0
 
 
 def compile_sass():
     os.makedirs('static/css', exist_ok=True)
 
-    with open(f'static/sass/{SCSS_FILENAME}', 'r') as scss:
-        scss.read()
+    styles_path = "static/sass"
+    for file in os.listdir(styles_path):
+        if file.startswith("styles") and file.endswith(".scss"):
+            with open(f'static/sass/{file}', 'r') as scss:
+                scss.read()
 
     sass.compile(dirname=('static/sass', 'static/css'))
-
-
-def get_custom_props():
-    return {
-        "year": datetime.now().year
-    }
 
 
 def float_with_comma(value):
@@ -59,36 +64,40 @@ def generar_infografias(entities_data, entity_name=None, regenerate=False):
     print("\n======== Generando ficheros HTML de las infografías =============")
     output_path = "infografias/html"
     os.makedirs(output_path, exist_ok=True)
-    custom_props = get_custom_props()
 
     if entity_name:
         entities_data = [entity for entity in entities_data if entity_name == entity["Nombre"]]
 
     total_entities = len(entities_data)
     for index, entity in enumerate(entities_data):
-        print(f"[{index+1}/{total_entities}] Generando infografia para la entidad {entity['Nombre']}...")
-        filename = sanitize_filename(entity["NIF"])
-        langs = entity['Idioma'].split(';')
-        for lang in langs:
-            translations = get_translations_from_lang(lang)
-            html_root = f"{output_path}/{entity['Codigo Territorio'].upper()}/{lang.upper()}"
-            os.makedirs(html_root, exist_ok=True)
-            html_path = f"{html_root}/{filename}.html"
-            if regenerate or not os.path.isfile(html_path):
-                template_loader = jinja2.FileSystemLoader(searchpath="template")
-                template_env = jinja2.Environment(loader=template_loader)
-                template_env.filters['float'] = float_with_comma
-                template_env.filters['is_float'] = is_float
-                template_file = TEMPLATE_FILENAME
-                template = template_env.get_template(template_file)
-                output_text = template.render(**{**entity, **translations, **custom_props})
+        if not custom_props["TERRITORIOS"] or entity['Codigo Territorio'].upper() in custom_props["TERRITORIOS"]:
+            print(f"[{index+1}/{total_entities}] Generando infografia para la entidad {entity['Nombre']}...")
+            filename = sanitize_filename(entity["NIF"])
+            langs = entity['Idioma'].split(';')
+            for lang in langs:
+                if not custom_props["IDIOMAS"] or lang.upper() in custom_props["IDIOMAS"]:
+                    translations = get_translations_from_lang(lang)
+                    html_root = f"{output_path}/{entity['Codigo Territorio'].upper()}/{lang.upper()}"
+                    os.makedirs(html_root, exist_ok=True)
+                    html_path = f"{html_root}/{filename}.html"
+                    if regenerate or not os.path.isfile(html_path):
+                        template_loader = jinja2.FileSystemLoader(searchpath="template")
+                        template_env = jinja2.Environment(loader=template_loader)
+                        template_env.filters['float'] = float_with_comma
+                        template_env.filters['is_float'] = is_float
+                        template_file = f"main_{lang}.html"
+                        try:
+                            template = template_env.get_template(template_file)
+                        except TemplateNotFound:
+                            template = template_env.get_template(custom_props["DEFAULT_TEMPLATE"])
+                        output_text = template.render(**{**entity, **translations, **custom_props})
 
-                html_file = open(html_path, 'w', encoding="utf-8")
-                html_file.write(output_text)
-                html_file.close()
-                print(f"[{index+1}/{total_entities}] Infografía para la entidad [{entity['Nombre']}] generada.")
-            else:
-                print(f"[{index + 1}/{total_entities}] Infografía para la entidad [{entity['Nombre']}] ya existe.")
+                        html_file = open(html_path, 'w', encoding="utf-8")
+                        html_file.write(output_text)
+                        html_file.close()
+                        print(f"[{index+1}/{total_entities}] Infografía para la entidad [{entity['Nombre']}] generada.")
+                    else:
+                        print(f"[{index + 1}/{total_entities}] Infografía para la entidad [{entity['Nombre']}] ya existe.")
 
 
 def get_translations_from_lang(lang):
@@ -114,10 +123,10 @@ def exportar_infografias(nif=None, regenerate=False):
         total_tasks = get_file_count(html_path)
         territories_dirs = os.listdir(html_path)
         for territory in territories_dirs:
-            if territory in ["MAD"]:
+            if not custom_props["TERRITORIOS"] or territory.upper() in custom_props["TERRITORIOS"]:
                 lang_dirs = os.listdir(f"{html_path}/{territory}")
                 for lang in lang_dirs:
-                    if lang in ["CAS"]:
+                    if not custom_props["IDIOMAS"] or lang.upper() in custom_props["IDIOMAS"]:
                         files_list = os.listdir(f"{html_path}/{territory}/{lang}")
 
                         if nif:

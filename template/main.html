@@ -112,14 +112,14 @@
             </div>
 
             <div class="text-center">
-                <span class="cifra cifra1">{% if ind127 != "nan" and ind127 | is_float %}{{ind127|float|abs|replace(".", ",")}}%{% else %}*{% endif%}</span>
+                <span class="cifra cifra1">{% if ind127 != "nan" and ind127 | is_float %}{{(ind127|float|abs|replace(".", ",")).rstrip(',0')}}%{% else %}*{% endif%}</span>
                 <span class="label label1">{{TXT020}}</span><br> <!-- Brecha salarial entre hombres y mujeres -->
                 <span class="description">
                     {% if ind127 is defined and ind127 | is_float  %}
                         {% if ind127|float >= 0  %}
-                            * {{TXT025 | replace("ind127", ind127|float|abs|replace(".", ",")) }} <!-- Los hombres ganan un X % más que las mujeres -->
+                            * {{TXT025 | replace("ind127", (ind127|float|abs|replace(".", ",")).rstrip(',0')) }} <!-- Los hombres ganan un X % más que las mujeres -->
                         {% else %}
-                            * {{TXT026 | replace("ind127", ind127|float|abs|replace(".", ",")) }} <!-- Las mujeres ganan un X % mas que los hombres” -->
+                            * {{TXT026 | replace("ind127", (ind127|float|abs|replace(".", ",")).rstrip(',0')) }} <!-- Las mujeres ganan un X % mas que los hombres” -->
                         {% endif %}
                     {% else %}
                         {% set values = { "E2": E2, "E3": E3, "E4": E4, "E5": E5 } %}
@@ -227,11 +227,7 @@
             <li>{{TXT048}} <!-- Medidas que mejoran la ley de conciliación -->
                 <span class="check">{% if ind80 == "True" %}{% elif ind80 == "False" %}{% endif %}</span>
                 <span class="description">
-                    {% set values = { "T1": T1, "T2": T2, "T3": T3, "T4": T4 } %}
 
-                    {% if ind80 in values %}
-                        * {{ values[ind80] }}
-                    {% endif %}
                 </span>
             </li>
         </ul>
@@ -270,7 +266,7 @@
         </ul>
 
          <ul class="checklist secundario">
-            <li>{{TXT037}} <!-- Opera con <br>finanzas éticas -->
+            <li>{{TXT037}} <!-- Opera con finanzas éticas -->
                 <span class="check">{% if ind71 == "True" %}{% else %}{% endif %}</span>
             </li>
          </ul>

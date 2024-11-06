@@ -30,11 +30,11 @@
     <div class="mes titulo"> <!-- Balance/Auditoría social de la Economía Social y Solidaria [AÑO] -->
         {% if auditoria_balance.lower() == "bal" %}
             {% if TXT001 is string %}
-                {{ ' '.join(TXT001.split(' ')[0:2]) }} <em>{{ ' '.join(TXT001.split(' ')[2:]) }}</em> {{ year }}
+                {{ ' '.join(TXT001.split(' ')[0:2]) }} <em>{{ ' '.join(TXT001.split(' ')[2:]) }}</em> {{ YEAR }}
             {% endif %}
         {% else %}
             {% if TXT002 is string %}
-                {{ ' '.join(TXT002.split(' ')[0:2]) }} <em>{{ ' '.join(TXT002.split(' ')[2:]) }}</em> {{ year }}
+                {{ ' '.join(TXT002.split(' ')[0:2]) }} <em>{{ ' '.join(TXT002.split(' ')[2:]) }}</em> {{ YEAR }}
             {% endif %}
         {% endif %}
     </div>
@@ -215,7 +215,16 @@
                     {% endif %}
                 </span>
             </li>
-            <li>{{TXT048}}<span class="check">{% if ind80 == "True" %}{% elif ind80 == "False" %}{% endif %}</span></li> <!-- Medidas que mejoran la ley de conciliación -->
+            <li>{{TXT048}} <!-- Medidas que mejoran la ley de conciliación -->
+                <span class="check">{% if ind80 == "True" %}{% elif ind80 == "False" %}{% endif %}</span>
+                <span class="description">
+<!--                    {% set values = { "T1": T1, "T2": T2, "T3": T3, "T4": T4 } %}-->
+
+<!--                    {% if ind80 in values %}-->
+<!--                        * {{ values[ind80] }}-->
+<!--                    {% endif %}-->
+                </span>
+            </li>
         </ul>
 
     </section>
@@ -363,6 +372,7 @@
                 borderWidth:0,
                 startAngle:{{ rotacion if rotacion != "nan" else 100 }},
                 dataLabels: {
+                    alignTo: 'connectors',
                     connectorShape: function(labelPosition, connectorPosition, options) {
                         // Let the built-in crookedLine function do the heavy lifting
                         const path = Highcharts.seriesTypes

@@ -85,7 +85,16 @@ footer{
     .logos{
         height: 125px;
 
-      > * { float:left; max-width: 33%; padding-right: 5%; }
+        > * {
+            float:left;
+            max-width: 33%;
+            padding-right: 5%;
+
+//  Solo para el logo de Balanç Social
+//             &:first-child {
+//                 height: 150px;
+//             }
+        }
     }
     
   }

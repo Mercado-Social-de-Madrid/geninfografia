@@ -72,7 +72,7 @@ class Parser:
         suffix_index = 0
 
         try:
-            locale.setlocale(locale.LC_ALL, 'es_ES')
+            locale.setlocale(locale.LC_ALL, 'es_ES.UTF-8')
             value = locale.atof(str(value).replace(" ", ""))
             if number_type is int:
                 value = round(value)

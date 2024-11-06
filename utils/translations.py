@@ -12,7 +12,7 @@ class Lang:
 
 
 class Translations:
-    ROOT = "Translations"
+    ROOT = "translations"
     df = pd.read_csv(f"{ROOT}/strings.csv")
 
     CAS = Lang('cas', "Castellano")

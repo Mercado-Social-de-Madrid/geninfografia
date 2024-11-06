@@ -140,8 +140,7 @@ def exportar_infografias(nif=None, regenerate=False):
                                 "origin": '*',
                                 "storageTypes": 'all',
                             })
-                            driver.get(str(Path(input_file).absolute()))
-                            # time.sleep(2) # Only for PDF export
+                            # driver.get(str(Path(input_file).absolute()))
                             export_percent += 100 / total_tasks
                             html2img(driver, filename, extension="png", output_path=f"infografias/png/{territory}/{lang}", regenerate=regenerate)
                             # html2img(driver, filename, extension="jpg", output_path=f"infografias/jpg/{territory}/{lang}", regenerate=regenerate)

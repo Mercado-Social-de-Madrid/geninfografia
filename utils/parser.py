@@ -8,13 +8,21 @@ class Parser:
     int_properties = ["ind3d", "ind3h", "ind3a", "ind20d",
                       "ind97", "q1203", "q1201", "q1405",
                       "q1406", "q1413", "ind254", "ind6",
-                      "ind7", "ind67agru", "ind1d", "ind1h", "ind1a"]
+                      "ind7", "ind67agru", "ind1d", "ind1h", "ind1a",
+
+                      "ind1agrupado", "ind1agrupadod", "ind1agrupadoh", "ind1agrupadoa",
+                      "ind118", "q1203", "q1201"]
 
     float_properties = []
 
     boolean_properties = ["ind58", "ind62", "q4104a", "q4104b", "q4104c",
                           "q4104d", "q5305a", "q5305b", "q5305c",
-                          "q5305d", "ind71", "ind105", "ind78", "ind80"]
+                          "q5305d", "ind71", "ind105", "ind78", "ind80",
+
+                          "q3406c", "q3406a", "q3406d", "q5305a", "q5305b",
+                          "q5305c", "q5305d", "ind71", "q4106a", "q4106d",
+                          "q4106c", "ind62agrupado", "q6813a", "q6813b",
+                          "q6813c", "q6813d", "q1415e", "q1415f", "q1415a"]
 
     def parse_infografias(self):
         territories = self.parse_territories()
@@ -73,7 +81,10 @@ class Parser:
 
         try:
             locale.setlocale(locale.LC_ALL, 'es_ES.UTF-8')
-            value = locale.atof(str(value).replace(" ", ""))
+            value = str(value)
+            value = value.replace(" ", "")
+            value = value.replace("€", "")
+            value = locale.atof(value)
             if number_type is int:
                 value = round(value)
 

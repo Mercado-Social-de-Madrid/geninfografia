@@ -379,7 +379,7 @@ section{
 
 #equidad{ 
   color:$color-equidad;
-  height: 35%;
+  height: 28%;
   padding: 3.5vw;
 
   .columnas{
@@ -392,14 +392,14 @@ section{
 
 #sostenibilidad{
   color:$color-sostenibilidad;
-  height: 37%;
+  height: 30%;
 
   .titulo{ top:4.5vw; }  
 }
 
 #trabajo{
   color:$color-trabajo;
-  height: 28%;
+  height: 42%;
 
   .titulo{ top:6vw; }
   .icono{ top:2.5vw; }
@@ -407,6 +407,13 @@ section{
   .description {
     width: 19%;
     right: -2.2em;
+  }
+
+  ul.checklist{
+    li {
+        margin-bottom: 1em;
+        padding-right: 3em;
+    }
   }
 }
 

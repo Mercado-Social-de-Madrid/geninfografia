@@ -85,11 +85,11 @@ def generar_infografias(entities_data, entity_name=None, regenerate=False):
                         template_env = jinja2.Environment(loader=template_loader)
                         template_env.filters['float'] = float_with_comma
                         template_env.filters['is_float'] = is_float
-                        template_file = f"main_{lang}.html"
+                        template_file = f"{custom_props["MODO"]}_{lang}.html"
                         try:
                             template = template_env.get_template(template_file)
                         except TemplateNotFound:
-                            template = template_env.get_template(custom_props["DEFAULT_TEMPLATE"])
+                            template = template_env.get_template(f"{custom_props["MODO"]}.html")
                         output_text = template.render(**{**entity, **translations, **custom_props})
 
                         html_file = open(html_path, 'w', encoding="utf-8")
@@ -136,11 +136,11 @@ def exportar_infografias(nif=None, regenerate=False):
                             html_path = "infografias/html"
                             input_file = f"{html_path}/{territory}/{lang}/{filename}"
                             driver.delete_all_cookies()
-                            driver.execute_cdp_cmd('Storage.clearDataForOrigin', {
-                                "origin": '*',
-                                "storageTypes": 'all',
-                            })
-                            # driver.get(str(Path(input_file).absolute()))
+                            # driver.execute_cdp_cmd('Storage.clearDataForOrigin', {
+                            #     "origin": '*',
+                            #     "storageTypes": 'all',
+                            # })
+                            driver.get("file:///" + str(Path(input_file).absolute()))
                             export_percent += 100 / total_tasks
                             html2img(driver, filename, extension="png", output_path=f"infografias/png/{territory}/{lang}", regenerate=regenerate)
                             # html2img(driver, filename, extension="jpg", output_path=f"infografias/jpg/{territory}/{lang}", regenerate=regenerate)
@@ -197,14 +197,15 @@ def html2img(driver, filename, extension, output_path="infografias/png", regener
 
     if regenerate or not os.path.isfile(img_path):
         print(f"[{round(export_percent)}%] Exportando infografia en formato {extension.upper()} [{img_path}]...")
-        driver.set_window_size(width=2480, height=3508)
+        driver.set_window_size(width=2480, height=3700)
         driver.save_screenshot(filename=img_path)
         try:
-            pngquant.config(os.environ["PNGQUANT_PATH"], min_quality=85, max_quality=85)
+            pngquant.config(custom_props["PNGQUANT_PATH"], min_quality=85, max_quality=85)
             pngquant.quant_image(img_path)
-        except KeyError:
+        except KeyError as e:
+            print(e)
             print("No es posible optimizar la imagen")
-            print("- Añade la variable de entorno PNGQUANT_PATH con la ubicación del ejecutable de pngquant.")
+            print("- Añade la ubicación de pngquant en el archivo config.yaml usando la propiedad PNGQUANT_PATH.")
             print("Puedes descargarlo en https://pngquant.org/")
         print(f"[{round(export_percent)}%] Infografía exportada a {extension.upper()} [{img_path}]")
     else:
@@ -212,14 +213,14 @@ def html2img(driver, filename, extension, output_path="infografias/png", regener
 
 
 def get_driver():
-    chrome_options = webdriver.ChromeOptions()
-    chrome_options.add_argument('--headless')
-    chrome_options.add_argument('--hide-scrollbars')
-    chrome_options.add_argument('--window-size=2480,3508')
-    chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
-    chrome_options.add_argument('--log-level=3')
+    options = webdriver.ChromeOptions()
+    options.add_argument("-headless")
+    options.add_argument('--hide-scrollbars')
+    options.add_argument('--window-size=2480,3508')
+    options.add_experimental_option('excludeSwitches', ['enable-logging'])
+    options.add_argument('--log-level=3')
 
-    driver = webdriver.Chrome(options=chrome_options)
+    driver = webdriver.Chrome(options=options)
     return driver
 
 

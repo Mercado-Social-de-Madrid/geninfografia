@@ -11,7 +11,7 @@ class Parser:
                       "ind7", "ind67agru", "ind1d", "ind1h", "ind1a",
 
                       "ind1agrupado", "ind1agrupadod", "ind1agrupadoh", "ind1agrupadoa",
-                      "ind118", "q1203", "q1201"]
+                      "ind118", "q1203", "q1201", "ind254A"]
 
     float_properties = []
 

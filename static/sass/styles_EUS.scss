@@ -1,356 +1,20 @@
-@import 'font-face';
-@include font-face("Veneer Three", "../fonts/Veneer Three.woff");
-@include font-face("Wingding", "../fonts/wingding.ttf");
-@include font-face("Source Sans Pro", "../fonts/SourceSansPro-Regular.ttf", 400);
-@include font-face("Source Sans Pro", "../fonts/SourceSansPro-Italic.ttf", 400, italic);
-@include font-face("Source Sans Pro", "../fonts/SourceSansPro-ExtraLight.ttf", 200);
-@include font-face("Source Sans Pro", "../fonts/SourceSansPro-ExtraLightItalic.ttf", 200, italic);
-@include font-face("Source Sans Pro", "../fonts/SourceSansPro-Light.ttf", 300);
-@include font-face("Source Sans Pro", "../fonts/SourceSansPro-LightItalic.ttf", 300, italic);
-@include font-face("Source Sans Pro", "../fonts/SourceSansPro-Semibold.ttf", 600);
-@include font-face("Source Sans Pro", "../fonts/SourceSansPro-SemiboldItalic.ttf", 600, italic);
-@include font-face("Source Sans Pro", "../fonts/SourceSansPro-Bold.ttf", 700);
-@include font-face("Source Sans Pro", "../fonts/SourceSansPro-BoldItalic.ttf", 700, italic);
-@include font-face("Source Sans Pro", "../fonts/SourceSansPro-Black.ttf", 900);
-@include font-face("Source Sans Pro", "../fonts/SourceSansPro-BlackItalic.ttf", 900, italic);
-
-*, *::after, *::before {
-  box-sizing: inherit;
-}
-
-html {
-  box-sizing: border-box;
-  font-family: 'Source Sans Pro', sans-serif;
-  line-height: 1.15;
-  text-size-adjust: 100%;
-  -ms-overflow-style: scrollbar;
-  height: 141.4vw;
-  font-size:1vw;
-  background-color: #FFFFFF;
-}
-
-$color-main: #85b23d;
-$color-equidad: #9165a1;
-$color-sostenibilidad: #2a7840;
-$color-trabajo: #db9427;
-$color-cooperacion: #3ea4b7; 
-$color-cooperacion2: #cbc036; 
-$color-riqueza: #c42f43; 
-$color-riqueza2: #d56473;
-
-
-[tabindex='-1']:focus { outline: 0 !important; }
-body{
-  height:100%;
-  background: #FFFFFF;
-  position: relative;
-
-  &:before {
-    content: "";
-    width: 100%;
-    height: 100%;
-    background-image: url(../img/pattern.svg), none;
-    background-size: 15%;
-    opacity: 0.05;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-}
-html,body{margin: 0; padding: 0;}
-p,h1,h2,h3{margin:0;font-weight: normal;}
-
-footer{
-  background:#fff;
-  position:absolute;
-  bottom:0;
-  width:100%;
-  height:7%;
-
-  .seccion{
-    padding-top:1rem;
-    float:left;
-    font-size:1.2em;
-  
-    span{
-      margin-bottom:0.8em;
-      display:block;
-    }
-  }
-
-  .promueve{
-    width:45%;
-    padding-left:5%;
-    
-    .logos{
-        height: 125px;
-
-      > * { float:left; max-width: 33%; padding-right: 5%; }    }
-  }
-
-  .enlaces{
-    font-size:1.3em;
-    width:33%;
-    font-weight:600;
-    padding-top:1.3em;
-    line-height:1.6;
-    text-align:center;
-  }
-  .colabora{
-    width:22%;
-    padding-left:4%;
-    padding-right:5%;
-
-    .logos{
-        height: 150px;
-      > * { float: left; width: 80%;  }
-    }
-  }
-}
-
-
-.text-center{ text-align:center; }
-
-.titulo{
-  font-family: Veneer Three;
-  font-size: 4vw;
-  line-height: 0.84;
-}
-
-.titulo em{
-  color:#85b23d;
-  font-style: normal;
-}
-
-.label{
-  text-transform: uppercase;
-  font-weight:700;
-
-  &.label1{ font-size:1.3rem; }
-  &.label2{ font-size:1.95rem; }
-  &.label3{ font-size:1.6rem; line-height:0.95; }
-}
-
-.cifra{
-  display: block;
-  font-weight: bold;
-
-  small{ font-size:0.43em; }
-
-}
-.cifra1{ font-size:5.5rem; font-weight: 800; }
-.cifra2{ font-size:4.2rem; font-weight: 800; }
-.cifra3{ font-size: 2.8rem; }
-.cifra4{ font-size: 3.5rem; font-weight:800; }
-
-.personas-porcent{
-    position: absolute;
-    width: 9%;
-    top: 35%;
-    right: 50%;
-    bottom: 2.3vw;
-    text-align: right;
-    padding-right:0.4vw;
-    border-right: 0.25vw solid #111;
-
-    p{
-      margin-top:1.04rem;
-      font-size:1.3rem;
-      text-transform: uppercase;
-      line-height: 1;
-    }
-
-}
-
-.personas{
-  position:absolute;
-  display: flex;
-  flex-direction: column;
-  top:2.5vw;
-  width:100%;
-  padding-left:1vw;
-
-    .label {
-        width: 15%;
-        align-self: center;
-    }
-
-    .cifra2{
-        margin-bottom:-0.1em;
-    }
-}
-
-.personas-numero{
-    position: absolute;
-    width: 14%;
-    top: 35%;
-    left:51%;
-    bottom: 2.3vw;
-    padding-left:0.6vw;
-    border-left: 0.25vw solid #85b23d;
-    color:#85b23d;
-    padding-top:0.31vw;
-
-    p{
-      margin-top:1.05rem;
-    }
-}
-
-.columna1{ position:absolute; height:72%; top:21%; width: 53.5vw; border-right: 0.8vw solid #fff; }
-.columna2{ position:absolute; height:72%; top:21%; left:53.5vw; width:46.5vw;}
-
-
-.columnas{
-  position:relative;
-  display:flex;
-
-  > * { flex: 1; }
-}
+@import 'styles';
 
 ul.checklist{
-  font-family: Veneer Three;
-  list-style:none;
-  padding:0 3rem;
-  margin:0;
-  line-height:1.05;
-  font-size:1.9vw;
-  position:absolute;
-  width:100%;
-  right: 0;
+  font-size: 1.9vw;
 
   li{
-    margin: 0.4em;
     padding-right: 0.5em;
-    position:relative;
   }
 
   .check {
-    font-family: Wingdings;
-    font-size:1.5em;
     line-height: 0.7;
-    width: 1em;
-    position: absolute;
-    right: 0;
-    top: 50%;
-    margin-top: -0.4em;
-
   }
 
-  .description {
-    font-family: Source Sans Pro;
-    position: absolute;
-    width: 30%;
-    right: 0;
-    font-size:0.5em;
-//     margin-top: -0.5em;
-  }
-
-
 }
-
-header{
-    display: block;
-    position: relative;
-    height: 21%;
-    background-color: #FFFFFF;
-
-    &:before {
-        content: "";
-        position: absolute;
-        width: 50%;
-        top: 8%;
-        bottom: 8%;
-        left: 24.5%;
-        background-image: url(../img/corazon.svg), none;
-        background-repeat: no-repeat;
-    }
-
-    .corazon{
-        position:absolute;
-        container-type: inline-size;
-        top:4vw;
-        left:3.6vw;
-        width:20vw;
-        display:flex;
-        flex-flow: column;
-        height:24vw;
-
-        .titulo{
-            font-size: 18cqw;
-        }
-
-        .logo-entidad{
-            flex: 1 1 auto;
-            background-size: contain;
-            background-position:center left;
-            background-repeat:no-repeat;
-        }
-    }
-
-    .mes{
-      position: absolute;
-      right:3.6vw;
-      top:4vw;
-      width:30vw;
-      text-align: right;
-    }
-
-    .columnas{
-      position:absolute;
-      width:34%;
-      height: 55%;
-      right: 0;
-      bottom: 0;
-      padding-left: 4%;
-      line-height:1;
-      background-image: url(../img/colinas.png), none;
-      background-size: 100%;
-      background-repeat: no-repeat;
-      background-position: bottom;
-      color: #FFF;
-
-      .ingresos {
-        position: absolute;
-        width: 50%;
-        bottom: 0;
-        left: 0;
-        text-align: center;
-        padding-bottom: 5%;
-      }
-
-      .gastos {
-        position: absolute;
-        width: 50%;
-        bottom: 0;
-        right: 0;
-        text-align: center;
-        padding-bottom: 5%;
-      }
-    }
-}
-
 
 section{
-  border-bottom: 0.8vw solid #fff;
-
-  position:relative;
-  width:100%;
-
-  &:before {
-    content: "";
-    background-color: rgba(0, 200, 0, 0.1);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-
   .titulo{
-    position:absolute;
-    top:6vw;
-    left:40%;
-    right:10%;
     font-size: 3.5vw;
   }
 
@@ -358,41 +22,16 @@ section{
     bottom:10%;
   }
 
-  .icono {
-    position:absolute;
-    width: 20%;
-    top: 4vw;
-    left: 17%;
-  }
 }
 
-#equidad{ 
-  color:$color-equidad;
-  height: 35%;
-  padding: 3.5vw;
-
+#equidad{
   .columnas{
     top:8vw;
-    width:110%;
-    margin-left:-5%;
-    padding: 0 1rem;
   }
 }
 
-#sostenibilidad{
-  color:$color-sostenibilidad;
-  height: 37%;
-
-  .titulo{ top:4.5vw; }  
-}
 
 #trabajo{
-  color:$color-trabajo;
-  height: 28%;
-
-  .titulo{ top:6vw; }
-  .icono{ top:2.5vw; }
-
   .description {
     width: 14%;
     margin-top: -3em;
@@ -401,21 +40,13 @@ section{
 }
 
 #cooperacion{
-  color:$color-cooperacion;
-  height:46%;
-
-  .secundario{ color:$color-cooperacion2; }
 
   aside{
-    position:absolute;
-    width: 33%;
-    left:53%;
+    width: 42%;
     top:17vw;
   }
 
   .icono {
-    width: 17%;
-    top: 10vw;
     left: 10%;
 
     &.secundario {
@@ -424,109 +55,24 @@ section{
   }
 
   .titulo{
-    left:5.8%;     
-
     &.secundario{
       left:49%;
-    } 
+    }
   }
 
   .checklist{
-    width: 55%;
-    left: 0;
     bottom: 10%;
   }
 
   .checklist.secundario{
-    padding-right:0;
-    width:50%;
-    left:45%;
-    bottom:25%;
-
-    li {
-        padding-right: 15%;
-    }
-
-    .check {
-      position: absolute;
-      top: auto;
-      bottom:0.5em;
-    }
+    bottom: 30%;
   }
 }
 
 #riqueza{
-  color:$color-riqueza;
-  height:54%;
-
-  .icono{ width:18%; left: 8%;}
-  .titulo { top: 5.5vw; left: 31%; }
-
-  h3{
-    font-size: 2.25vw;
-    color: $color-riqueza2;
-    &.t1{
-      top:30%;
-      right:0;
-      left:0;
-    }
-    &.t2{
-      top:0; left:0;
-      margin-bottom:0.5em;
-      position:relative;
-    }
-  }
 
   .reparto{
-    position:absolute;
     width:100%;
-    padding-left: 3vw;
     padding-right: 3vw;
-    bottom:3vw;
   }
-
-  .columnas{
-    margin-left:-2.5%;
-   }
-}
-
-#ingresos{
-  overflow: visible !important;
-  position: absolute;
-  top: 40%;
-  width: 100%;
-  height: 50%;
-}
-
-
-.chart-text{
-  font-family: 'Source Sans Pro', sans-serif;
-  font-size: 1.4rem;
-  line-height:0.9;
-//   text-transform: uppercase;
-  position: relative;
-  top: -1.9rem;
-  margin-left: 0.4rem;
-  padding-right: 0.8rem;
-  padding-bottom:0.5rem;
-
-  .cifra3{
-    font-size: 2.3rem;
-    color: $color-riqueza;
-  }
-}
-
-.highcharts-credits {
-    display: none;
-}
-
-.highcharts-container {
-    overflow: visible !important;
-    width: 100%;
-    height: 100%;
-}
-
-.highcharts-pie-series .highcharts-data-label-connector {
-    stroke: #c42f43;
-    stroke-width: 0.3rem;
 }

@@ -3,9 +3,9 @@ TXT001,BALANCE SOCIAL DE LA ECONOMÍA SOCIAL Y SOLIDARIA,BALANÇ SOCIAL DE L'ECO
 TXT002,AUDITORÍA SOCIAL DE LA ECONOMÍA SOCIAL Y SOLIDARIA,AUDITORIA SOCIAL DE L'ECONOMIA SOCIAL I SOLIDÀRIA,EKONOMIA SOZIAL ETA SOLIDARIOAREN AUDITORIA SOZIALA,AUDITORÍA SOCIAL DA ECONOMÍA SOCIAL E SOLIDARIA
 TXT003,ENSEÑA EL CORAZÓN,ENSENYA EL COR,bihotza erakusten du,ENSINA O CORAZÓN
 TXT004,Personas de la organización,Persones de l'organització,pertsona erakundean,Persoas da organización
-TXT005,Mujeres,Dones,Emakumeak,Mulleres
-TXT006,Hombres,Homes,Gizonak,Homes
-TXT007,Identidades No binarias,Identitats no-binàries,Nortasun ez-bitarrak,Identidades non-binarias
+TXT005,    Mujeres,Dones,Emakumeak,    Mulleres
+TXT006,    Hombres,Homes,Gizonak,    Homes
+TXT007,    Identidades No binarias,Identitats no-binàries,Nortasun ez-bitarrak,    Identidades non-binarias
 TXT008,TRABAJADORAS,Treballadores,LANGILEAK,TRABALLADORAS
 G1,La entidad no cuenta con personas trabajadoras,L'entitat no compta amb persones treballadores,Erakundeak ez du langilerik,A entidade non conta con persoas traballadoras
 TXT010,VOLUNTARIAS,Voluntàries,BOLUNTARIOAK,VOLUNTARIAS
@@ -24,8 +24,8 @@ E2,No se puede calcular porque la entidad no cuenta con trabajadoras,No es pot c
 E5,En esta entidad las trabajadoras y los trabajadores tienen la misma remuneración,En aquesta entitat les treballadores i treballadors tenen la mateixa remuneració,"Erakunde horretan, langileek ordainsari bera dute.","Nesta entidade, as traballadoras e os traballadores teñen a mesma remuneración"
 E3,No se puede calcular porque la entidad sólo tiene una trabajadora,No es pot calcular perquè l'entitat compta només amb una treballadora,Ezin da kalkulatu erakundeak langile bakarra duelako,Non se pode calcular porque a entidade só ten unha traballadora
 E4,No se puede calcular porque la entidad es no mixta,No es pot calcular perquè l'entitat no és mixta,Ezin da kalkulatu erakundea ez delako mistoa,Non se pode calcular porque a entidade é non-mixta
-TXT025,Los hombres ganan un ind97% más que las mujeres,Els homes guanyen un ind97% més que les dones,Gizonek emakumeek baino % ind97 gehiago irabazten dute,Os homes gañan un ind97% máis ca as mulleres
-TXT026,Las mujeres ganan un ind97% mas que los hombres,Les dones guanyen un ind97% més que els homes,Emakumeek gizonek baino % ind97 gehiago irabazten dute,As mulleres gañan un ind97% máis ca os homes
+TXT025,Los hombres ganan un ind127% más que las mujeres,Els homes guanyen un ind127% més que les dones,Gizonek emakumeek baino % ind127 gehiago irabazten dute,Os homes gañan un ind127% máis ca as mulleres
+TXT026,Las mujeres ganan un ind127% mas que los hombres,Les dones guanyen un ind127% més que els homes,Emakumeek gizonek baino % ind127 gehiago irabazten dute,As mulleres gañan un ind127% máis ca os homes
 TXT027,Difusión de salarios a la plantilla,Difusió dels salaris a la plantilla,Langileen artean soldatak zabaltzea,Difusión de salarios ao persoal
 E9,No corresponde porque solo hay una persona trabajadora,No correspon perquè només hi ha una persona treballadora,"Ez dagokio, langile bakarra dagoelako",Non corresponde porque só hai unha persoa traballadora
 E8,No corresponde porque no hay personal contratado,No correspon perquè no hi ha personal contractat,"Ez dagokio, langilerik ez dagoelako",Non corresponde porque non hai persoal contratado
@@ -66,19 +66,13 @@ TXT059,Mil,Mil,mila,Mil
 TXT060,Promueve,Promou,Sustatzaileak,Promove
 TXT061,Colabora,Col·labora,Laguntzailea,Colabora
 E7,No se puede calcular porque la entidad sólo tiene una trabajadora,No es pot calcular perquè l'entitat compta només amb una treballadora,Ezin da kalkulatu erakundeak langile bakarra duelako,Non se pode calcular porque a entidade só ten unha traballadora
-TXT062,Nos damos visibilidad mutua,Ens donem visibilitat mútuament,Elkar ikusarazten dugu,
-TXT063,Elaboramos presupuesto conjuntamente,Elaborem el pressupost conjuntament,Aurrekontua elkarrekin egiten dugu,
-TXT064,Pensamos juntas el proyecto,Pensem juntes el projecte,Proiektua elkarrekin pentsatzen dugu,
-TXT065,Compartimos pérdidas,Compartim pèrdues,Galerak partekatzen ditugu,
-TXT066,Me formo sobre temas ambientales,Em formo sobre temes ambientals,Ingurumen-gaiei buruzko prestakuntza jasotzen dut,
-TXT067,Tengo horario laboral definido,Tinc un horari laboral definit,Lan-ordutegia zehaztuta daukat,
-TXT068,Utilizo herramientas para contabilizar las horas de trabajo,Utilitzo eines per comptabilitzar les hores de treball,Lanorduak zenbatzeko tresnak erabiltzen ditut,
-TXT069,Diferencio el móvil personal del laboral,Diferencio el mòbil personal del laboral,Mugikor pertsonala eta laneko mugikorra bereizten ditut,
-TXT070,Utilizo servicios de atención al emprendimiento o similares,Utilitzo serveis d'atenció a la emprenedoria o similars,Ekintzailetzari arreta emateko zerbitzuak edo antzekoak erabiltzen ditut,
-TXT071,Salario,Salari,Soldata,
-TXT072,Al trabajar con otras autónomas: ,En treballar amb altres autònomes:,Beste autonomo batzuekin lan egitean:,
-TXT073,Intercoopero en el sector compartiendo:,Intercoopero en el sector compartint:,"Sektorean lankidetzan aritzen naiz, honako hauek partekatuz:",
-TXT074,Opero con finanzas éticas,Opero amb finances ètiques,Finantza etikoak erabiltzen ditut,
-TXT075,Hago divulgación ambiental ,Faig divulgació ambiental,Ingurumen-dibulgazioa egiten dut,
-TXT076,Si,Sí,Bai,
-TXT077,No,no,Ez,
+TXT062,Nos damos visibilidad mutuamente,Nos damos visibilidad mutuamente,Nos damos visibilidad mutuamente,Nos damos visibilidad mutuamente
+TXT063,Elaboramos presupuestos juntas,Elaboramos presupuestos juntas,Elaboramos presupuestos juntas,Elaboramos presupuestos juntas
+TXT064,Pensamos juntas el proyecto,Pensamos juntas el proyecto,Pensamos juntas el proyecto,Pensamos juntas el proyecto
+TXT065,Compartimos pérdidas,Compartimos pérdidas,Compartimos pérdidas,Compartimos pérdidas
+TXT066,Me formo sobre temas ambientales,Me formo sobre temas ambientales,Me formo sobre temas ambientales,Me formo sobre temas ambientales
+TXT067,Horario laboral definido,Horario laboral definido,Horario laboral definido,Horario laboral definido
+TXT068,Se utiliza alguna herramienta para contabilizar las horas de trabajo,Se utiliza alguna herramienta para contabilizar las horas de trabajo,Se utiliza alguna herramienta para contabilizar las horas de trabajo,Se utiliza alguna herramienta para contabilizar las horas de trabajo
+TXT069,Se diferencia el móvil personal del laboral,Se diferencia el móvil personal del laboral,Se diferencia el móvil personal del laboral,Se diferencia el móvil personal del laboral
+TXT070,Se utiliza alguna atención al emprendimiento u otro servicio similar,Se utiliza alguna atención al emprendimiento u otro servicio similar,Se utiliza alguna atención al emprendimiento u otro servicio similar,Se utiliza alguna atención al emprendimiento u otro servicio similar
+TXT071,Salario,Salario,Salario,Salario

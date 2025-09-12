@@ -7,7 +7,7 @@
     <title>Infografía Balance social</title>
 
     <!-- CSS -->
-    <link href="../../../../static/css/styles_EUS.css" rel="stylesheet" />
+    <link href="../../../../static/css/styles_autonomas.css" rel="stylesheet" />
 
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
@@ -24,7 +24,7 @@
             {{Nombre}}<br>
             <em>{{TXT003}}</em> <!-- Enseña el corazón -->
         </div>
-        <div class="logo-entidad" style="background-image: url({{logo}})"></div>
+        <div class="logo-entidad" style="background-image: url({{Logo}})"></div>
     </div>
 
     <div class="mes titulo"> <!-- Balance/Auditoría social de la Economía Social y Solidaria [AÑO] -->
@@ -79,17 +79,18 @@
         <img class="icono" src="../../../../static/img/equidad.png">
         <h2 class="titulo">{{TXT016}}</h2> <!-- Equidad -->
         <ul class="checklist">
-            <li>{{TXT062}} <!-- Nos damos visibilidad mutuamente -->
-                <span class="check">{% if q3406c == "True" %}✔{% else %}✗{% endif %}</span>
+            <li>{{TXT072}}</li> <!-- Al trabajar con otras autónomas: -->
+            <li>{{TXT064}} <!-- Pensamos juntas el proyecto -->
+                <span class="check">{% if q3406b == "True" %}✔{% else %}✗{% endif %}</span>
             </li>
             <li>{{TXT063}} <!-- Elaboramos presupuesto juntas -->
                 <span class="check">{% if q3406a == "True" %}✔{% else %}✗{% endif %}</span>
             </li>
-            <li>{{TXT064}} <!-- Pensamos juntas el proyecto -->
+            <li>{{TXT065}} <!-- Compartimos pérdidas -->
                 <span class="check">{% if q3406d == "True" %}✔{% else %}✗{% endif %}</span>
             </li>
-            <li>{{TXT065}} <!-- Compartimos pérdidas -->
-                <span class="check">{% if q3406d == "True" %}✔{% else %}✗{% endif %}</span> <!-- Todo: Corregir código -->
+            <li>{{TXT062}} <!-- Nos damos visibilidad mutuamente -->
+                <span class="check">{% if q3406c == "True" %}✔{% else %}✗{% endif %}</span>
             </li>
         </ul>
     </section>       
@@ -144,7 +145,7 @@
         <img class="icono secundario" src="../../../../static/img/compromiso_entorno.png">
 
         <aside>
-            <span class="cifra cifra1">%{{ind254A}}</span>
+            <span class="cifra cifra1">{{ind254A}}%</span>
             <span class="label label1">{{TXT031}}</span> <!-- Compras dentro de la Economía Social -->
         </aside>
 
@@ -209,6 +210,10 @@
 </div>
 
 <footer>
+    <div class="leyenda">
+        <div>✔={{TXT076}}</div>
+        <div>✗={{TXT077}}</div>
+    </div>
     <div class="seccion promueve">
         <span>{{TXT060|upper}}</span> <!-- PROMUEVE -->
         <div class="logos">
@@ -314,7 +319,7 @@
                     {
                         color:'#ff9fac',
                         name: '{{TXT054}}', // Otras
-                        y: 0 // ToDo: Falta código
+                        y: {{ ind67agru if ind67agru != "nan" else 0 }}
                     }
                 ]
             }

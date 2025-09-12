@@ -12,3 +12,4 @@ selenium~=4.26.1
 wakepy~=0.10.1
 pngquant~=1.0.8
 pyyaml==6.0.1
+standard-imghdr==3.13.0

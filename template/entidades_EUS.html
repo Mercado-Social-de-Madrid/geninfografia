@@ -7,7 +7,7 @@
     <title>Infografía Balance social</title>
 
     <!-- CSS -->
-    <link href="../../../../static/css/styles.css" rel="stylesheet" />
+    <link href="../../../../static/css/styles_EUS.css" rel="stylesheet" />
 
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
@@ -24,7 +24,7 @@
             {{Nombre}}<br>
             <em>{{TXT003}}</em> <!-- Enseña el corazón -->
         </div>
-        <div class="logo-entidad" style="background-image: url({{logo}})"></div>
+        <div class="logo-entidad" style="background-image: url({{Logo}})"></div>
     </div>
 
     <div class="mes titulo"> <!-- Balance/Auditoría social de la Economía Social y Solidaria [AÑO] -->
@@ -40,9 +40,9 @@
     </div>
 
     <div class="personas-porcent">
-        <p><strong class="cifra cifra3">{% if ind1d != "nan" %}{{ind1d}}%{% else %}*{% endif%}</strong> {{TXT005}} </p> <!-- Mujeres -->
-        <p><strong class="cifra cifra3">{% if ind1h != "nan" %}{{ind1h}}%{% else %}*{% endif%}</strong> {{TXT006}} </p> <!-- Hombres -->
-        <p><strong class="cifra cifra3">{% if ind1a != "nan" %}{{ind1a}}%{% else %}*{% endif%}</strong> {{TXT007}} </p> <!-- Identidades no binarias -->
+        <p><strong class="cifra cifra3">{% if ind1d != "nan" %}%{{ind1d}}{% else %}*{% endif%}</strong> {{TXT005}} </p> <!-- Mujeres -->
+        <p><strong class="cifra cifra3">{% if ind1h != "nan" %}%{{ind1h}}{% else %}*{% endif%}</strong> {{TXT006}} </p> <!-- Hombres -->
+        <p><strong class="cifra cifra3">{% if ind1a != "nan" %}%{{ind1a}}{% else %}*{% endif%}</strong> {{TXT007}} </p> <!-- Identidades no binarias -->
     </div>
 
     <div class="personas-numero">
@@ -100,7 +100,7 @@
 
         <div class="columnas">
             <div class="text-center">
-                <span class="cifra cifra1">{% if ind20d != "nan" and ind20d | is_float %}{{ind20d}}%{% else %}*{% endif%}</span>
+                <span class="cifra cifra1">{% if ind20d != "nan" and ind20d | is_float %}%{{ind20d}}{% else %}*{% endif%}</span>
                 <span class="label label1">{{TXT017}}</span><br> <!-- Mujeres en puestos de responsabilidad -->
                 <span class="description">
                     {% set values = { "E1": E1, "E3": E3, "E4": E4, "E7": E7, "E8": E8, "T2": T2 } %}
@@ -112,20 +112,20 @@
             </div>
 
             <div class="text-center">
-                <span class="cifra cifra1">{% if ind127 != "nan" and ind127 | is_float %}{{(ind127|float|abs|replace(".", ",")).rstrip(',0')}}%{% else %}*{% endif%}</span>
+                <span class="cifra cifra1">{% if ind97 != "nan" and ind97 | is_float %}%{{(ind97|float|abs|replace(".", ",")).rstrip(',0')}}{% else %}*{% endif%}</span>
                 <span class="label label1">{{TXT020}}</span><br> <!-- Brecha salarial entre hombres y mujeres -->
                 <span class="description">
-                    {% if ind127 is defined and ind127 | is_float  %}
-                        {% if ind127|float >= 0  %}
-                            * {{TXT025 | replace("ind127", (ind127|float|abs|replace(".", ",")).rstrip(',0')) }} <!-- Los hombres ganan un X % más que las mujeres -->
+                    {% if ind97 is defined and ind97 | is_float  %}
+                        {% if ind97|float >= 0  %}
+                            * {{TXT025 | replace("ind97", (ind97|float|abs|replace(".", ",")).rstrip(',0')) }} <!-- Los hombres ganan un X % más que las mujeres -->
                         {% else %}
-                            * {{TXT026 | replace("ind127", (ind127|float|abs|replace(".", ",")).rstrip(',0')) }} <!-- Las mujeres ganan un X % mas que los hombres” -->
+                            * {{TXT026 | replace("ind97", (ind97|float|abs|replace(".", ",")).rstrip(',0')) }} <!-- Las mujeres ganan un X % mas que los hombres” -->
                         {% endif %}
                     {% else %}
                         {% set values = { "E2": E2, "E3": E3, "E4": E4, "E5": E5 } %}
 
-                        {% if ind127 in values %}
-                            * {{ values[ind127] }}
+                        {% if ind97 in values %}
+                            * {{ values[ind97] }}
                         {% endif %}
                     {% endif %}
                 </span>
@@ -248,7 +248,7 @@
         <img class="icono secundario" src="../../../../static/img/compromiso_entorno.png">
 
         <aside>
-            <span class="cifra cifra1">{{ind254}}%</span>
+            <span class="cifra cifra1">%{{ind254}}</span>
             <span class="label label1">{{TXT031}}</span> <!-- Compras dentro de la Economía Social -->
         </aside>
 
@@ -322,6 +322,10 @@
 </div>
 
 <footer>
+    <div class="leyenda">
+        <div>✔={{TXT076}}</div>
+        <div>✗={{TXT077}}</div>
+    </div>
     <div class="seccion promueve">
         <span>{{TXT060|upper}}</span> <!-- PROMUEVE -->
         <div class="logos">
@@ -371,7 +375,7 @@
                     overflow: 'none',
                     formatter: function(){ // your condition/check
                       if(this.y !== 0){
-                        return '<div class="chart-text"><span class="cifra3">' + this.y + '%</span><br>' + this.point.name + '</div>';
+                        return '<div class="chart-text"><span class="cifra3">%' + this.y + '</span><br>' + this.point.name + '</div>';
                       }
                     }
                 }
@@ -379,9 +383,19 @@
             pie: {
                 size: '100%',
                 borderWidth:0,
-                startAngle:{{ rotacion if rotacion != "nan" else 100 }},
+                startAngle:
+                            {% if ([ind6|int, ind7|int, ind67agru|int] | reject("==", 0) | list | count) != 0 %}
+                                {% if ([ind6|int, ind7|int, ind67agru|int] | reject("==", 0) |  reject("<", 40) | list | count) == 2 %}
+                                    0,
+                                {% elif  ([ind6|int, ind7|int, ind67agru|int] | reject("==", 0) |  reject("<", 40) | list | count) == 1 %}
+                                    90,
+                                {% else %}
+                                    {{ 90 + (([ind6|int, ind7|int, ind67agru|int] | reject("==", 0) | min) * 36 / 10) }},
+                                {% endif %}
+                            {% else %}
+                                45,
+                            {% endif %}
                 dataLabels: {
-
                     connectorShape: function(labelPosition, connectorPosition, options) {
                         // Let the built-in crookedLine function do the heavy lifting
                         const path = Highcharts.seriesTypes

@@ -1,4 +1,4 @@
-import locale
+import os
 
 import pandas as pd
 
@@ -24,9 +24,9 @@ class Parser:
                           "q4106c", "ind62agrupado", "q6813a", "q6813b",
                           "q6813c", "q6813d", "q1415e", "q1415f", "q1415a"]
 
-    def parse_infografias(self):
+    def parse_infografias(self, data_file):
         territories = self.parse_territories()
-        df = pd.read_csv('data/datos_infografias.csv', encoding="utf-8")
+        df = pd.read_csv(data_file, encoding="utf-8")
         columns = df.columns.tolist()
         data = df.values
 
@@ -52,7 +52,8 @@ class Parser:
         return entities
 
     def parse_territories(self):
-        df = pd.read_csv('data/datos_territorios.csv', encoding="utf-8")
+        datos_territorios_dir = os.path.join(os.path.dirname(__file__), "..", "data", "datos_territorios.csv")
+        df = pd.read_csv(datos_territorios_dir, encoding="utf-8")
         df = df.fillna('')
 
         territories = {}
@@ -76,15 +77,16 @@ class Parser:
             return value
 
     def parse_number(self, value, number_type):
-        suffixes = ["", "<small>MIL</small>", "M"]
+        suffixes = ["", "<small>mila</small>", "M"]
         suffix_index = 0
 
         try:
-            locale.setlocale(locale.LC_ALL, 'es_ES.UTF-8')
             value = str(value)
             value = value.replace(" ", "")
             value = value.replace("€", "")
-            value = locale.atof(value)
+            value = value.replace(".", "")
+            value = value.replace(",", ".")
+            value = float(value)
             if number_type is int:
                 value = round(value)
 

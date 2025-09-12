@@ -1,7 +1,7 @@
 from setuptools import find_packages, setup
 
 setup(
-   name='foo',
+   name='geninfografia',
    version='1.0',
    description='A useful module',
    license='GPLv3',

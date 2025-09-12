@@ -1,0 +1,46 @@
+@import "styles";
+
+.promueve{
+    .logos{
+        > * {
+            max-height: unset;
+        }
+    }
+}
+
+ul.checklist{
+  li{
+    padding-right: 0.5em;
+  }
+
+  .check {
+    line-height: 0.7;
+  }
+}
+
+#equidad{
+  height: 28%;
+}
+
+
+#sostenibilidad{
+  height: 30%;
+}
+
+
+#trabajo{
+  height: 42%;
+
+  .description {
+    width: 19%;
+     line-height: unset;
+  }
+
+  ul.checklist{
+    li {
+        line-height: unset;
+        margin-bottom: 1em;
+        padding-right: 3em;
+    }
+  }
+}

@@ -1,5 +1,4 @@
 import os
-
 import pandas as pd
 
 
@@ -77,7 +76,7 @@ class Parser:
             return value
 
     def parse_number(self, value, number_type):
-        suffixes = ["", "<small>mila</small>", "M"]
+        suffixes = ["", "<small>{{ TXT059 }}</small>", "M"]
         suffix_index = 0
 
         try:

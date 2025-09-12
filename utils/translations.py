@@ -12,7 +12,7 @@ class Lang:
 
 
 class Translations:
-    translations_dir = os.path.join(os.path.dirname(__file__), "../translations")
+    translations_dir = os.path.join(os.path.dirname(__file__), "..", "translations")
     df = pd.read_csv(f"{translations_dir}/strings.csv")
 
     CAS = Lang('cas', "Castellano")

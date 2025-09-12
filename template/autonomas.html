@@ -7,7 +7,7 @@
     <title>Infografía Balance social</title>
 
     <!-- CSS -->
-    <link href="../../../../static/css/styles_autonomas.css" rel="stylesheet" />
+    <link href="../../static/css/styles_autonomas.css" rel="stylesheet" />
 
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
@@ -62,12 +62,12 @@
     <div class="columnas">
         <div class="ingresos">
             <span class="label label2">{{TXT014}}</span> <!-- Ingresos -->
-            <span class="cifra cifra4">{{q1203}}€</span>
+            <span class="cifra cifra4">{{q1203 | subrender}}€</span>
         </div>
 
         <div class="gastos">
             <span class="label label2">{{TXT015}}</span> <!-- Gastos -->
-            <span class="cifra cifra4">{{q1201}}€</span>
+            <span class="cifra cifra4">{{q1201 | subrender}}€</span>
         </div>
 
     </div>
@@ -76,7 +76,7 @@
 
 <div class="columna1">
     <section id="equidad">
-        <img class="icono" src="../../../../static/img/equidad.png">
+        <img class="icono" src="../../static/img/equidad.png">
         <h2 class="titulo">{{TXT016}}</h2> <!-- Equidad -->
         <ul class="checklist">
             <li>{{TXT072}}</li> <!-- Al trabajar con otras autónomas: -->
@@ -96,7 +96,7 @@
     </section>       
 
     <section id="sostenibilidad">
-        <img class="icono" src="../../../../static/img/sostenibilidad_ecologica.png">
+        <img class="icono" src="../../static/img/sostenibilidad_ecologica.png">
         <h2 class="titulo">{{TXT038}}</h2> <!-- Sostenibilidad ecológica -->
         <ul class="checklist">
             <li>{{TXT039}} <!-- Sistema de gestión ambiental -->
@@ -115,7 +115,7 @@
     </section>
 
     <section id="trabajo">
-        <img class="icono" src="../../../../static/img/trabajo_digno.png">
+        <img class="icono" src="../../static/img/trabajo_digno.png">
         <h2 class="titulo">{{TXT045}}</h2> <!-- Trabajo digno -->
 
         <ul class="checklist">
@@ -141,8 +141,8 @@
         <h2 class="titulo">{{TXT030A}}</h2> <!-- Cooperación y -->
         <h2 class="titulo secundario"> {{TXT030B}}</h2> <!-- compromiso con el entorno -->
 
-        <img class="icono" src="../../../../static/img/cooperacion.png">
-        <img class="icono secundario" src="../../../../static/img/compromiso_entorno.png">
+        <img class="icono" src="../../static/img/cooperacion.png">
+        <img class="icono secundario" src="../../static/img/compromiso_entorno.png">
 
         <aside>
             <span class="cifra cifra1">{{ind254A}}%</span>
@@ -175,7 +175,7 @@
     </section>
 
     <section id="riqueza">
-        <img class="icono" src="../../../../static/img/reparto_justo_riqueza.png">
+        <img class="icono" src="../../static/img/reparto_justo_riqueza.png">
         <h2 class="titulo">{{TXT050}}</h2> <!-- Reparto justo de la riqueza -->
 
         <h3 class="titulo t1 text-center"> {{TXT051}} </h3> <!-- Fuentes de ingresos -->
@@ -219,7 +219,7 @@
         <div class="logos">
             {% if logo_reas %}<img src="{{logo_reas}}">{% endif %}
             {% if logo_mercado %}<img src="{{logo_mercado}}">{% endif %}
-            <img src="../../../../static/img/reas.svg">
+            <img src="../../static/img/reas.svg">
         </div>
     </div>
     <div class="seccion enlaces">
@@ -230,7 +230,7 @@
     <div class="seccion colabora">
         <span>{{TXT061|upper}}</span> <!-- COLABORA -->
         <div class="logos">
-            <img src="../../../../static/img/ministerio_trabajo.jpg">
+            <img src="../../static/img/ministerio_trabajo.jpg">
         </div>
     </div>
 </footer>

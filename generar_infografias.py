@@ -3,14 +3,14 @@ import json
 import os
 import sys
 import yaml
-import time
-from pathlib import Path
-from datetime import datetime
+import re
+import shutil
 
 import sass
 import jinja2
 import pngquant
-from jinja2 import TemplateNotFound
+from jinja2 import TemplateNotFound, pass_context
+from markupsafe import Markup
 from pathvalidate import sanitize_filename
 from fuzzywuzzy import fuzz
 from selenium import webdriver
@@ -21,8 +21,8 @@ from selenium.common.exceptions import TimeoutException
 from wakepy import keep
 from PIL import Image
 
-from utils.translations import Translations
-from utils.parser import Parser
+from .utils.translations import Translations
+from .utils.parser import Parser
 
 ROOT_DIR = os.path.dirname(__file__)
 
@@ -69,6 +69,13 @@ def is_float(value):
     except ValueError:
         return False
 
+@pass_context
+def subrender_filter(context, value):
+    _template = context.eval_ctx.environment.from_string(value)
+    result = _template.render(**context)
+    if context.eval_ctx.autoescape:
+        result = Markup(result)
+    return result
 
 def generar_infografias(output_path, mode, entities_data, entity_name=None, regenerate=False):
     print("\n======== Generando ficheros HTML de las infografías =============")
@@ -79,6 +86,7 @@ def generar_infografias(output_path, mode, entities_data, entity_name=None, rege
         entities_data = [entity for entity in entities_data if entity_name == entity["Nombre"]]
 
     total_entities = len(entities_data)
+    print(f"Número de entidades: {total_entities}")
     for index, entity in enumerate(entities_data):
         if not custom_props["TERRITORIOS"] or entity['Codigo Territorio'].upper() in custom_props["TERRITORIOS"]:
             print(f"[{index+1}/{total_entities}] Generando infografia para la entidad {entity['Nombre']}...")
@@ -95,11 +103,13 @@ def generar_infografias(output_path, mode, entities_data, entity_name=None, rege
                         template_env = jinja2.Environment(loader=template_loader)
                         template_env.filters['float'] = float_with_comma
                         template_env.filters['is_float'] = is_float
+                        template_env.filters['subrender'] = subrender_filter
                         template_file = f"{mode}_{lang.upper()}.html"
                         try:
                             template = template_env.get_template(template_file)
                         except TemplateNotFound:
                             template = template_env.get_template(f"{mode}.html")
+
                         output_text = template.render(**{**entity, **translations, **custom_props})
 
                         html_file = open(html_path, 'w', encoding="utf-8")
@@ -112,24 +122,34 @@ def generar_infografias(output_path, mode, entities_data, entity_name=None, rege
 
 def get_translations_from_lang(lang):
     translations = {}
+    translations_dir = os.path.join(ROOT_DIR, "translations")
+
     try:
-        with open(f"translations/{lang}.json", "r", encoding="utf-8") as translations_file:
+        with open(os.path.join(translations_dir, f"{lang}.json"), "r", encoding="utf-8") as translations_file:
             translations = json.loads(translations_file.read())
     except FileNotFoundError:
         pass
 
     return translations
 
+def copy_static_files(output_path):
+    static_dir = "static"
+    source = os.path.join(ROOT_DIR, static_dir)
+    dest = os.path.join(output_path, "html", static_dir)
+    shutil.copytree(source, dest, dirs_exist_ok=True)
 
-def exportar_infografias(output_path, nif=None, regenerate=False):
+def exportar_infografias(output_path, nif, regenerate, selenium_host, selenium_port):
     global export_percent
     print("\n\n======== Exportando infografías =============")
 
-    driver = get_driver()
-    driver.set_script_timeout(999999999)
+    options = webdriver.ChromeOptions()
+    options.add_argument('--hide-scrollbars')
+    options.add_argument('--window-size=2480,3508')
+    options.add_experimental_option('excludeSwitches', ['enable-logging'])
+    options.add_argument('--log-level=3')
 
-    try:
-        html_path = custom_props["HTML_PATH"]
+    with webdriver.Remote(f"http://{selenium_host}:{selenium_port}/wd/hub", options=options) as driver:
+        html_path = os.path.join(ROOT_DIR, output_path, "html")
         total_tasks = get_file_count(html_path)
         territories_dirs = os.listdir(html_path)
         for territory in territories_dirs:
@@ -145,14 +165,16 @@ def exportar_infografias(output_path, nif=None, regenerate=False):
                         for filename in files_list:
                             filename = filename.split('.')[0]
                             input_file = f"{html_path}/{territory}/{lang}/{filename}.html"
+                            print(f"Input file: file://{input_file}")
                             driver.delete_all_cookies()
                             # driver.execute_cdp_cmd('Storage.clearDataForOrigin', {
                             #     "origin": '*',
                             #     "storageTypes": 'all',
                             # })
-                            driver.get("file:///" + str(Path(input_file).absolute()))
+
                             try:
-                                WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "highcharts-container")))
+                                driver.get(f"file://{input_file}")
+                                WebDriverWait(driver, 3).until(EC.presence_of_element_located((By.CLASS_NAME, "highcharts-container")))
                             except TimeoutException:
                                 print("Timout waiting for highchart to load.")
                             export_percent += 100 / total_tasks
@@ -160,9 +182,6 @@ def exportar_infografias(output_path, nif=None, regenerate=False):
                             img2pdf(filename, input_path=f"{output_path}/png/{territory}/{lang}", output_path=f"{output_path}/pdf/{territory}/{lang}")
                             # html2img(driver, filename, extension="jpg", output_path=f"infografias/jpg/{territory}/{lang}", regenerate=regenerate)
                             # html2pdf(driver, filename, output_path=f"infografias/pdf/{territory}/{lang}", regenerate=regenerate)
-
-    finally:
-        driver.quit()
 
 
 def get_file_count(path):
@@ -183,7 +202,7 @@ def html2pdf(driver, filename, output_path="infografias/pdf", regenerate=False):
     pdf_path = f"{output_path}/{filename.split('.')[0]}.pdf"
 
     if regenerate or not os.path.isfile(pdf_path):
-        print(f"[{round(export_percent)}%] Exportando infografía en formato PDF [{str(Path(pdf_path).absolute())}]...")
+        print(f"[{round(export_percent)}%] Exportando infografía {filename.split('.')[0]} en formato PDF.")
         params = {
             "paperWidth": 8.268,
             "paperHeight": 11.693,
@@ -286,21 +305,23 @@ def get_args():
 
 Translations().generate_translations()
 
-def run(data_file, output_path="infografias"):
+# Asumes a selenium service running in localhost at port 4444. This is required for exporting the PNGs
+def run(data_file, output_path="infografias", entity_name=None, regenerate=False, selenium_host="127.0.0.1", selenium_port="4444"):
     entities_data = Parser().parse_infografias(data_file)
-    entity_name, regenerate = get_args()
     nif_to_export = None
     if entity_name is not None:
         entity_name = find_best_match(entity_name, [entity["Nombre"] for entity in entities_data])
         nif_to_export = next((entity["NIF"] for entity in entities_data if entity["Nombre"] == entity_name))
 
-    mode = datos_infografias.removeprefix('datos_').removesuffix('.csv')
+    mode = re.search(r".*datos_(.*).csv", data_file).group(1)
     generar_infografias(output_path, mode, entities_data, entity_name, regenerate)
+    copy_static_files(output_path)
 
     with keep.presenting() as k:
-        exportar_infografias(output_path, nif_to_export, regenerate)
+        exportar_infografias(output_path, nif_to_export, regenerate, selenium_host, selenium_port)
 
 
 if __name__ == "__main__":
+    entity_name, regenerate = get_args()
     for datos_infografias in custom_props["ARCHIVOS_INFOGRAFIAS"].split(', '):
-        run(f'{custom_props["DIRECTORIO_INFOGRAFIAS"]}/{datos_infografias}')
+        run(f'{custom_props["DIRECTORIO_INFOGRAFIAS"]}/{datos_infografias}', entity_name=entity_name, regenerate=regenerate)
